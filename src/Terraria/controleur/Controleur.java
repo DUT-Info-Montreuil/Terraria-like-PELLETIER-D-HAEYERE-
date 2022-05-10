@@ -1,9 +1,9 @@
-package applicationV1.controleur;
+package Terraria.controleur;
 
-import applicationV1.modele.Acteur;
-import applicationV1.modele.Environnement;
-import applicationV1.modele.Loup;
-import applicationV1.modele.Mouton;
+import Terraria.modele.Acteur;
+import Terraria.modele.Environnement;
+import Terraria.modele.Loup;
+import Terraria.modele.Mouton;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
@@ -12,7 +12,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 

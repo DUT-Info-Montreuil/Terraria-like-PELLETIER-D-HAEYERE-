@@ -1,9 +1,7 @@
-package applicationV1.modele;
+package Terraria.modele;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-
-import java.util.ArrayList;
 
 public class Environnement {
 

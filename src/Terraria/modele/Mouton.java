@@ -1,4 +1,4 @@
-package applicationV1.modele;
+package Terraria.modele;
 
 public class Mouton extends Acteur{
 	private static double pourcentageRepro =6;

@@ -1,4 +1,4 @@
-package applicationV1.modele;
+package Terraria.modele;
 public class SaisieEntierException extends Exception {
 
 	public SaisieEntierException(String string) {

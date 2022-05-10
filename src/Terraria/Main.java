@@ -1,7 +1,4 @@
-package applicationV1;
-
-import java.io.File;
-import java.net.URL;
+package Terraria;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;

@@ -1,9 +1,7 @@
-package applicationV1.modele;
+package Terraria.modele;
 
 import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.value.ObservableValue;
 
 import java.util.Random;
 
