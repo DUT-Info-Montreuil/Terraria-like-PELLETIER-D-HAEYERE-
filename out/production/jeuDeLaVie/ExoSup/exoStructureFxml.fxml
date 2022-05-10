@@ -1,0 +1,27 @@
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Text?>
+<VBox  xmlns:fx="http://javafx.com/fxml/1" fx:controller="ExoSup.Controleur">
+    <children>
+        <StackPane prefHeight="150.0" prefWidth="200.0" fx:id="pane">
+            <children>
+                <Circle fill="red" radius="100.0" stroke="BLACK" strokeType="INSIDE"/>
+                <Rectangle fx:id="afficheRectangle" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="150.0" stroke="BLACK" strokeType="INSIDE" width="150.0" visible="true"/>
+            </children>
+        </StackPane>
+        <Button mnemonicParsing="false" text="b1"/>
+        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="5.0">
+            <children>
+                <RadioButton mnemonicParsing="false" text="A" />
+                <RadioButton mnemonicParsing="false" text="B"/>
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="un bout de texte"/>
+            </children>
+        </HBox>
+        <Button mnemonicParsing="false" text="b2" onAction="#reactionBouton"/>
+    </children>
+</VBox>

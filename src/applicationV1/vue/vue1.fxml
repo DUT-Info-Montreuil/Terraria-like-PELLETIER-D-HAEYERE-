@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane styleClass="background" stylesheets="@dark.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="applicationV1.controleur.Controleur">
+   <top>
+      <Label styleClass="label-header" stylesheets="@dark.css" text="Jeu de la vie" BorderPane.alignment="CENTER" />
+   </top>
+   <right>
+      <VBox prefHeight="328.0" prefWidth="143.0" styleClass="encadre" stylesheets="@dark.css" BorderPane.alignment="CENTER">
+         <children>
+            <VBox prefHeight="124.0" prefWidth="112.0" styleClass="encadre" stylesheets="@dark.css">
+               <children>
+                  <RadioButton fx:id="loup" mnemonicParsing="false" styleClass="label-bright" stylesheets="@dark.css" text="Loup">
+                     <toggleGroup>
+                        <ToggleGroup fx:id="LoupAndMouton" />
+                     </toggleGroup>
+                  </RadioButton>
+                  <RadioButton fx:id="mouton" mnemonicParsing="false" styleClass="label-bright" stylesheets="@dark.css" text="Mouton" toggleGroup="$LoupAndMouton" />
+                  <HBox prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <Label styleClass="label-bright" text="Nombre" />
+                        <TextField fx:id="nbrDActeur" prefHeight="32.0" prefWidth="40.0" />
+                     </children>
+                  </HBox>
+                  <Button mnemonicParsing="false" onAction="#ajouterActeur" text="Ajouter" />
+               </children>
+            </VBox>
+            <VBox prefHeight="200.0" prefWidth="100.0" styleClass="encadre" stylesheets="@dark.css">
+               <children>
+                  <Label styleClass="label-bright" stylesheets="@dark.css" text="Reproduction" />
+                  <Label styleClass="label-bright" text="Loup" />
+                  <Slider fx:id="prodLoup" majorTickUnit="2.0" max="10.0" min="1.0" minorTickCount="1" showTickLabels="true" showTickMarks="true" />
+                  <Label styleClass="label-bright" text="Mouton" />
+                  <Slider fx:id="prodMouton" majorTickUnit="2.0" max="10.0" min="1.0" minorTickCount="1" showTickLabels="true" showTickMarks="true" />
+                  <Label styleClass="label-bright" text="max manger " />
+                  <Slider fx:id="idMaxMangeMouton" majorTickUnit="5.0" max="20.0" min="1.0" minorTickCount="2" showTickLabels="true" showTickMarks="true" />
+               </children>
+            </VBox>
+            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" styleClass="encadre" stylesheets="@dark.css">
+               <children>
+                  <Button mnemonicParsing="false" onAction="#jouerUnTour" prefHeight="33.0" prefWidth="128.0" text="un Tour" />
+               </children>
+            </VBox>
+            <VBox prefHeight="200.0" prefWidth="100.0">
+               <children>
+                  <HBox prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <Label styleClass="label-bright" text="nbr de tour" />
+                        <TextField fx:id="nbrDeTour" alignment="CENTER_RIGHT" prefHeight="32.0" prefWidth="40.0">
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                        </TextField>
+                     </children>
+                  </HBox>
+                  <Button mnemonicParsing="false" onAction="#plusieursTour" text="Lancer" />
+               </children>
+            </VBox>
+         </children>
+      </VBox>
+   </right>
+   <center>
+      <Pane fx:id="root" prefHeight="400.0" prefWidth="400.0" style="-fx-background-color: green;" stylesheets="@dark.css" BorderPane.alignment="CENTER" />
+   </center>
+   <bottom>
+      <HBox prefHeight="100.0" prefWidth="200.0" styleClass="encadre" stylesheets="@dark.css" BorderPane.alignment="CENTER">
+         <children>
+            <VBox alignment="CENTER" prefHeight="100.0" prefWidth="137.0">
+               <children>
+                  <Label alignment="CENTER" styleClass="label-bright" text="nbr de tour" />
+                  <Label fx:id="nbrTour" styleClass="label-bright" text="0" />
+               </children>
+            </VBox>
+            <VBox alignment="CENTER" prefHeight="100.0" prefWidth="129.0">
+               <children>
+                  <Label styleClass="label-bright" text="nbr de vivants" />
+                  <Label fx:id="nbrVivant" styleClass="label-bright" text="0" />
+               </children>
+            </VBox>
+            <VBox alignment="CENTER" prefHeight="100.0" prefWidth="132.0">
+               <children>
+                  <Label styleClass="label-bright" text="nbr de Loups" />
+                  <Label fx:id="nbrLoup" styleClass="label-bright" text="0" />
+               </children>
+            </VBox>
+            <VBox alignment="CENTER" prefHeight="100.0" prefWidth="125.0">
+               <children>
+                  <Label prefHeight="19.0" prefWidth="112.0" styleClass="label-bright" text="nbr de mouton" />
+                  <Label fx:id="nbrMouton" styleClass="label-bright" text="0" />
+               </children>
+            </VBox>
+            <VBox prefHeight="200.0" prefWidth="100.0">
+               <children>
+                  <Label styleClass="label-bright" text="Naissance Tour :" />
+                  <Label fx:id="TourNaissance" styleClass="label-bright" />
+                  <Label styleClass="label-bright" text="Vie" />
+                  <Label fx:id="HPActeur" styleClass="label-bright" />
+               </children>
+            </VBox>
+            <VBox prefHeight="200.0" prefWidth="100.0">
+               <children>
+                  <Label styleClass="label-bright" text="ID" />
+                  <Label fx:id="IDActeur" styleClass="label-bright" />
+                  <Label styleClass="label-bright" text="Nombre de capture" />
+                  <Label fx:id="NombreDeCap" styleClass="label-bright" />
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+   </bottom>
+</BorderPane>
