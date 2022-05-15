@@ -14,7 +14,7 @@ public class Environnement {
 
     public Environnement() {
         JSONParser parser = new JSONParser();
-        File resourceFile = new File("src/Terraria/vue/terrain.json");
+        File resourceFile = new File("src/Terraria/vue/world.json");
         try (Reader reader = new FileReader(resourceFile)) {
 
             JSONObject jsonObject = (JSONObject) parser.parse(reader);
