@@ -36,10 +36,6 @@ public class Environnement {
     private ArrayList<Tile> listeTiles = new ArrayList<>() ;
 
     public Environnement() {
-
-
-
-
     }
 
 
