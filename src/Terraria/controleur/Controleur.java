@@ -46,8 +46,9 @@ public class Controleur implements Initializable {
         hero = new Joueur(20, 5, 50, 50, e1, "hero", "persoIdle.png");
 
         ajoutSprite(hero);
-        pane.getScene().getCamera().layoutXProperty().bind(hero.getXProprety().subtract(pane.getScene().getWidth()/2) /*-e1.getLargeur()*16/2*/);
-        pane.getScene().getCamera().layoutYProperty().bind(hero.getYProprety().subtract(pane.getScene().getHeight()/2) /*-e1.getLargeur()*16/2*/);
+
+        pane.getScene().getCamera().layoutXProperty().bind(hero.getXProprety().subtract(pane.getScene().getWidth()/2));
+        //pane.getScene().getCamera().layoutYProperty().bind(hero.getYProprety().subtract(pane.getScene().getHeight()/2) /*-e1.getLargeur()*16/2*/);
 
 
     }
