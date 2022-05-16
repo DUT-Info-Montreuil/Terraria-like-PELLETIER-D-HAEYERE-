@@ -44,8 +44,11 @@ public class Controleur implements Initializable {
         e1.loadTile() ;
         e1.loadLayers() ;
         afficheMap(e1);
-        Joueur hero = new Joueur(20,5,50,50,e1,"hero","persoIdle.png");
+        Joueur hero = new Joueur(20,5,1024,100,e1,"hero","persoIdle.png");
         ajoutSprite(hero);
+        pane.getScene().getCamera().layoutXProperty().bind(hero.getXProprety().subtract(pane.getScene().getWidth()/2) /*-e1.getLargeur()*16/2*/);
+        pane.getScene().getCamera().layoutYProperty().bind(hero.getYProprety().subtract(pane.getScene().getHeight()/2) /*-e1.getLargeur()*16/2*/);
+
 
     }
 
