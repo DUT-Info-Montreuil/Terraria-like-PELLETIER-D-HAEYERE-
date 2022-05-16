@@ -10,10 +10,12 @@ import javafx.scene.layout.BorderPane;
 public class Main extends Application {
     @Override
     public void start(Stage primaryStage) {
+        System.out.println(String.valueOf(getClass().getResource("/air.jpg")));
         try {
             BorderPane root = FXMLLoader.load(getClass().getResource("vue/vue1.fxml"));
             Scene scene = new Scene(root,800,600);
             primaryStage.setScene(scene);
+
 
             primaryStage.show();
         } catch (Exception e) {
