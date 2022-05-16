@@ -4,6 +4,8 @@ import Terraria.modele.Environnement;
 import Terraria.modele.Tile;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.ParallelCamera;
+import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
@@ -24,19 +26,23 @@ public class Controleur implements Initializable {
     @FXML
     private Pane pane;
 
-    @FXML
-    private BorderPane borderPane;
-    public Environnement e1 ;
+
+    private Environnement e1 ;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
          e1 = new Environnement();
+        Scene scene = new Scene(pane,e1.getLargeur()*16, e1.getHauteur()*16);
+        ParallelCamera camera = new ParallelCamera();
+        scene.setCamera(camera);
+        //scene.getCamera().setLayoutY(50); pour deplacer la camera a bin au joueur plus tard
 
-        e1.loadMap("ress/terrain2.json");
+        e1.loadMap("ress/terrain.json");
         e1.loadTileInfo();
         e1.loadTile() ;
         e1.loadLayers() ;
         afficheMap(e1);
+        System.out.println("hey");
     }
 
     private void afficheMap(Environnement e1) {
