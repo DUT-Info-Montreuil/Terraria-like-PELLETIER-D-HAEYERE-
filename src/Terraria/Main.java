@@ -13,7 +13,7 @@ public class Main extends Application {
         System.out.println(String.valueOf(getClass().getResource("/air.jpg")));
         try {
             BorderPane root = FXMLLoader.load(getClass().getResource("vue/vue1.fxml"));
-            Scene scene = new Scene(root,800,600);
+            Scene scene = new Scene(root,1024,1024);
             primaryStage.setScene(scene);
 
 
