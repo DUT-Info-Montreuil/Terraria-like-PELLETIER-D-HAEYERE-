@@ -1,6 +1,8 @@
 package Terraria.controleur;
 
+import Terraria.modele.Acteur;
 import Terraria.modele.Environnement;
+import Terraria.modele.Joueur;
 import Terraria.modele.Tile;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -37,6 +39,8 @@ public class Controleur implements Initializable {
         e1.loadTile() ;
         e1.loadLayers() ;
         afficheMap(e1);
+        Joueur hero = new Joueur(20,5,50,50,e1,"hero","persoIdle.png");
+        ajoutSprite(hero);
     }
 
     private void afficheMap(Environnement e1) {
@@ -86,5 +90,11 @@ public class Controleur implements Initializable {
             posX = 0 ;
             posY += 16 ;
         }
+    }
+    private void ajoutSprite(Acteur a){
+        ImageView imageView = new ImageView(a.getSprite());
+        pane.getChildren().add(imageView);
+        imageView.translateXProperty().bind(a.getXProprety());
+        imageView.translateYProperty().bind(a.getYProprety());
     }
 }
