@@ -14,6 +14,8 @@ public class Environnement {
     private ArrayList<JSONObject> layers;
     private Map<Long , String> infotiles = new HashMap<Long , String>();
     private JSONObject map ;
+    private int hauteur ;
+    private int largeur ;
 
     public ArrayList<JSONObject> getLayers() {
         return layers;
@@ -41,6 +43,14 @@ public class Environnement {
     }
 
 
+    public int getHauteur() {
+        return hauteur;
+    }
+
+    public int getLargeur() {
+        return largeur;
+    }
+
     public void loadMap (String path){
         //JSON parser object to parse read file
         JSONParser jsonParser = new JSONParser();
@@ -54,6 +64,15 @@ public class Environnement {
             System.out.println(map);
             System.out.println("Map loaded");
 
+
+
+            JSONArray layers = (JSONArray) map.get("layers");
+            JSONObject layer = (JSONObject) layers.get(0) ;
+            hauteur = ((Long) layer.get("height")).intValue() ;
+            largeur = ((Long) layer.get("width")).intValue() ;
+
+
+
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -64,12 +83,12 @@ public class Environnement {
     }
 
     public void loadTileInfo() {
-        JSONArray tilesets = (JSONArray) map.get("tilesets");
-        JSONObject miniTiles = (JSONObject) tilesets.get(0) ;
-        System.out.println(miniTiles.toJSONString());
-        JSONArray superMiniTile = (JSONArray) miniTiles.get("tiles");
-        for (int i = 0; i < superMiniTile.size(); i++) {
-            JSONObject a = (JSONObject) superMiniTile.get(i);
+        JSONArray tileSets = (JSONArray) map.get("tilesets");
+        JSONObject confTilesSet = (JSONObject) tileSets.get(0) ;
+
+        JSONArray tiles = (JSONArray) confTilesSet.get("tiles");
+        for (int i = 0; i < tiles.size(); i++) {
+            JSONObject a = (JSONObject) tiles.get(i);
             infotiles.put((Long) a.get("id")+ 1, (String) a.get("image")) ;
 
         }
@@ -91,11 +110,11 @@ public class Environnement {
 
     public void loadTile() {
         JSONArray tilesets = (JSONArray) map.get("tilesets");
-        JSONObject miniTiles = (JSONObject) tilesets.get(0) ;
-        System.out.println(miniTiles.toJSONString());
-        JSONArray superMiniTile = (JSONArray) miniTiles.get("tiles");
-        for (int i = 0; i < superMiniTile.size(); i++) {
-            JSONObject a = (JSONObject) superMiniTile.get(i);
+        JSONObject confTilesSet = (JSONObject) tilesets.get(0) ;
+
+        JSONArray tiles = (JSONArray) confTilesSet.get("tiles");
+        for (int i = 0; i < tiles.size(); i++) {
+            JSONObject a = (JSONObject) tiles.get(i);
             int b = ((Long) a.get("id")).intValue();
             String c = (String) a.get("image") ;
             int d = ((Long) a.get("imageheight")).intValue();

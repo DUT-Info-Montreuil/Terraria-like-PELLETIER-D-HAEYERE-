@@ -26,10 +26,11 @@ public class Controleur implements Initializable {
 
     @FXML
     private BorderPane borderPane;
+    public Environnement e1 ;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        Environnement e1 = new Environnement();
+         e1 = new Environnement();
 
         e1.loadMap("ress/terrain2.json");
         e1.loadTileInfo();
@@ -41,33 +42,33 @@ public class Controleur implements Initializable {
     private void afficheMap(Environnement e1) {
         JSONObject map = e1.getMap() ;
         JSONArray layers = (JSONArray) map.get("layers");
-        JSONObject data = (JSONObject) layers.get(0) ;
-        JSONArray miniData = (JSONArray) data.get("data");
+        JSONObject layer = (JSONObject) layers.get(0) ;
+        JSONArray data = (JSONArray) layer.get("data");
         Map<Long ,String> info = e1.getInfotiles() ;
 
         int posX = 0 ;
         int posY = 0 ;
         int nbr = 0 ;
         ArrayList<Tile> listeTiles = e1.getListeTiles() ;
-        for (Tile a :listeTiles
+        for (Tile t :listeTiles
              ) {
-            System.out.println("je suis une tile "+ a.getImage());
+            System.out.println("je suis une tile "+ t.getImage());
         }
-        for (int i = 0; i <16 ; i++) {
-            for (int j = 0; j < 16; j++) {
+        for (int i = 0; i <e1.getLargeur() ; i++) {
+            for (int j = 0; j < e1.getHauteur(); j++) {
                 try {
-                    //"/"+info.get(miniData.get(nbr)))
+
                     ImageView imageView ;
 
                     for (Tile t :listeTiles) {
 
-                        if (((Long) miniData.get(nbr)).intValue() == t.getId()){
+                        if (((Long) data.get(nbr)).intValue() == t.getId()){
                             imageView = new ImageView(t.getImage()) ;
                             imageView.setX(posX);
                             imageView.setY(posY);
                             pane.getChildren().add(imageView);
                             listImageView.add(imageView) ;
-                            System.out.println("adding "+info.get(miniData.get(nbr))+" to the pane");
+                            System.out.println("adding "+info.get(data.get(nbr))+" to the pane");
                         }
                     }
 

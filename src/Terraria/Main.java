@@ -1,5 +1,6 @@
 package Terraria;
 
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
@@ -13,7 +14,7 @@ public class Main extends Application {
         System.out.println(String.valueOf(getClass().getResource("/air.jpg")));
         try {
             BorderPane root = FXMLLoader.load(getClass().getResource("vue/vue1.fxml"));
-            Scene scene = new Scene(root,1024,1024);
+            Scene scene = new Scene(root,16*16, 16*16);
             primaryStage.setScene(scene);
 
 
