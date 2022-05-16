@@ -10,6 +10,11 @@ public abstract class Acteur {
     private int vitesse;
     private IntegerProperty posX,posY;
     private  int direction;
+
+    public void setDirection(int direction) {
+        this.direction = direction;
+    }
+
     private String id;
     private boolean statut;
 
