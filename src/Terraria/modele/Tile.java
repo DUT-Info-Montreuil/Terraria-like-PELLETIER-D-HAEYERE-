@@ -12,17 +12,15 @@ import java.io.FileNotFoundException;
 
 
 public class Tile {
-    private final long value;
-    private long id;
-    private String image;
-    private long hauteur;
-    private long width;
+    private int id;
+    private Image image;
+    private int hauteur;
+    private int width;
 
-    public long getId() {
-        return id = -1;
-    }
+    public int getId() {return id;}
 
-    public String getImage() {
+
+    public Image getImage() {
         return image;
     }
 
@@ -34,9 +32,11 @@ public class Tile {
         return width;
     }
 
-    public Tile(long value, String image, long hauteur, long width) {
-        this.value = value;
-        this.image = image;
+
+
+    public Tile(int id, String path, int hauteur, int width ) {
+        this.id = id+1;
+        this.image = new Image(String.valueOf(getClass().getResource("/"+path)));
         this.hauteur = hauteur;
         this.width = width;
 

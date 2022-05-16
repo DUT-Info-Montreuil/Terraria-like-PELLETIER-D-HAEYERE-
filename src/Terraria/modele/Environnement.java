@@ -70,7 +70,7 @@ public class Environnement {
         JSONArray superMiniTile = (JSONArray) miniTiles.get("tiles");
         for (int i = 0; i < superMiniTile.size(); i++) {
             JSONObject a = (JSONObject) superMiniTile.get(i);
-            infotiles.put((Long) a.get("id"), (String) a.get("image")) ;
+            infotiles.put((Long) a.get("id")+ 1, (String) a.get("image")) ;
 
         }
         System.out.println("les tiles info sont charger");
@@ -96,10 +96,10 @@ public class Environnement {
         JSONArray superMiniTile = (JSONArray) miniTiles.get("tiles");
         for (int i = 0; i < superMiniTile.size(); i++) {
             JSONObject a = (JSONObject) superMiniTile.get(i);
-            Long b = (Long) a.get("id");
+            int b = ((Long) a.get("id")).intValue();
             String c = (String) a.get("image") ;
-            Long d = (Long) a.get("imageheight") ;
-            Long e = (Long) a.get("imageheight") ;
+            int d = ((Long) a.get("imageheight")).intValue();
+            int e = ((Long) a.get("imageheight")).intValue() ;
 
             listeTiles.add(new Tile(b ,c ,d, e)) ;
         }
