@@ -5,7 +5,7 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.scene.image.Image;
 
 public abstract class Acteur {
-    private Image sprite;
+    private Image sprite;  //inverser
     private int pv;
     private int vitesse;
     private IntegerProperty posX,posY;

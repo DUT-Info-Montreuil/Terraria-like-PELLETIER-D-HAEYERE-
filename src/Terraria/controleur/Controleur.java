@@ -25,6 +25,7 @@ public class Controleur implements Initializable {
     private ArrayList<ImageView> listImageView = new ArrayList<>();
     @FXML
     private Pane pane;
+
     public final int sprit_hauteur = 16;
     public final int sprit_largeur = 16 ;
 
@@ -32,10 +33,14 @@ public class Controleur implements Initializable {
     private Environnement e1;
     private Joueur hero;
 
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         e1 = new Environnement();
+
         Scene scene = new Scene(pane, e1.getLargeur() *sprit_largeur, e1.getHauteur() * sprit_hauteur);
+
+        
         ParallelCamera camera = new ParallelCamera();
         scene.setCamera(camera);
         //scene.getCamera().setLayoutY(50); pour deplacer la camera a bin au joueur plus tard
@@ -113,17 +118,16 @@ public class Controleur implements Initializable {
 
     @FXML
     public void mouvements(KeyEvent keyEvent) {
-        System.out.println("testttt");
         switch (keyEvent.getCode()) {
             case D:
-                hero.setDirection(1);
-                System.out.println("oui");
+                e1.getJoueur1().setDirection(1);
+                e1.getJoueur1().seDeplace();
                 break;
             case Q:
-                hero.setDirection(-1);
+                e1.getJoueur1().setDirection(-1);
+                e1.getJoueur1().seDeplace();
                 break;
+
         }
-        hero.seDeplace();
-        System.out.println("testttt");
     }
 }
