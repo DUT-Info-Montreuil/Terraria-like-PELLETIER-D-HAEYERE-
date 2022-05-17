@@ -52,7 +52,7 @@ public class Controleur implements Initializable {
         e1.loadLayers();
         afficheMap(e1);
 
-        hero = new Joueur(20, 5, 16, 16, e1, "hero", "persoIdle.png");
+        Joueur hero = new Joueur(20, 5, 16, 16, e1, "hero", "persoIdle.png");
 
 
         ajoutSprite(hero);
