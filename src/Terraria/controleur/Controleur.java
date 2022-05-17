@@ -18,6 +18,7 @@ import org.json.simple.JSONObject;
 
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.ResourceBundle;
 
@@ -33,20 +34,19 @@ public class Controleur implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        e1 = new Environnement();
-        Joueur hero = new Joueur(20, 5, 16, 16, e1, "hero");
+        e1 = new Environnement(InitialisationEnvironnement.loadMap("ress/terrain2.json"));
+
+        HashMap<Integer, Image> mapLienIdImage = loadTile(e1.getMap());
+
+        Joueur hero = new Joueur(20, 5, 42, 42, e1, "hero");
         e1.setJoueur1(hero);
         Scene scene = new Scene(pane, e1.getLargeur() *sprit_largeur, e1.getHauteur() * sprit_hauteur);
 
         
         ParallelCamera camera = new ParallelCamera();
         scene.setCamera(camera);
-
-        e1.loadMap("ress/terrain2.json");
-        e1.loadTileInfo();
-        e1.loadTile();
         e1.loadLayers();
-        afficheMap(e1);
+        afficheMap(e1,mapLienIdImage);
 
 
         ajoutSprite(hero);
@@ -56,44 +56,45 @@ public class Controleur implements Initializable {
 
 
     }
+    public HashMap<Integer,Image> loadTile(JSONObject map) {
 
-    private void afficheMap(Environnement e1) {
-        JSONObject map = e1.getMap();
-        JSONArray layers = (JSONArray) map.get("layers");
-        JSONObject layer = (JSONObject) layers.get(0);
-        JSONArray data = (JSONArray) layer.get("data");
-        Map<Long, String> info = e1.getInfotiles();
+        JSONArray tilesets = (JSONArray) map.get("tilesets");
+        JSONObject confTilesSet = (JSONObject) tilesets.get(0);
+        JSONArray tiles = (JSONArray) confTilesSet.get("tiles");
+        HashMap<Integer, Image> mapLienIdImage = new HashMap<Integer, Image>();
+        for (int i = 0; i < tiles.size(); i++) {
+            JSONObject tile = (JSONObject) tiles.get(i);
+            int id = ((Long) tile.get("id")).intValue();
+            Image image = new Image((String.valueOf(getClass().getResource("/" + tile.get("image")))));
+            mapLienIdImage.put(id, image);
+        }
+        return mapLienIdImage;
+    }
 
+    private void afficheMap(Environnement e1,HashMap<Integer,Image> hashMapData) {
+        ArrayList<Integer> listeTiles = e1.getTerrain();
         int posX = 0;
         int posY = 0;
         int nbr = 0;
-        ArrayList<Tile> listeTiles = e1.getListeTiles();
-        for (Tile t : listeTiles
-        ) {
-            System.out.println("je suis une tile " + t.getImage());
-        }
+        System.out.println("-----------------------------------------");
+        System.out.println(listeTiles);
+        System.out.println("-----------------------------------------");
+        ImageView imageView;
+        System.out.println(hashMapData);
         for (int i = 0; i < e1.getLargeur(); i++) {
             for (int j = 0; j < e1.getHauteur(); j++) {
-                try {
 
-                    ImageView imageView;
 
-                    for (Tile t : listeTiles) {
-
-                        if (((Long) data.get(nbr)).intValue() == t.getId()) {
-                            imageView = new ImageView(t.getImage());
+                            imageView = new ImageView(hashMapData.get(listeTiles.get(nbr)));
                             imageView.setX(posX);
                             imageView.setY(posY);
                             pane.getChildren().add(imageView);
                             listImageView.add(imageView);
-                            System.out.println("adding " + info.get(data.get(nbr)) + " to the pane");
-                        }
-                    }
 
 
-                } catch (Exception e) {
-                    System.out.println("error :'(");
-                }
+
+
+
 
                 nbr++;
                 posX += 16;
