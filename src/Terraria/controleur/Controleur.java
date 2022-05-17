@@ -34,7 +34,8 @@ public class Controleur implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         e1 = new Environnement();
-
+        Joueur hero = new Joueur(20, 5, 16, 16, e1, "hero");
+        e1.setJoueur1(hero);
         Scene scene = new Scene(pane, e1.getLargeur() *sprit_largeur, e1.getHauteur() * sprit_hauteur);
 
         
@@ -47,7 +48,7 @@ public class Controleur implements Initializable {
         e1.loadLayers();
         afficheMap(e1);
 
-        Joueur hero = new Joueur(20, 5, 16, 16, e1, "hero");
+
         ajoutSprite(hero);
         System.out.println(pane.getScene().getHeight());
         pane.getScene().getCamera().layoutXProperty().bind(hero.getXProprety().subtract(new SimpleIntegerProperty((e1.getLargeur()*sprit_largeur)/2)));
