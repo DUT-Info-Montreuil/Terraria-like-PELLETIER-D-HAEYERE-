@@ -64,7 +64,7 @@ public class Controleur implements Initializable {
         HashMap<Integer, Image> mapLienIdImage = new HashMap<Integer, Image>();
         for (int i = 0; i < tiles.size(); i++) {
             JSONObject tile = (JSONObject) tiles.get(i);
-            int id = ((Long) tile.get("id")).intValue();
+            int id = (((Long) tile.get("id")).intValue())+1;
             Image image = new Image((String.valueOf(getClass().getResource("/" + tile.get("image")))));
             mapLienIdImage.put(id, image);
         }
