@@ -4,6 +4,7 @@ import Terraria.modele.Acteur;
 import Terraria.modele.Environnement;
 import Terraria.modele.Joueur;
 import Terraria.modele.Tile;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.ParallelCamera;
@@ -24,6 +25,8 @@ public class Controleur implements Initializable {
     private ArrayList<ImageView> listImageView = new ArrayList<>();
     @FXML
     private Pane pane;
+    public final int sprit_hauteur = 16;
+    public final int sprit_largeur = 16 ;
 
 
     private Environnement e1;
@@ -32,7 +35,7 @@ public class Controleur implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         e1 = new Environnement();
-        Scene scene = new Scene(pane, e1.getLargeur() * 16, e1.getHauteur() * 16);
+        Scene scene = new Scene(pane, e1.getLargeur() *sprit_largeur, e1.getHauteur() * sprit_hauteur);
         ParallelCamera camera = new ParallelCamera();
         scene.setCamera(camera);
         //scene.getCamera().setLayoutY(50); pour deplacer la camera a bin au joueur plus tard
@@ -43,12 +46,12 @@ public class Controleur implements Initializable {
         e1.loadLayers();
         afficheMap(e1);
 
-        hero = new Joueur(20, 5, 50, 50, e1, "hero", "persoIdle.png");
+        hero = new Joueur(20, 5, 16, 16, e1, "hero", "persoIdle.png");
 
         ajoutSprite(hero);
-
-        pane.getScene().getCamera().layoutXProperty().bind(hero.getXProprety().subtract(pane.getScene().getWidth()/2));
-        //pane.getScene().getCamera().layoutYProperty().bind(hero.getYProprety().subtract(pane.getScene().getHeight()/2) /*-e1.getLargeur()*16/2*/);
+        System.out.println(pane.getScene().getHeight());
+        pane.getScene().getCamera().layoutXProperty().bind(hero.getXProprety().subtract(new SimpleIntegerProperty((e1.getLargeur()*sprit_largeur)/2)));
+        pane.getScene().getCamera().layoutYProperty().bind(hero.getYProprety().subtract(new SimpleIntegerProperty(((e1.getLargeur()*sprit_hauteur)/2)-24)));
 
 
     }
