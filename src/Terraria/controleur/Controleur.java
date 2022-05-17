@@ -8,6 +8,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.ParallelCamera;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
@@ -24,6 +25,7 @@ public class Controleur implements Initializable {
     private ArrayList<ImageView> listImageView = new ArrayList<>();
     @FXML
     private Pane pane;
+
     Environnement e1;
 
     @Override
@@ -41,6 +43,8 @@ public class Controleur implements Initializable {
         e1.loadTile();
         e1.loadLayers();
         afficheMap(e1);
+
+        //Initialisation du sprite du hero
 
 
         ajoutSprite(hero);
@@ -99,10 +103,13 @@ public class Controleur implements Initializable {
     }
 
     private void ajoutSprite(Acteur a) {
-        ImageView imageView = new ImageView(a.getSprite());
-        pane.getChildren().add(imageView);
-        imageView.translateXProperty().bind(a.getXProprety());
-        imageView.translateYProperty().bind(a.getYProprety());
+
+        Image imageSpriteHero =new Image(String.valueOf(getClass().getResource("/"+a.getPathSprite())));
+        ImageView imageViewSpriteHero = new ImageView(imageSpriteHero);
+        imageViewSpriteHero.setId(a.getId());
+        pane.getChildren().add(imageViewSpriteHero);
+        imageViewSpriteHero.translateXProperty().bind(a.getXProprety());
+        imageViewSpriteHero.translateYProperty().bind(a.getYProprety());
     }
 
     @FXML
