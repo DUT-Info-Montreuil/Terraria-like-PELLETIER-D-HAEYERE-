@@ -103,8 +103,7 @@ public class Controleur implements Initializable {
     }
 
     private void ajoutSprite(Acteur a) {
-
-        Image imageSpriteHero =new Image(String.valueOf(getClass().getResource("/"+a.getPathSprite())));
+        Image imageSpriteHero =new Image(String.valueOf(getClass().getResource("/persoIdle.png"))); // a modifier quand ajout d'autre acteur
         ImageView imageViewSpriteHero = new ImageView(imageSpriteHero);
         imageViewSpriteHero.setId(a.getId());
         pane.getChildren().add(imageViewSpriteHero);
