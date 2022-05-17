@@ -24,14 +24,13 @@ public class Controleur implements Initializable {
     private ArrayList<ImageView> listImageView = new ArrayList<>();
     @FXML
     private Pane pane;
-
-
-    private Environnement e1;
-    private Joueur hero;
+    Environnement e1;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         e1 = new Environnement();
+        Joueur hero = new Joueur(20, 8, 16, 16, e1, "hero", "persoIdle.png");
+        e1.setJoueur1(hero);
         Scene scene = new Scene(pane, e1.getLargeur() * 16, e1.getHauteur() * 16);
         ParallelCamera camera = new ParallelCamera();
         scene.setCamera(camera);
@@ -43,11 +42,10 @@ public class Controleur implements Initializable {
         e1.loadLayers();
         afficheMap(e1);
 
-        hero = new Joueur(20, 8, 16, 16, e1, "hero", "persoIdle.png");
 
         ajoutSprite(hero);
-        pane.getScene().getCamera().layoutXProperty().bind(hero.getXProprety().subtract(pane.getScene().getWidth()/2) /*-e1.getLargeur()*16/2*/);
-        pane.getScene().getCamera().layoutYProperty().bind(hero.getYProprety().subtract(pane.getScene().getHeight()/2) /*-e1.getLargeur()*16/2*/);
+        //pane.getScene().getCamera().layoutXProperty().bind(hero.getXProprety().subtract(pane.getScene().getWidth()/2) /*-e1.getLargeur()*16/2*/);
+        //pane.getScene().getCamera().layoutYProperty().bind(hero.getYProprety().subtract(pane.getScene().getHeight()/2) /*-e1.getLargeur()*16/2*/);
 
 
     }
@@ -111,12 +109,12 @@ public class Controleur implements Initializable {
     public void mouvements(KeyEvent keyEvent) {
         switch (keyEvent.getCode()) {
             case D:
-                hero.setDirection(1);
-                hero.seDeplace();
+                e1.getJoueur1().setDirection(1);
+                e1.getJoueur1().seDeplace();
                 break;
             case Q:
-                hero.setDirection(-1);
-                hero.seDeplace();
+                e1.getJoueur1().setDirection(-1);
+                e1.getJoueur1().seDeplace();
                 break;
 
         }

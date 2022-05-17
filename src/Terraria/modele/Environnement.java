@@ -20,6 +20,7 @@ public class Environnement {
     private JSONObject map;
     private int hauteur;
     private int largeur;
+    private Joueur joueur1;
 
     public ArrayList<JSONObject> getLayers() {
         return layers;
@@ -40,6 +41,7 @@ public class Environnement {
     private ArrayList<Tile> listeTiles = new ArrayList<>();
 
     public Environnement() {
+
     }
 
 
@@ -122,6 +124,14 @@ public class Environnement {
             listeTiles.add(new Tile(b, c, d, e));
         }
         System.out.println("les tiles sont charger");
+    }
+
+    public void setJoueur1(Joueur joueur1) {
+        this.joueur1 = joueur1;
+    }
+
+    public Joueur getJoueur1() {
+        return joueur1;
     }
 }
 
