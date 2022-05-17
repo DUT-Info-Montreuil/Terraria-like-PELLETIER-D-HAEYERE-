@@ -38,11 +38,11 @@ public class Controleur implements Initializable {
         e1.setJoueur1(hero);
         Scene scene = new Scene(pane, e1.getLargeur() *sprit_largeur, e1.getHauteur() * sprit_hauteur);
 
-        
+        /*
         ParallelCamera camera = new ParallelCamera();
         scene.setCamera(camera);
-
-        e1.loadMap("ress/terrain2.json");
+*/
+        e1.loadMap("ress/terrain.json");
         e1.loadTileInfo();
         e1.loadTile();
         e1.loadLayers();
@@ -51,9 +51,10 @@ public class Controleur implements Initializable {
 
         ajoutSprite(hero);
         System.out.println(pane.getScene().getHeight());
+        /*
         pane.getScene().getCamera().layoutXProperty().bind(hero.getXProprety().subtract(new SimpleIntegerProperty((e1.getLargeur()*sprit_largeur)/2)));
         pane.getScene().getCamera().layoutYProperty().bind(hero.getYProprety().subtract(new SimpleIntegerProperty(((e1.getLargeur()*sprit_hauteur)/2)-24)));
-
+*/
 
     }
 
