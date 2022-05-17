@@ -16,7 +16,7 @@ public class Main extends Application {
         try {
             Pane root = FXMLLoader.load(getClass().getResource("vue/vue1.fxml"));
             primaryStage.setScene(root.getScene());
-            primaryStage.setResizable(true);
+            primaryStage.setResizable(false);
             primaryStage.show();
             root.requestFocus();
         } catch (Exception e) {
