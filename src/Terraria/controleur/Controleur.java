@@ -9,6 +9,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.ParallelCamera;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
@@ -26,12 +27,13 @@ public class Controleur implements Initializable {
     @FXML
     private Pane pane;
 
+    Environnement e1;
     public final int sprit_hauteur = 16;
     public final int sprit_largeur = 16 ;
 
 
-    private Environnement e1;
-    private Joueur hero;
+
+
 
 
     @Override
@@ -43,7 +45,6 @@ public class Controleur implements Initializable {
         
         ParallelCamera camera = new ParallelCamera();
         scene.setCamera(camera);
-        //scene.getCamera().setLayoutY(50); pour deplacer la camera a bin au joueur plus tard
 
         e1.loadMap("ress/terrain2.json");
         e1.loadTileInfo();
@@ -52,6 +53,7 @@ public class Controleur implements Initializable {
         afficheMap(e1);
 
         hero = new Joueur(20, 5, 16, 16, e1, "hero", "persoIdle.png");
+
 
         ajoutSprite(hero);
         System.out.println(pane.getScene().getHeight());
@@ -110,10 +112,13 @@ public class Controleur implements Initializable {
     }
 
     private void ajoutSprite(Acteur a) {
-        ImageView imageView = new ImageView(a.getSprite());
-        pane.getChildren().add(imageView);
-        imageView.translateXProperty().bind(a.getXProprety());
-        imageView.translateYProperty().bind(a.getYProprety());
+
+        Image imageSpriteHero =new Image(String.valueOf(getClass().getResource("/"+a.getPathSprite())));
+        ImageView imageViewSpriteHero = new ImageView(imageSpriteHero);
+        imageViewSpriteHero.setId(a.getId());
+        pane.getChildren().add(imageViewSpriteHero);
+        imageViewSpriteHero.translateXProperty().bind(a.getXProprety());
+        imageViewSpriteHero.translateYProperty().bind(a.getYProprety());
     }
 
     @FXML

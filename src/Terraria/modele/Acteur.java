@@ -2,10 +2,9 @@ package Terraria.modele;
 
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
-import javafx.scene.image.Image;
 
 public abstract class Acteur {
-    private Image sprite;  //inverser
+    private String PathSprite;
     private int pv;
     private int vitesse;
     private IntegerProperty posX,posY;
@@ -18,8 +17,8 @@ public abstract class Acteur {
     private String id;
     private boolean statut;
 
-    public Image getSprite() {
-        return sprite;
+    public String getPathSprite() {
+        return PathSprite;
     }
 
     public String getId() {
@@ -37,7 +36,7 @@ public abstract class Acteur {
         this.statut = true;
         this.environnement = environnement;
         this.id=id;
-        this.sprite=new Image(String.valueOf(getClass().getResource("/"+path)));
+        this.PathSprite=path;
     }
 
     public int getPv() {
