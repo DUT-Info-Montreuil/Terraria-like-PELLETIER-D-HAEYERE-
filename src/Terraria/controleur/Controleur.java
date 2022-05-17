@@ -43,7 +43,7 @@ public class Controleur implements Initializable {
         e1.loadLayers();
         afficheMap(e1);
 
-        hero = new Joueur(20, 5, 50, 50, e1, "hero", "persoIdle.png");
+        hero = new Joueur(20, 8, 16, 16, e1, "hero", "persoIdle.png");
 
         ajoutSprite(hero);
         pane.getScene().getCamera().layoutXProperty().bind(hero.getXProprety().subtract(pane.getScene().getWidth()/2) /*-e1.getLargeur()*16/2*/);
@@ -109,17 +109,16 @@ public class Controleur implements Initializable {
 
     @FXML
     public void mouvements(KeyEvent keyEvent) {
-        System.out.println("testttt");
         switch (keyEvent.getCode()) {
             case D:
                 hero.setDirection(1);
-                System.out.println("oui");
+                hero.seDeplace();
                 break;
             case Q:
                 hero.setDirection(-1);
+                hero.seDeplace();
                 break;
+
         }
-        hero.seDeplace();
-        System.out.println("testttt");
     }
 }
