@@ -4,7 +4,6 @@ import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 
 public abstract class Acteur {
-    private String PathSprite;
     private int pv;
     private int vitesse;
     private IntegerProperty posX,posY;
@@ -17,9 +16,6 @@ public abstract class Acteur {
     private String id;
     private boolean statut;
 
-    public String getPathSprite() {
-        return PathSprite;
-    }
 
     public String getId() {
         return id;
@@ -27,7 +23,7 @@ public abstract class Acteur {
 
     protected Environnement environnement;
 
-    public Acteur(int pv, int vitesse, int posX, int posY, Environnement environnement,String id,String path) {
+    public Acteur(int pv, int vitesse, int posX, int posY, Environnement environnement,String id) {
         this.pv = pv;
         this.vitesse = vitesse;
         this.posX = new SimpleIntegerProperty(posX);
@@ -36,7 +32,7 @@ public abstract class Acteur {
         this.statut = true;
         this.environnement = environnement;
         this.id=id;
-        this.PathSprite=path;
+
     }
 
     public int getPv() {
