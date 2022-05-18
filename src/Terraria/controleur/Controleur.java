@@ -34,7 +34,7 @@ public class Controleur implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        e1 = new Environnement(InitialisationEnvironnement.loadMap("ress/terrain2.json"));
+        e1 = new Environnement(InitialisationEnvironnement.loadMap("ress/terrain.json"));
 
         HashMap<Integer, Image> mapLienIdImage = loadTile(e1.getMap());
 
@@ -42,12 +42,12 @@ public class Controleur implements Initializable {
         e1.setJoueur1(hero);
         Scene scene = new Scene(pane, e1.getLargeur() *sprit_largeur, e1.getHauteur() * sprit_hauteur);
 
-        /*
+
         ParallelCamera camera = new ParallelCamera();
         scene.setCamera(camera);
 
 
-*/
+
         
 
         e1.loadLayers();
@@ -55,11 +55,11 @@ public class Controleur implements Initializable {
 
 
         ajoutSprite(hero);
-        System.out.println(pane.getScene().getHeight());
-        /*
-        pane.getScene().getCamera().layoutXProperty().bind(hero.getXProprety().subtract(new SimpleIntegerProperty((e1.getLargeur()*sprit_largeur)/2)));
-        pane.getScene().getCamera().layoutYProperty().bind(hero.getYProprety().subtract(new SimpleIntegerProperty(((e1.getLargeur()*sprit_hauteur)/2)-24)));
-*/
+
+
+        pane.getScene().getCamera().layoutXProperty().bind(hero.getXProprety().subtract(pane.getScene().getWidth()/2));
+        pane.getScene().getCamera().layoutYProperty().bind(hero.getYProprety().subtract(pane.getScene().getHeight()/2));
+
 
     }
     public HashMap<Integer,Image> loadTile(JSONObject map) {
