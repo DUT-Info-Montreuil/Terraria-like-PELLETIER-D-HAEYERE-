@@ -42,18 +42,24 @@ public class Controleur implements Initializable {
         e1.setJoueur1(hero);
         Scene scene = new Scene(pane, e1.getLargeur() *sprit_largeur, e1.getHauteur() * sprit_hauteur);
 
-        
+        /*
         ParallelCamera camera = new ParallelCamera();
         scene.setCamera(camera);
+
+
+*/
+        
+
         e1.loadLayers();
         afficheMap(e1,mapLienIdImage);
 
 
         ajoutSprite(hero);
         System.out.println(pane.getScene().getHeight());
+        /*
         pane.getScene().getCamera().layoutXProperty().bind(hero.getXProprety().subtract(new SimpleIntegerProperty((e1.getLargeur()*sprit_largeur)/2)));
         pane.getScene().getCamera().layoutYProperty().bind(hero.getYProprety().subtract(new SimpleIntegerProperty(((e1.getLargeur()*sprit_hauteur)/2)-24)));
-
+*/
 
     }
     public HashMap<Integer,Image> loadTile(JSONObject map) {
