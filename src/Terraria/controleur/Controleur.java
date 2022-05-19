@@ -4,6 +4,8 @@ import Terraria.modele.Acteur;
 import Terraria.modele.Environnement;
 import Terraria.modele.Joueur;
 import Terraria.modele.Tile;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -13,6 +15,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
+import javafx.util.Duration;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
@@ -27,14 +30,14 @@ public class Controleur implements Initializable {
     private ArrayList<ImageView> listImageView = new ArrayList<>();
     @FXML
     private Pane pane;
-
+    private Timeline timeline;
     Environnement e1;
     public final int sprit_hauteur = 16;
     public final int sprit_largeur = 16 ;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        e1 = new Environnement(InitialisationEnvironnement.loadMap("ress/terrain2.json"));
+        e1 = new Environnement(InitialisationEnvironnement.loadMap("ress/terrain.json"));
 
         HashMap<Integer, Image> mapLienIdImage = loadTile(e1.getMap());
 
@@ -42,12 +45,12 @@ public class Controleur implements Initializable {
         e1.setJoueur1(hero);
         Scene scene = new Scene(pane, e1.getLargeur() *sprit_largeur, e1.getHauteur() * sprit_hauteur);
 
-        /*
+
         ParallelCamera camera = new ParallelCamera();
         scene.setCamera(camera);
 
 
-*/
+
         
 
         e1.loadLayers();
@@ -56,10 +59,21 @@ public class Controleur implements Initializable {
 
         ajoutSprite(hero);
         System.out.println(pane.getScene().getHeight());
-        /*
+
         pane.getScene().getCamera().layoutXProperty().bind(hero.getXProprety().subtract(new SimpleIntegerProperty((e1.getLargeur()*sprit_largeur)/2)));
         pane.getScene().getCamera().layoutYProperty().bind(hero.getYProprety().subtract(new SimpleIntegerProperty(((e1.getLargeur()*sprit_hauteur)/2)-24)));
-*/
+
+        launchTimeLine();
+        timeline.setCycleCount(timeline.INDEFINITE);
+        timeline.play();
+
+    }
+    public void launchTimeLine(){
+        timeline = new Timeline(new KeyFrame (Duration.millis(32.66),actionEvent->{
+
+            e1.getJoueur1().seDeplace();
+
+        }));
 
     }
     public HashMap<Integer,Image> loadTile(JSONObject map) {
@@ -102,6 +116,8 @@ public class Controleur implements Initializable {
 
 
 
+
+
                 nbr++;
                 posX += 16;
 
@@ -126,11 +142,21 @@ public class Controleur implements Initializable {
         switch (keyEvent.getCode()) {
             case D:
                 e1.getJoueur1().setDirection(1);
-                e1.getJoueur1().seDeplace();
                 break;
             case Q:
                 e1.getJoueur1().setDirection(-1);
-                e1.getJoueur1().seDeplace();
+                break;
+
+        }
+    }
+    @FXML
+    public void stopMouvement(KeyEvent keyEvent) {
+        switch (keyEvent.getCode()) {
+            case D:
+                e1.getJoueur1().setDirection(0);
+                break;
+            case Q:
+                e1.getJoueur1().setDirection(0);
                 break;
 
         }

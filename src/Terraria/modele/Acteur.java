@@ -28,7 +28,7 @@ public abstract class Acteur {
         this.vitesse = vitesse;
         this.posX = new SimpleIntegerProperty(posX);
         this.posY = new SimpleIntegerProperty(posY);
-        this.direction=1;
+        this.direction=0;
         this.statut = true;
         this.environnement = environnement;
         this.id=id;
