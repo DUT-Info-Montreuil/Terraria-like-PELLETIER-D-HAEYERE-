@@ -18,10 +18,10 @@
             7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7,
             7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7,
             7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7,
-            5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5,
-            5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5,
-            5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5,
-            5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5,
+            4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4,
+            4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4,
+            4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4,
+            4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4,
             3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3,
             3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3,
             3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3,
@@ -62,49 +62,87 @@
                  "id":0,
                  "image":"air.jpg",
                  "imageheight":16,
-                 "imagewidth":16
+                 "imagewidth":16,
+                 "properties":[
+                        {
+                         "name":"collide",
+                         "type":"bool",
+                         "value":false
+                        }]
                 }, 
                 {
                  "id":1,
                  "image":"herbe.jpg",
                  "imageheight":16,
-                 "imagewidth":16
+                 "imagewidth":16,
+                 "properties":[
+                        {
+                         "name":"collide",
+                         "type":"bool",
+                         "value":true
+                        }]
                 }, 
                 {
                  "id":2,
                  "image":"lave.jpg",
                  "imageheight":16,
-                 "imagewidth":16
+                 "imagewidth":16,
+                 "properties":[
+                        {
+                         "name":"collide",
+                         "type":"bool",
+                         "value":true
+                        }]
                 }, 
                 {
                  "id":3,
-                 "image":"pierre1.jpg",
+                 "image":"pierre2.jpg",
                  "imageheight":16,
-                 "imagewidth":16
+                 "imagewidth":16,
+                 "properties":[
+                        {
+                         "name":"collide",
+                         "type":"bool",
+                         "value":true
+                        }]
                 }, 
                 {
                  "id":4,
-                 "image":"pierre2.jpg",
+                 "image":"pierre1.jpg",
                  "imageheight":16,
-                 "imagewidth":16
+                 "imagewidth":16,
+                 "properties":[
+                        {
+                         "name":"collide",
+                         "type":"bool",
+                         "value":true
+                        }]
                 }, 
                 {
                  "id":5,
                  "image":"pierre3.jpg",
                  "imageheight":16,
-                 "imagewidth":16
+                 "imagewidth":16,
+                 "properties":[
+                        {
+                         "name":"collide",
+                         "type":"bool",
+                         "value":true
+                        }]
                 }, 
                 {
                  "id":6,
                  "image":"terre.png",
                  "imageheight":16,
-                 "imagewidth":16
+                 "imagewidth":16,
+                 "properties":[
+                        {
+                         "name":"collide",
+                         "type":"bool",
+                         "value":true
+                        }]
                 }],
          "tilewidth":16
-        }, 
-        {
-         "firstgid":8,
-         "source":"jeuxdetuile.tsx"
         }],
  "tilewidth":16,
  "type":"map",

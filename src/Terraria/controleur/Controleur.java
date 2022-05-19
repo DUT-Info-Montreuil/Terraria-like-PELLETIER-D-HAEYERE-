@@ -37,9 +37,9 @@ public class Controleur implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        e1 = new Environnement(InitialisationEnvironnement.loadMap("ress/terrain.json"));
+        e1 = new Environnement(InitialisationEnvironnement.loadMap("ress/terrain2.json"));
 
-        HashMap<Integer, Image> mapLienIdImage = loadTile(e1.getMap());
+        HashMap<Tile, Image> mapLienIdImage = loadTile(e1.getMap());
 
         Joueur hero = new Joueur(20, 5, 42, 42, e1, "hero");
         e1.setJoueur1(hero);
@@ -50,8 +50,6 @@ public class Controleur implements Initializable {
         scene.setCamera(camera);
 
 
-
-        
 
         e1.loadLayers();
         afficheMap(e1,mapLienIdImage);
@@ -79,22 +77,19 @@ public class Controleur implements Initializable {
 
 
     }
-    public HashMap<Integer,Image> loadTile(JSONObject map) {
+    public HashMap<Tile,Image> loadTile(JSONObject map) {
 
-        JSONArray tilesets = (JSONArray) map.get("tilesets");
-        JSONObject confTilesSet = (JSONObject) tilesets.get(0);
-        JSONArray tiles = (JSONArray) confTilesSet.get("tiles");
-        HashMap<Integer, Image> mapLienIdImage = new HashMap<Integer, Image>();
-        for (int i = 0; i < tiles.size(); i++) {
-            JSONObject tile = (JSONObject) tiles.get(i);
-            int id = (((Long) tile.get("id")).intValue())+1;
-            Image image = new Image((String.valueOf(getClass().getResource("/" + tile.get("image")))));
-            mapLienIdImage.put(id, image);
+        ArrayList<Tile> tiles = e1.getAllTiles() ;
+        HashMap<Tile, Image> mapLienIdImage = new HashMap<Tile, Image>();
+        for ( Tile t :tiles ) {
+
+            Image image = new Image((String.valueOf(getClass().getResource("/" + t.getImagePath() ))));
+            mapLienIdImage.put(t, image);
         }
         return mapLienIdImage;
     }
 
-    private void afficheMap(Environnement e1,HashMap<Integer,Image> hashMapData) {
+    private void afficheMap(Environnement e1,HashMap<Tile,Image> hashMapData) {
         ArrayList<Integer> listeTiles = e1.getTerrain();
         int posX = 0;
         int posY = 0;
@@ -104,15 +99,22 @@ public class Controleur implements Initializable {
         System.out.println("-----------------------------------------");
         ImageView imageView;
         System.out.println(hashMapData);
+        ArrayList<Tile> tiles  = e1.getAllTiles() ;
         for (int i = 0; i < e1.getLargeur(); i++) {
             for (int j = 0; j < e1.getHauteur(); j++) {
+                for (Tile t :tiles ) {
+                    if (t.getId() == listeTiles.get(nbr)) {
 
+                        imageView = new ImageView(hashMapData.get(t));
+                        imageView.setX(posX);
+                        imageView.setY(posY);
 
-                            imageView = new ImageView(hashMapData.get(listeTiles.get(nbr)));
-                            imageView.setX(posX);
-                            imageView.setY(posY);
-                            pane.getChildren().add(imageView);
-                            listImageView.add(imageView);
+                        pane.getChildren().add(imageView);
+                        listImageView.add(imageView);
+                    }
+
+                }
+
 
 
 
