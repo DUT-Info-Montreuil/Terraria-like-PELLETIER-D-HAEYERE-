@@ -58,10 +58,12 @@ public class Controleur implements Initializable {
 
 
         ajoutSprite(hero);
+
         System.out.println(pane.getScene().getHeight());
 
-        pane.getScene().getCamera().layoutXProperty().bind(hero.getXProprety().subtract(new SimpleIntegerProperty((e1.getLargeur()*sprit_largeur)/2)));
-        pane.getScene().getCamera().layoutYProperty().bind(hero.getYProprety().subtract(new SimpleIntegerProperty(((e1.getLargeur()*sprit_hauteur)/2)-24)));
+        pane.getScene().getCamera().layoutXProperty().bind(hero.getXProprety().subtract(pane.getScene().getWidth()/2));
+        pane.getScene().getCamera().layoutYProperty().bind(hero.getYProprety().subtract(pane.getScene().getHeight()/2));
+
 
         launchTimeLine();
         timeline.setCycleCount(timeline.INDEFINITE);
@@ -74,6 +76,7 @@ public class Controleur implements Initializable {
             e1.getJoueur1().seDeplace();
 
         }));
+
 
     }
     public HashMap<Integer,Image> loadTile(JSONObject map) {
