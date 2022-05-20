@@ -4,7 +4,7 @@ import javafx.scene.image.Image;
 
 
 public class Tile {
-    private boolean collide;
+    private HitBox box;
     private int id;
     private String imagePath;
     private int hauteur;
@@ -25,17 +25,17 @@ public class Tile {
         return width;
     }
 
-    public boolean canCollide(){
-        return collide ;
+    public HitBox canCollide(){
+        return box ;
     }
 
 
-    public Tile(int id, String path, int hauteur, int width , boolean collide ) {
+    public Tile(int id, String path, int hauteur, int width , HitBox hitBox ) {
         this.id = id+1;
         this.imagePath = path ;
         this.hauteur = hauteur;
         this.width = width;
-        this.collide = collide ;
+        this.box = hitBox ;
 
     }
 }

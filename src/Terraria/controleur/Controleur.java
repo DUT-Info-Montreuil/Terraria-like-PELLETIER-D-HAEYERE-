@@ -115,14 +115,6 @@ public class Controleur implements Initializable {
 
                 }
 
-
-
-
-
-
-
-
-
                 nbr++;
                 posX += 16;
 

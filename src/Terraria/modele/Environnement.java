@@ -82,8 +82,13 @@ public class Environnement {
             JSONArray property = (JSONArray) a.get("properties");
             JSONObject subProperty = (JSONObject) property.get(0);
             boolean collide = (boolean) subProperty.get("value");
+            JSONObject objectgroup = (JSONObject) a.get("objectgroup") ;
+            JSONArray objects = (JSONArray) objectgroup.get("objects");
+            JSONObject hitBox  = (JSONObject) objects.get(0) ;
 
-            this.allTiles.add(new Tile(id, imagePath, height, width, collide));
+
+
+            this.allTiles.add(new Tile(id, imagePath, height, width, new HitBox( ((Long) hitBox.get("whith")).intValue() , ((Long) hitBox.get("whith")).intValue(), collide)));
 
         }
     }
