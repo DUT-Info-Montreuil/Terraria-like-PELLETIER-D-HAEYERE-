@@ -18,10 +18,7 @@ public class HitBox {
         return height;
     }
 
-    public void setX(int x) {
-        this.x =  new SimpleIntegerProperty(x) ;
 
-    }
 
     public SimpleIntegerProperty getX() {
         return x;
@@ -38,13 +35,17 @@ public class HitBox {
     public int getWidth() {
         return width;
     }
+    public void setX(int x) {
+        this.x =  new SimpleIntegerProperty(x) ;
+
+    }
 
     public  HitBox (int x ,int  y , int height , int width , boolean solide){
         this.isSolide = solide ;
         this.height = height ;
         this.width = width ;
-        this.x = new SimpleIntegerProperty (x) ;
-        this.y =  new SimpleIntegerProperty(y) ;
+        this.x = new SimpleIntegerProperty(x) ;
+        this.y = new SimpleIntegerProperty(y) ;
 
     }
 }

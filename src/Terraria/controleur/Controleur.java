@@ -39,7 +39,7 @@ public class Controleur implements Initializable {
 
         HashMap<Tile, Image> mapLienIdImage = loadTile(e1.getMap());
 
-        Joueur hero = new Joueur(20, 5, 42, 42, e1, "hero"  , new HitBox( 42 ,  42 ,  25 , 14 , true ));
+        Joueur hero = new Joueur(20, 5, 50, 30, e1, "hero"  , new HitBox( 50 ,  30 ,25 , 14 , true ));
         e1.setJoueur1(hero);
         Scene scene = new Scene(pane, e1.getLargeur() *sprit_largeur, e1.getHauteur() * sprit_hauteur);
 
@@ -68,8 +68,8 @@ public class Controleur implements Initializable {
     }
     public void launchTimeLine(){
         timeline = new Timeline(new KeyFrame (Duration.millis(32.66),actionEvent->{
-            System.out.println("hero x "+e1.getJoueur1().getBox().getX());
-            System.out.println("hero y "+e1.getJoueur1().getBox().getY());
+            System.out.println("hero x "+e1.getJoueur1().getBox().getX().intValue());
+            System.out.println("hero y "+e1.getJoueur1().getBox().getY().intValue());
             e1.getJoueur1().seDeplace();
             for (Block b :allBlock) {
                 e1.getJoueur1().collideGaucheDroite(b) ;
