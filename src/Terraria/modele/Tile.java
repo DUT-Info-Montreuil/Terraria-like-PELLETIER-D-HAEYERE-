@@ -25,7 +25,7 @@ public class Tile {
         return width;
     }
 
-    public HitBox canCollide(){
+    public HitBox getBox(){
         return box ;
     }
 

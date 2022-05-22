@@ -88,7 +88,7 @@ public class Environnement {
 
 
 
-            this.allTiles.add(new Tile(id, imagePath, height, width, new HitBox( ((Long) hitBox.get("whith")).intValue() , ((Long) hitBox.get("whith")).intValue(), collide)));
+            this.allTiles.add(new Tile(id, imagePath, height, width, new HitBox(0 , 0 , ((Long) hitBox.get("height")).intValue() , ((Long) hitBox.get("width")).intValue(), collide)));
 
         }
     }

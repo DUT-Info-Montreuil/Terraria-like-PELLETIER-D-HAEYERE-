@@ -1,9 +1,6 @@
 package Terraria.controleur;
 
-import Terraria.modele.Acteur;
-import Terraria.modele.Environnement;
-import Terraria.modele.Joueur;
-import Terraria.modele.Tile;
+import Terraria.modele.*;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -34,6 +31,7 @@ public class Controleur implements Initializable {
     Environnement e1;
     public final int sprit_hauteur = 16;
     public final int sprit_largeur = 16 ;
+    private ArrayList<Block> allBlock = new ArrayList<>() ;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -41,7 +39,7 @@ public class Controleur implements Initializable {
 
         HashMap<Tile, Image> mapLienIdImage = loadTile(e1.getMap());
 
-        Joueur hero = new Joueur(20, 5, 42, 42, e1, "hero");
+        Joueur hero = new Joueur(20, 5, 42, 42, e1, "hero"  , new HitBox( 42 ,  42 ,  25 , 14 , true ));
         e1.setJoueur1(hero);
         Scene scene = new Scene(pane, e1.getLargeur() *sprit_largeur, e1.getHauteur() * sprit_hauteur);
 
@@ -70,8 +68,13 @@ public class Controleur implements Initializable {
     }
     public void launchTimeLine(){
         timeline = new Timeline(new KeyFrame (Duration.millis(32.66),actionEvent->{
-
+            System.out.println("hero x "+e1.getJoueur1().getBox().getX());
+            System.out.println("hero y "+e1.getJoueur1().getBox().getY());
             e1.getJoueur1().seDeplace();
+            for (Block b :allBlock) {
+                e1.getJoueur1().collideGaucheDroite(b) ;
+            }
+
 
         }));
 
@@ -104,10 +107,14 @@ public class Controleur implements Initializable {
             for (int j = 0; j < e1.getHauteur(); j++) {
                 for (Tile t :tiles ) {
                     if (t.getId() == listeTiles.get(nbr)) {
-
+                        Block b = new Block(posX , posY , t) ;
+                        t.getBox().setX(posX);
+                        t.getBox().setY(posY);
                         imageView = new ImageView(hashMapData.get(t));
                         imageView.setX(posX);
                         imageView.setY(posY);
+                        imageView.setId(Integer.toString(b.getId()));
+                        allBlock.add(b) ;
 
                         pane.getChildren().add(imageView);
                         listImageView.add(imageView);
