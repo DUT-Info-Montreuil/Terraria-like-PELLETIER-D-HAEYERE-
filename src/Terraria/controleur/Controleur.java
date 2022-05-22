@@ -7,6 +7,7 @@ import Terraria.modele.Tile;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.ParallelCamera;
@@ -14,7 +15,9 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import javafx.scene.shape.Circle;
 import javafx.util.Duration;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -33,36 +36,51 @@ public class Controleur implements Initializable {
     private Timeline timeline;
     Environnement e1;
     public final int sprit_hauteur = 16;
-    public final int sprit_largeur = 16 ;
+    public final int sprit_largeur = 16;
+    EventHandler<MouseEvent> eventHandler;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
         e1 = new Environnement(InitialisationEnvironnement.loadMap("ress/terrain.json"));
-
         HashMap<Integer, Image> mapLienIdImage = loadTile(e1.getMap());
-
         Joueur hero = new Joueur(20, 5, 42, 42, e1, "hero");
+
+        eventHandler = new EventHandler<MouseEvent>() {     //Initialisation eventHandler
+            @Override
+            public void handle(MouseEvent e) {
+                System.out.println("Hello World");                  //Action quand cliqué
+                ImageView imageClicked = (ImageView) e.getSource();
+
+                pane.getChildren().remove(imageClicked);
+
+
+                System.out.println(imageClicked);
+                System.out.println(e.getSource());
+            }
+        };
+
+
         e1.setJoueur1(hero);
-        Scene scene = new Scene(pane, e1.getLargeur() *sprit_largeur, e1.getHauteur() * sprit_hauteur);
+        Scene scene = new Scene(pane, e1.getLargeur() * sprit_largeur, e1.getHauteur() * sprit_hauteur);
 
 
         ParallelCamera camera = new ParallelCamera();
         scene.setCamera(camera);
 
 
-
-        
-
         e1.loadLayers();
-        afficheMap(e1,mapLienIdImage);
+        afficheMap(e1, mapLienIdImage);
 
 
         ajoutSprite(hero);
 
         System.out.println(pane.getScene().getHeight());
 
-        pane.getScene().getCamera().layoutXProperty().bind(hero.getXProprety().subtract(pane.getScene().getWidth()/2));
-        pane.getScene().getCamera().layoutYProperty().bind(hero.getYProprety().subtract(pane.getScene().getHeight()/2));
+        pane.getScene().getCamera().layoutXProperty().bind(hero.getXProprety().subtract(pane.getScene().getWidth() / 2));
+
+
+        //Registering the event filter
 
 
         launchTimeLine();
@@ -70,8 +88,9 @@ public class Controleur implements Initializable {
         timeline.play();
 
     }
-    public void launchTimeLine(){
-        timeline = new Timeline(new KeyFrame (Duration.millis(32.66),actionEvent->{
+
+    public void launchTimeLine() {
+        timeline = new Timeline(new KeyFrame(Duration.millis(32.66), actionEvent -> {
 
             e1.getJoueur1().seDeplace();
 
@@ -79,7 +98,8 @@ public class Controleur implements Initializable {
 
 
     }
-    public HashMap<Integer,Image> loadTile(JSONObject map) {
+
+    public HashMap<Integer, Image> loadTile(JSONObject map) {
 
         JSONArray tilesets = (JSONArray) map.get("tilesets");
         JSONObject confTilesSet = (JSONObject) tilesets.get(0);
@@ -87,14 +107,14 @@ public class Controleur implements Initializable {
         HashMap<Integer, Image> mapLienIdImage = new HashMap<Integer, Image>();
         for (int i = 0; i < tiles.size(); i++) {
             JSONObject tile = (JSONObject) tiles.get(i);
-            int id = (((Long) tile.get("id")).intValue())+1;
+            int id = (((Long) tile.get("id")).intValue()) + 1;
             Image image = new Image((String.valueOf(getClass().getResource("/" + tile.get("image")))));
             mapLienIdImage.put(id, image);
         }
         return mapLienIdImage;
     }
 
-    private void afficheMap(Environnement e1,HashMap<Integer,Image> hashMapData) {
+    private void afficheMap(Environnement e1, HashMap<Integer, Image> hashMapData) {
         ArrayList<Integer> listeTiles = e1.getTerrain();
         int posX = 0;
         int posY = 0;
@@ -108,22 +128,17 @@ public class Controleur implements Initializable {
             for (int j = 0; j < e1.getHauteur(); j++) {
 
 
-                            imageView = new ImageView(hashMapData.get(listeTiles.get(nbr)));
-                            imageView.setX(posX);
-                            imageView.setY(posY);
-                            pane.getChildren().add(imageView);
-                            listImageView.add(imageView);
-
-
-
-
-
-
+                imageView = new ImageView(hashMapData.get(listeTiles.get(nbr)));
+                imageView.setX(posX);
+                imageView.setY(posY);
+                pane.getChildren().add(imageView);
+                listImageView.add(imageView);
+                imageView.setId(Integer.toString(nbr));
+                imageView.addEventFilter(MouseEvent.MOUSE_CLICKED, eventHandler);
 
 
                 nbr++;
                 posX += 16;
-
 
             }
             posX = 0;
@@ -132,12 +147,14 @@ public class Controleur implements Initializable {
     }
 
     private void ajoutSprite(Acteur a) {
-        Image imageSpriteHero =new Image(String.valueOf(getClass().getResource("/persoIdle.png"))); // a modifier quand ajout d'autre acteur
+        Image imageSpriteHero = new Image(String.valueOf(getClass().getResource("/persoIdle.png"))); // a modifier quand ajout d'autre acteur
         ImageView imageViewSpriteHero = new ImageView(imageSpriteHero);
         imageViewSpriteHero.setId(a.getId());
         pane.getChildren().add(imageViewSpriteHero);
         imageViewSpriteHero.translateXProperty().bind(a.getXProprety());
         imageViewSpriteHero.translateYProperty().bind(a.getYProprety());
+
+
     }
 
     @FXML
@@ -152,6 +169,7 @@ public class Controleur implements Initializable {
 
         }
     }
+
     @FXML
     public void stopMouvement(KeyEvent keyEvent) {
         switch (keyEvent.getCode()) {
