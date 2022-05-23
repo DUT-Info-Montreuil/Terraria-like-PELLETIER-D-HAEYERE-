@@ -1,27 +1,20 @@
 package Terraria.modele;
 
-import com.sun.javafx.geom.Rectangle;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.Pane;
-
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-
-
 
 
 public class Tile {
+    private HitBox box;
     private int id;
-    private Image image;
+    private String imagePath;
     private int hauteur;
     private int width;
 
     public int getId() {return id;}
 
 
-    public Image getImage() {
-        return image;
+    public String getImagePath() {
+        return imagePath;
     }
 
     public long getHauteur() {
@@ -32,13 +25,17 @@ public class Tile {
         return width;
     }
 
+    public HitBox getBox(){
+        return box ;
+    }
 
 
-    public Tile(int id, String path, int hauteur, int width ) {
+    public Tile(int id, String path, int hauteur, int width , HitBox hitBox ) {
         this.id = id+1;
-        this.image = new Image(String.valueOf(getClass().getResource("/"+path)));
+        this.imagePath = path ;
         this.hauteur = hauteur;
         this.width = width;
+        this.box = hitBox ;
 
     }
 }

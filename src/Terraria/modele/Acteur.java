@@ -9,9 +9,14 @@ public abstract class Acteur {
     private int vitesse;
     private IntegerProperty posX,posY;
     private  int direction;
+
     private int multiplicateurSaut;
     private boolean isFalling;
     private boolean isJumping;
+
+    private HitBox box ;
+
+
     public void setDirection(int direction) {
         this.direction = direction;
     }
@@ -29,7 +34,11 @@ public abstract class Acteur {
 
     protected Environnement environnement;
 
-    public Acteur(int pv, int vitesse, int posX, int posY, Environnement environnement,String id) {
+    public HitBox getBox() {
+        return box;
+    }
+
+    public Acteur(int pv, int vitesse, int posX, int posY, Environnement environnement, String id , HitBox b ) {
         this.pv = pv;
         this.vitesse = vitesse;
         this.posX = new SimpleIntegerProperty(posX);
@@ -38,9 +47,13 @@ public abstract class Acteur {
         this.statut = true;
         this.environnement = environnement;
         this.id=id;
+
         this.isFalling=false;
         this.multiplicateurSaut=10;
         this.isJumping=false;
+
+        this.box = b ;
+
 
     }
 
@@ -50,6 +63,10 @@ public abstract class Acteur {
 
     public int getVitesse() {
         return vitesse;
+    }
+
+    public int getDirection() {
+        return direction;
     }
 
     public int getPosX() {

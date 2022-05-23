@@ -1,8 +1,10 @@
 package Terraria.controleur;
 
+
 import Terraria.modele.Acteur;
 import Terraria.modele.Environnement;
 import Terraria.modele.Joueur;
+import Terraria.modele.*;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.fxml.FXML;
@@ -13,6 +15,8 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -30,15 +34,20 @@ public class Controleur implements Initializable {
     private Timeline timeline;
     Environnement e1;
     public final int sprit_hauteur = 16;
-    public final int sprit_largeur = 16;
+
+    public final int sprit_largeur = 16 ;
+    private ArrayList<Block> allBlock = new ArrayList<>() ;
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        e1 = new Environnement(InitialisationEnvironnement.loadMap("ress/terrain.json"));
+        e1 = new Environnement(InitialisationEnvironnement.loadMap("ress/terrain2.json"));
 
-        HashMap<Integer, Image> mapLienIdImage = loadTile(e1.getMap());
+        HashMap<Tile, Image> mapLienIdImage = loadTile(e1.getMap());
 
-        Joueur hero = new Joueur(20, 5, 512, 512, e1, "hero");
+
+        Joueur hero = new Joueur(20, 5, 50, 30, e1, "hero"  , new HitBox( 50 ,  30 ,24 , 14 , true ));
+
         e1.setJoueur1(hero);
         Scene scene = new Scene(pane, e1.getLargeur() * sprit_largeur, e1.getHauteur() * sprit_hauteur);
 
@@ -47,8 +56,11 @@ public class Controleur implements Initializable {
         scene.setCamera(camera);
 
 
+
         e1.loadLayers();
-        afficheMap(e1, mapLienIdImage);
+        afficheMap(e1,mapLienIdImage);
+        afficherColision(allBlock ,hero , true);
+
 
 
         ajoutSprite(hero);
@@ -68,29 +80,33 @@ public class Controleur implements Initializable {
     public void launchTimeLine() {
         timeline = new Timeline(new KeyFrame(Duration.millis(32.66), actionEvent -> {
 
-            e1.getJoueur1().seDeplace();
+            if(e1.getJoueur1().getDirection() == 1 && e1.getJoueur1().collideGaucheDroite(allBlock) != 1  ){
+                e1.getJoueur1().seDeplace();
+            }else if (e1.getJoueur1().getDirection() == -1 && e1.getJoueur1().collideGaucheDroite(allBlock) != -1 ){
+                e1.getJoueur1().seDeplace();
+            }
+
 
         }));
 
 
     }
 
-    public HashMap<Integer, Image> loadTile(JSONObject map) {
+    public HashMap<Tile,Image> loadTile(JSONObject map) {
 
-        JSONArray tilesets = (JSONArray) map.get("tilesets");
-        JSONObject confTilesSet = (JSONObject) tilesets.get(0);
-        JSONArray tiles = (JSONArray) confTilesSet.get("tiles");
-        HashMap<Integer, Image> mapLienIdImage = new HashMap<Integer, Image>();
-        for (int i = 0; i < tiles.size(); i++) {
-            JSONObject tile = (JSONObject) tiles.get(i);
-            int id = (((Long) tile.get("id")).intValue()) + 1;
-            Image image = new Image((String.valueOf(getClass().getResource("/" + tile.get("image")))));
-            mapLienIdImage.put(id, image);
+        ArrayList<Tile> tiles = e1.getAllTiles() ;
+        HashMap<Tile, Image> mapLienIdImage = new HashMap<Tile, Image>();
+        for ( Tile t :tiles ) {
+
+            Image image = new Image((String.valueOf(getClass().getResource("/" + t.getImagePath() ))));
+            mapLienIdImage.put(t, image);
+
         }
         return mapLienIdImage;
     }
 
-    private void afficheMap(Environnement e1, HashMap<Integer, Image> hashMapData) {
+    private void afficheMap(Environnement e1,HashMap<Tile,Image> hashMapData) {
+
         ArrayList<Integer> listeTiles = e1.getTerrain();
         int posX = 0;
         int posY = 0;
@@ -100,15 +116,24 @@ public class Controleur implements Initializable {
         System.out.println("-----------------------------------------");
         ImageView imageView;
         System.out.println(hashMapData);
+        ArrayList<Tile> tiles  = e1.getAllTiles() ;
         for (int i = 0; i < e1.getLargeur(); i++) {
             for (int j = 0; j < e1.getHauteur(); j++) {
+                for (Tile t :tiles ) {
+                    if (t.getId() == listeTiles.get(nbr)) {
+                        Block b = new Block(posX , posY , t) ;
+                        imageView = new ImageView(hashMapData.get(t));
+                        imageView.setX(posX);
+                        imageView.setY(posY);
+                        imageView.setId(Integer.toString(b.getId()));
+                        allBlock.add(b) ;
+
+                        pane.getChildren().add(imageView);
+                        listImageView.add(imageView);
+                    }
 
 
-                imageView = new ImageView(hashMapData.get(listeTiles.get(nbr)));
-                imageView.setX(posX);
-                imageView.setY(posY);
-                pane.getChildren().add(imageView);
-                listImageView.add(imageView);
+                }
 
 
                 nbr++;
@@ -134,10 +159,13 @@ public class Controleur implements Initializable {
     public void mouvements(KeyEvent keyEvent) {
         switch (keyEvent.getCode()) {
             case D:
-                e1.getJoueur1().setDirection(1);
+                    e1.getJoueur1().setDirection(1);
                 break;
             case Q:
-                e1.getJoueur1().setDirection(-1);
+
+                    e1.getJoueur1().setDirection(-1);
+
+
                 break;
             case SPACE:
                 if (!e1.getJoueur1().isJumping()) {
@@ -158,4 +186,36 @@ public class Controleur implements Initializable {
 
         }
     }
+
+    public void afficherColision(ArrayList<Block> blocks , Acteur a , boolean affiche ){
+        if (affiche){
+            System.out.println(blocks.size());
+            Rectangle rec = new Rectangle(a.getBox().getX().intValue() , a.getBox().getY().intValue() , a.getBox().getWidth(), a.getBox().getHeight()) ;
+            rec.setFill(Color.TRANSPARENT);
+            rec.setStroke(Color.RED);
+            rec.xProperty().bind(a.getBox().getX());
+            rec.yProperty().bind(a.getBox().getY());
+            pane.getChildren().add(rec) ;
+            for (Block b: blocks) {
+                Rectangle r = new Rectangle(b.getBoxX().intValue() , b.getBoxY().intValue() , b.getTile().getWidth(), b.getTile().getHauteur()) ;
+                r.setFill(Color.TRANSPARENT);
+                r.setStroke(Color.RED);
+                r.setX(b.getBoxX().intValue());
+                r.setY(b.getBoxY().intValue());
+                pane.getChildren().add(r) ;
+
+
+
+
+            }
+
+
+
+
+
+        }
+
+    }
+
+
 }
