@@ -11,21 +11,21 @@
  "layers":[
         {
          "data":[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
             1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-            2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
-            7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7,
-            7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7,
-            7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7,
-            5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5,
-            5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5,
-            5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5,
-            5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5,
-            3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3,
-            3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3,
-            3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3,
-            3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3],
+            1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+            1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+            20, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 19,
+            24, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 23,
+            24, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 23,
+            24, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 23,
+            18, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 17,
+            11, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 10,
+            15, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 14,
+            15, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 14,
+            15, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 14,
+            15, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 14,
+            9, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 8],
          "height":16,
          "id":1,
          "name":"Calque de Tuiles 1",
@@ -53,58 +53,313 @@
              "width":1
             },
          "margin":0,
-         "name":"testtile",
+         "name":"qiufqiebf",
          "spacing":0,
-         "tilecount":7,
+         "tilecount":25,
          "tileheight":16,
          "tiles":[
                 {
                  "id":0,
                  "image":"air.jpg",
                  "imageheight":16,
-                 "imagewidth":16
+                 "imagewidth":16,
+                 "properties":[
+                        {
+                         "name":"collide",
+                         "type":"bool",
+                         "value":false
+                        }]
                 }, 
                 {
                  "id":1,
                  "image":"herbe.jpg",
                  "imageheight":16,
-                 "imagewidth":16
+                 "imagewidth":16,
+                 "properties":[
+                        {
+                         "name":"collide",
+                         "type":"bool",
+                         "value":true
+                        }]
                 }, 
                 {
                  "id":2,
                  "image":"lave.jpg",
                  "imageheight":16,
-                 "imagewidth":16
+                 "imagewidth":16,
+                 "properties":[
+                        {
+                         "name":"collide",
+                         "type":"bool",
+                         "value":true
+                        }]
                 }, 
                 {
                  "id":3,
-                 "image":"pierre1.jpg",
+                 "image":"pierre2.jpg",
                  "imageheight":16,
-                 "imagewidth":16
+                 "imagewidth":16,
+                 "properties":[
+                        {
+                         "name":"collide",
+                         "type":"bool",
+                         "value":true
+                        }]
                 }, 
                 {
                  "id":4,
-                 "image":"pierre2.jpg",
+                 "image":"pierre1.jpg",
                  "imageheight":16,
-                 "imagewidth":16
+                 "imagewidth":16,
+                 "properties":[
+                        {
+                         "name":"collide",
+                         "type":"bool",
+                         "value":true
+                        }]
                 }, 
                 {
                  "id":5,
                  "image":"pierre3.jpg",
                  "imageheight":16,
-                 "imagewidth":16
+                 "imagewidth":16,
+                 "properties":[
+                        {
+                         "name":"collide",
+                         "type":"bool",
+                         "value":true
+                        }]
                 }, 
                 {
                  "id":6,
                  "image":"terre.png",
                  "imageheight":16,
-                 "imagewidth":16
+                 "imagewidth":16,
+                 "properties":[
+                        {
+                         "name":"collide",
+                         "type":"bool",
+                         "value":true
+                        }]
+                }, 
+                {
+                 "id":7,
+                 "image":"sol1CoinsBasDroit.png",
+                 "imageheight":16,
+                 "imagewidth":16,
+                 "properties":[
+                        {
+                         "name":"collide",
+                         "type":"bool",
+                         "value":true
+                        }]
+                }, 
+                {
+                 "id":8,
+                 "image":"sol1CoinsBasGauche.png",
+                 "imageheight":16,
+                 "imagewidth":16,
+                 "properties":[
+                        {
+                         "name":"collide",
+                         "type":"bool",
+                         "value":true
+                        }]
+                }, 
+                {
+                 "id":9,
+                 "image":"sol1CoinsHautDroit.png",
+                 "imageheight":16,
+                 "imagewidth":16,
+                 "properties":[
+                        {
+                         "name":"collide",
+                         "type":"bool",
+                         "value":true
+                        }]
+                }, 
+                {
+                 "id":10,
+                 "image":"sol1CoinsHautGauche.png",
+                 "imageheight":16,
+                 "imagewidth":16,
+                 "properties":[
+                        {
+                         "name":"collide",
+                         "type":"bool",
+                         "value":true
+                        }]
+                }, 
+                {
+                 "id":11,
+                 "image":"sol1Milieux.png",
+                 "imageheight":16,
+                 "imagewidth":16,
+                 "properties":[
+                        {
+                         "name":"collide",
+                         "type":"bool",
+                         "value":true
+                        }]
+                }, 
+                {
+                 "id":12,
+                 "image":"sol1MilieuxBas.png",
+                 "imageheight":16,
+                 "imagewidth":16,
+                 "properties":[
+                        {
+                         "name":"collide",
+                         "type":"bool",
+                         "value":true
+                        }]
+                }, 
+                {
+                 "id":13,
+                 "image":"sol1MilieuxDroit.png",
+                 "imageheight":16,
+                 "imagewidth":16,
+                 "properties":[
+                        {
+                         "name":"collide",
+                         "type":"bool",
+                         "value":true
+                        }]
+                }, 
+                {
+                 "id":14,
+                 "image":"sol1MilieuxGauche.png",
+                 "imageheight":16,
+                 "imagewidth":16,
+                 "properties":[
+                        {
+                         "name":"collide",
+                         "type":"bool",
+                         "value":true
+                        }]
+                }, 
+                {
+                 "id":15,
+                 "image":"sol1MilieuxHaut.png",
+                 "imageheight":16,
+                 "imagewidth":16,
+                 "properties":[
+                        {
+                         "name":"collide",
+                         "type":"bool",
+                         "value":true
+                        }]
+                },
+            
+                {
+                 "id":16,
+                 "image":"sol2CoinsBasDroit.png",
+                 "imageheight":16,
+                 "imagewidth":16,
+                 "properties":[
+                        {
+                         "name":"collide",
+                         "type":"bool",
+                         "value":true
+                        }]
+                }, 
+                {
+                 "id":17,
+                 "image":"sol2CoinsBasGauche.png",
+                 "imageheight":16,
+                 "imagewidth":16,
+                 "properties":[
+                        {
+                         "name":"collide",
+                         "type":"bool",
+                         "value":true
+                        }]
+                }, 
+                {
+                 "id":18,
+                 "image":"sol2CoinsHautDroit.png",
+                 "imageheight":16,
+                 "imagewidth":16,
+                 "properties":[
+                        {
+                         "name":"collide",
+                         "type":"bool",
+                         "value":true
+                        }]
+                }, 
+                {
+                 "id":19,
+                 "image":"sol2CoinsHautGauche.png",
+                 "imageheight":16,
+                 "imagewidth":16,
+                 "properties":[
+                        {
+                         "name":"collide",
+                         "type":"bool",
+                         "value":true
+                        }]
+                }, 
+                {
+                 "id":20,
+                 "image":"sol2Milieux.png",
+                 "imageheight":16,
+                 "imagewidth":16,
+                 "properties":[
+                        {
+                         "name":"collide",
+                         "type":"bool",
+                         "value":true
+                        }]
+                }, 
+                {
+                 "id":21,
+                 "image":"sol2MilieuxBas.png",
+                 "imageheight":16,
+                 "imagewidth":16,
+                 "properties":[
+                        {
+                         "name":"collide",
+                         "type":"bool",
+                         "value":true
+                        }]
+                }, 
+                {
+                 "id":22,
+                 "image":"sol2MilieuxDroit.png",
+                 "imageheight":16,
+                 "imagewidth":16,
+                 "properties":[
+                        {
+                         "name":"collide",
+                         "type":"bool",
+                         "value":true
+                        }]
+                }, 
+                {
+                 "id":23,
+                 "image":"sol2MilieuxGauche.png",
+                 "imageheight":16,
+                 "imagewidth":16,
+                 "properties":[
+                        {
+                         "name":"collide",
+                         "type":"bool",
+                         "value":true
+                        }]
+                }, 
+                {
+                 "id":24,
+                 "image":"sol2MilieuxHaut.png",
+                 "imageheight":16,
+                 "imagewidth":16,
+                 "properties":[
+                        {
+                         "name":"collide",
+                         "type":"bool",
+                         "value":true
+                        }]
                 }],
          "tilewidth":16
-        }, 
-        {
-         "firstgid":8,
-         "source":"jeuxdetuile.tsx"
         }],
  "tilewidth":16,
  "type":"map",
