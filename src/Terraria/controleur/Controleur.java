@@ -38,7 +38,7 @@ public class Controleur implements Initializable {
     private Environnement e1;
     public final int sprit_hauteur = 16;
     public final int sprit_largeur = 16;
-    EventHandler<MouseEvent> eventHandler;
+    private EventHandler<MouseEvent> eventHandler;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -81,7 +81,7 @@ public class Controleur implements Initializable {
         System.out.println(pane.getScene().getHeight());
 
         pane.getScene().getCamera().layoutXProperty().bind(hero.getXProprety().subtract(pane.getScene().getWidth() / 2));
-        this.e1.getTerrain().addListener(new MonObservateurTerrain(pane,mapLienIdImage));
+        this.e1.getTerrain().addListener(new MonObservateurTerrain(pane,mapLienIdImage,eventHandler));
 
 
         //Registering the event filter
