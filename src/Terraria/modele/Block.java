@@ -24,6 +24,7 @@ public class Block {
     private  int  id  ;
     private static int idCount = 0 ;
     private final int offSet = 10 ;
+    private HitBox box ;
 
     public int getOffSet() {
         return offSet;
@@ -34,6 +35,7 @@ public class Block {
         this.y = y ;
         this.tile = t ;
         this.id = idCount++ ;
+        this.box = new HitBox (x + this.getTile().getBox().getX().intValue() , y + this.getTile().getBox().getY().intValue() , this.getTile().getBox().getHeight() ,  this.getTile().getBox().getWidth() , this.getTile().getBox().isSolide()) ;
     }
 
 
@@ -41,11 +43,13 @@ public class Block {
         return id;
     }
 
-    public SimpleIntegerProperty getBoxX() {
-        return this.getTile().getBox().getX() ;
+    public HitBox getBox(){
+        return box ;
     }
+
+    public SimpleIntegerProperty getBoxX() {return this.box.getX() ;}
     public SimpleIntegerProperty getBoxY() {
-        return this.getTile().getBox().getY() ;
+        return this.box.getY() ;
     }
 
 }

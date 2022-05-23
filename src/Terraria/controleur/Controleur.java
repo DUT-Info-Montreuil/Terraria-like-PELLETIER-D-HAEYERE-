@@ -12,6 +12,8 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -39,7 +41,7 @@ public class Controleur implements Initializable {
 
         HashMap<Tile, Image> mapLienIdImage = loadTile(e1.getMap());
 
-        Joueur hero = new Joueur(20, 5, 50, 30, e1, "hero"  , new HitBox( 50 ,  30 ,25 , 14 , true ));
+        Joueur hero = new Joueur(20, 5, 50, 30, e1, "hero"  , new HitBox( 50 ,  30 ,24 , 14 , true ));
         e1.setJoueur1(hero);
         Scene scene = new Scene(pane, e1.getLargeur() *sprit_largeur, e1.getHauteur() * sprit_hauteur);
 
@@ -51,6 +53,7 @@ public class Controleur implements Initializable {
 
         e1.loadLayers();
         afficheMap(e1,mapLienIdImage);
+        afficherColision(allBlock ,hero , true);
 
 
         ajoutSprite(hero);
@@ -68,11 +71,11 @@ public class Controleur implements Initializable {
     }
     public void launchTimeLine(){
         timeline = new Timeline(new KeyFrame (Duration.millis(32.66),actionEvent->{
-            System.out.println("hero x "+e1.getJoueur1().getBox().getX().intValue());
-            System.out.println("hero y "+e1.getJoueur1().getBox().getY().intValue());
-            e1.getJoueur1().seDeplace();
-            for (Block b :allBlock) {
-                e1.getJoueur1().collideGaucheDroite(b) ;
+
+            if(e1.getJoueur1().getDirection() == 1 && e1.getJoueur1().collideGaucheDroite(allBlock) != 1  ){
+                e1.getJoueur1().seDeplace();
+            }else if (e1.getJoueur1().getDirection() == -1 && e1.getJoueur1().collideGaucheDroite(allBlock) != -1 ){
+                e1.getJoueur1().seDeplace();
             }
 
 
@@ -108,8 +111,6 @@ public class Controleur implements Initializable {
                 for (Tile t :tiles ) {
                     if (t.getId() == listeTiles.get(nbr)) {
                         Block b = new Block(posX , posY , t) ;
-                        t.getBox().setX(posX);
-                        t.getBox().setY(posY);
                         imageView = new ImageView(hashMapData.get(t));
                         imageView.setX(posX);
                         imageView.setY(posY);
@@ -145,10 +146,13 @@ public class Controleur implements Initializable {
     public void mouvements(KeyEvent keyEvent) {
         switch (keyEvent.getCode()) {
             case D:
-                e1.getJoueur1().setDirection(1);
+                    e1.getJoueur1().setDirection(1);
                 break;
             case Q:
-                e1.getJoueur1().setDirection(-1);
+
+                    e1.getJoueur1().setDirection(-1);
+
+
                 break;
 
         }
@@ -165,4 +169,36 @@ public class Controleur implements Initializable {
 
         }
     }
+
+    public void afficherColision(ArrayList<Block> blocks , Acteur a , boolean affiche ){
+        if (affiche){
+            System.out.println(blocks.size());
+            Rectangle rec = new Rectangle(a.getBox().getX().intValue() , a.getBox().getY().intValue() , a.getBox().getWidth(), a.getBox().getHeight()) ;
+            rec.setFill(Color.TRANSPARENT);
+            rec.setStroke(Color.RED);
+            rec.xProperty().bind(a.getBox().getX());
+            rec.yProperty().bind(a.getBox().getY());
+            pane.getChildren().add(rec) ;
+            for (Block b: blocks) {
+                Rectangle r = new Rectangle(b.getBoxX().intValue() , b.getBoxY().intValue() , b.getTile().getWidth(), b.getTile().getHauteur()) ;
+                r.setFill(Color.TRANSPARENT);
+                r.setStroke(Color.RED);
+                r.setX(b.getBoxX().intValue());
+                r.setY(b.getBoxY().intValue());
+                pane.getChildren().add(r) ;
+
+
+
+
+            }
+
+
+
+
+
+        }
+
+    }
+
+
 }

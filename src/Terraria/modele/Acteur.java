@@ -49,6 +49,10 @@ public abstract class Acteur {
         return vitesse;
     }
 
+    public int getDirection() {
+        return direction;
+    }
+
     public int getPosX() {
         return posX.getValue();
     }
