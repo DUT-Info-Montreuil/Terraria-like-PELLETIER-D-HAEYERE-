@@ -1,5 +1,7 @@
 package Terraria.modele;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
@@ -15,7 +17,7 @@ public class Environnement {
     private JSONObject map;
     private int hauteur;
     private int largeur;
-    private ArrayList<Integer> terrain;
+    private ObservableList<Integer> terrain;
     private Joueur joueur1;
 
 
@@ -31,7 +33,7 @@ public class Environnement {
 
     public Environnement(JSONObject map) {
         this.map = map;
-        this.terrain=new ArrayList<Integer>();
+        this.terrain= FXCollections.observableArrayList();
         JSONArray layers = (JSONArray) map.get("layers");
         JSONObject layer = (JSONObject) layers.get(0);
         this.hauteur = ((Long) layer.get("height")).intValue();
@@ -43,7 +45,7 @@ public class Environnement {
         }
     }
 
-    public ArrayList<Integer> getTerrain() {
+    public ObservableList<Integer> getTerrain() {
         return terrain;
     }
 

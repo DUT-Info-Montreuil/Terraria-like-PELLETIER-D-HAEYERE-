@@ -4,9 +4,11 @@ import Terraria.modele.Acteur;
 import Terraria.modele.Environnement;
 import Terraria.modele.Joueur;
 import Terraria.modele.Tile;
+import Terraria.vue.MonObservateurTerrain;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -17,7 +19,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
-import javafx.scene.shape.Circle;
 import javafx.util.Duration;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -34,7 +35,7 @@ public class Controleur implements Initializable {
     @FXML
     private Pane pane;
     private Timeline timeline;
-    Environnement e1;
+    private Environnement e1;
     public final int sprit_hauteur = 16;
     public final int sprit_largeur = 16;
     EventHandler<MouseEvent> eventHandler;
@@ -42,21 +43,23 @@ public class Controleur implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-        e1 = new Environnement(InitialisationEnvironnement.loadMap("ress/terrain.json"));
+        e1 = new Environnement(InitialisationEnvironnement.loadMap("ress/terrain2.json"));
         HashMap<Integer, Image> mapLienIdImage = loadTile(e1.getMap());
-        Joueur hero = new Joueur(20, 5, 42, 42, e1, "hero");
+        Joueur hero = new Joueur(20, 5, 40, 40, e1, "hero");
+        Image test = new Image(String.valueOf(getClass().getResource("/persoIdle.png")));
+        ImageView testIV = new ImageView(test);
+        pane.getChildren().add(testIV);
+        testIV.setX(250);
+        testIV.setY(250);
 
         eventHandler = new EventHandler<MouseEvent>() {     //Initialisation eventHandler
             @Override
             public void handle(MouseEvent e) {
                 System.out.println("Hello World");                  //Action quand cliqué
                 ImageView imageClicked = (ImageView) e.getSource();
-
-                pane.getChildren().remove(imageClicked);
-
-
-                System.out.println(imageClicked);
-                System.out.println(e.getSource());
+                e1.getTerrain().remove(Integer.parseInt(imageClicked.getId()));
+                e1.getTerrain().add(Integer.parseInt(imageClicked.getId()),0);
+                System.out.println(e1.getTerrain());
             }
         };
 
@@ -78,6 +81,7 @@ public class Controleur implements Initializable {
         System.out.println(pane.getScene().getHeight());
 
         pane.getScene().getCamera().layoutXProperty().bind(hero.getXProprety().subtract(pane.getScene().getWidth() / 2));
+        this.e1.getTerrain().addListener(new MonObservateurTerrain(pane,mapLienIdImage));
 
 
         //Registering the event filter
@@ -115,7 +119,7 @@ public class Controleur implements Initializable {
     }
 
     private void afficheMap(Environnement e1, HashMap<Integer, Image> hashMapData) {
-        ArrayList<Integer> listeTiles = e1.getTerrain();
+        ObservableList<Integer> listeTiles = e1.getTerrain();
         int posX = 0;
         int posY = 0;
         int nbr = 0;
@@ -124,6 +128,7 @@ public class Controleur implements Initializable {
         System.out.println("-----------------------------------------");
         ImageView imageView;
         System.out.println(hashMapData);
+        int id=0;
         for (int i = 0; i < e1.getLargeur(); i++) {
             for (int j = 0; j < e1.getHauteur(); j++) {
 
@@ -133,13 +138,13 @@ public class Controleur implements Initializable {
                 imageView.setY(posY);
                 pane.getChildren().add(imageView);
                 listImageView.add(imageView);
-                imageView.setId(Integer.toString(nbr));
+                imageView.setId(Integer.toString(id));
                 imageView.addEventFilter(MouseEvent.MOUSE_CLICKED, eventHandler);
 
 
                 nbr++;
                 posX += 16;
-
+                id++;
             }
             posX = 0;
             posY += 16;
