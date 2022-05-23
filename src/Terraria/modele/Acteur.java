@@ -2,13 +2,20 @@ package Terraria.modele;
 
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
+import org.omg.CORBA.PUBLIC_MEMBER;
 
 public abstract class Acteur {
     private int pv;
     private int vitesse;
     private IntegerProperty posX,posY;
     private  int direction;
+
+    private int multiplicateurSaut;
+    private boolean isFalling;
+    private boolean isJumping;
+
     private HitBox box ;
+
 
     public void setDirection(int direction) {
         this.direction = direction;
@@ -17,6 +24,9 @@ public abstract class Acteur {
     private String id;
     private boolean statut;
 
+    public boolean isJumping() {
+        return isJumping;
+    }
 
     public String getId() {
         return id;
@@ -37,7 +47,13 @@ public abstract class Acteur {
         this.statut = true;
         this.environnement = environnement;
         this.id=id;
+
+        this.isFalling=false;
+        this.multiplicateurSaut=10;
+        this.isJumping=false;
+
         this.box = b ;
+
 
     }
 
@@ -65,7 +81,19 @@ public abstract class Acteur {
         return statut;
     }
     public void seDeplace(){
-        this.posX.setValue(posX.getValue()+(direction*vitesse));
+        this.posX.setValue(posX.getValue()+(direction*vitesse*2));
+        if (isFalling){
+            this.posY.setValue(posY.getValue()+(1.5*vitesse));
+        }
+
+    }
+    public void saute(){
+        if (!isFalling){
+            this.posY.setValue(posY.getValue()-1);
+        }
+
+
+
     }
     public IntegerProperty getXProprety(){return posX;}
 

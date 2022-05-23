@@ -1,9 +1,12 @@
 package Terraria.controleur;
 
+
+import Terraria.modele.Acteur;
+import Terraria.modele.Environnement;
+import Terraria.modele.Joueur;
 import Terraria.modele.*;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.beans.property.SimpleIntegerProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.ParallelCamera;
@@ -21,7 +24,6 @@ import org.json.simple.JSONObject;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
 import java.util.ResourceBundle;
 
 public class Controleur implements Initializable {
@@ -32,8 +34,10 @@ public class Controleur implements Initializable {
     private Timeline timeline;
     Environnement e1;
     public final int sprit_hauteur = 16;
+
     public final int sprit_largeur = 16 ;
     private ArrayList<Block> allBlock = new ArrayList<>() ;
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -41,9 +45,11 @@ public class Controleur implements Initializable {
 
         HashMap<Tile, Image> mapLienIdImage = loadTile(e1.getMap());
 
+
         Joueur hero = new Joueur(20, 5, 50, 30, e1, "hero"  , new HitBox( 50 ,  30 ,24 , 14 , true ));
+
         e1.setJoueur1(hero);
-        Scene scene = new Scene(pane, e1.getLargeur() *sprit_largeur, e1.getHauteur() * sprit_hauteur);
+        Scene scene = new Scene(pane, e1.getLargeur() * sprit_largeur, e1.getHauteur() * sprit_hauteur);
 
 
         ParallelCamera camera = new ParallelCamera();
@@ -56,12 +62,13 @@ public class Controleur implements Initializable {
         afficherColision(allBlock ,hero , true);
 
 
+
         ajoutSprite(hero);
 
         System.out.println(pane.getScene().getHeight());
 
-        pane.getScene().getCamera().layoutXProperty().bind(hero.getXProprety().subtract(pane.getScene().getWidth()/2));
-        pane.getScene().getCamera().layoutYProperty().bind(hero.getYProprety().subtract(pane.getScene().getHeight()/2));
+        pane.getScene().getCamera().layoutXProperty().bind(hero.getXProprety().subtract(pane.getScene().getWidth() / 2));
+        pane.getScene().getCamera().layoutYProperty().bind(hero.getYProprety().subtract(pane.getScene().getHeight() / 2));
 
 
         launchTimeLine();
@@ -69,8 +76,9 @@ public class Controleur implements Initializable {
         timeline.play();
 
     }
-    public void launchTimeLine(){
-        timeline = new Timeline(new KeyFrame (Duration.millis(32.66),actionEvent->{
+
+    public void launchTimeLine() {
+        timeline = new Timeline(new KeyFrame(Duration.millis(32.66), actionEvent -> {
 
             if(e1.getJoueur1().getDirection() == 1 && e1.getJoueur1().collideGaucheDroite(allBlock) != 1  ){
                 e1.getJoueur1().seDeplace();
@@ -83,6 +91,7 @@ public class Controleur implements Initializable {
 
 
     }
+
     public HashMap<Tile,Image> loadTile(JSONObject map) {
 
         ArrayList<Tile> tiles = e1.getAllTiles() ;
@@ -91,11 +100,13 @@ public class Controleur implements Initializable {
 
             Image image = new Image((String.valueOf(getClass().getResource("/" + t.getImagePath() ))));
             mapLienIdImage.put(t, image);
+
         }
         return mapLienIdImage;
     }
 
     private void afficheMap(Environnement e1,HashMap<Tile,Image> hashMapData) {
+
         ArrayList<Integer> listeTiles = e1.getTerrain();
         int posX = 0;
         int posY = 0;
@@ -121,7 +132,9 @@ public class Controleur implements Initializable {
                         listImageView.add(imageView);
                     }
 
+
                 }
+
 
                 nbr++;
                 posX += 16;
@@ -134,7 +147,7 @@ public class Controleur implements Initializable {
     }
 
     private void ajoutSprite(Acteur a) {
-        Image imageSpriteHero =new Image(String.valueOf(getClass().getResource("/persoIdle.png"))); // a modifier quand ajout d'autre acteur
+        Image imageSpriteHero = new Image(String.valueOf(getClass().getResource("/persoIdle.png"))); // a modifier quand ajout d'autre acteur
         ImageView imageViewSpriteHero = new ImageView(imageSpriteHero);
         imageViewSpriteHero.setId(a.getId());
         pane.getChildren().add(imageViewSpriteHero);
@@ -154,9 +167,13 @@ public class Controleur implements Initializable {
 
 
                 break;
-
+            case SPACE:
+                if (!e1.getJoueur1().isJumping()) {
+                    e1.getJoueur1().saute();
+                }
         }
     }
+
     @FXML
     public void stopMouvement(KeyEvent keyEvent) {
         switch (keyEvent.getCode()) {
