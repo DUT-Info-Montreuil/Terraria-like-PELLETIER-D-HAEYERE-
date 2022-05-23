@@ -38,6 +38,14 @@ public abstract class Acteur {
         return box;
     }
 
+    public boolean isFalling() {
+        return isFalling;
+    }
+
+    public void setFalling(boolean falling) {
+        isFalling = falling;
+    }
+
     public Acteur(int pv, int vitesse, int posX, int posY, Environnement environnement, String id , HitBox b ) {
         this.pv = pv;
         this.vitesse = vitesse;
@@ -47,11 +55,9 @@ public abstract class Acteur {
         this.statut = true;
         this.environnement = environnement;
         this.id=id;
-
-        this.isFalling=false;
+        this.isFalling=true;
         this.multiplicateurSaut=10;
         this.isJumping=false;
-
         this.box = b ;
 
 
@@ -80,16 +86,31 @@ public abstract class Acteur {
     public boolean getStatut() {
         return statut;
     }
+
+    public void setPosX(int posX) {
+        this.posX.set(posX);
+    }
+
+    public void setPosY(int posY) {
+        this.posY.set(posY);
+    }
+
     public void seDeplace(){
         this.posX.setValue(posX.getValue()+(direction*vitesse*2));
         if (isFalling){
             this.posY.setValue(posY.getValue()+(1.5*vitesse));
         }
 
+
+    }
+    public void gravite(){
+        if (isFalling){
+            this.posY.setValue(posY.getValue()+(vitesse));
+        }
     }
     public void saute(){
         if (!isFalling){
-            this.posY.setValue(posY.getValue()-1);
+            this.posY.setValue(posY.getValue()-50);
         }
 
 

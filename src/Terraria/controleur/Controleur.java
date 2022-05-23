@@ -46,7 +46,7 @@ public class Controleur implements Initializable {
         HashMap<Tile, Image> mapLienIdImage = loadTile(e1.getMap());
 
 
-        Joueur hero = new Joueur(20, 5, 50, 30, e1, "hero"  , new HitBox( 50 ,  30 ,24 , 14 , true ));
+        Joueur hero = new Joueur(20, 5, 50, -40, e1, "hero"  , new HitBox( 50 ,  30 ,24 , 14 , true ));
 
         e1.setJoueur1(hero);
         Scene scene = new Scene(pane, e1.getLargeur() * sprit_largeur, e1.getHauteur() * sprit_hauteur);
@@ -85,6 +85,20 @@ public class Controleur implements Initializable {
             }else if (e1.getJoueur1().getDirection() == -1 && e1.getJoueur1().collideGaucheDroite(allBlock) != -1 ){
                 e1.getJoueur1().seDeplace();
             }
+
+
+            switch ( e1.getJoueur1().collideHautBas(allBlock)){
+                case 0 :
+                    e1.getJoueur1().setFalling(true);
+
+                    break ;
+                case 1:
+                    e1.getJoueur1().setFalling(false);
+                    break;
+                case -1 :
+                    break;
+
+            }   e1.getJoueur1().gravite();
 
 
         }));
