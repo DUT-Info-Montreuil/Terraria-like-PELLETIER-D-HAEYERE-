@@ -23,7 +23,7 @@ public class Block {
     private Tile tile;
     private  int  id  ;
     private static int idCount = 0 ;
-    private final int offSet = 10      ;
+    private final int offSet = 10     ;
     private HitBox box ;
 
     public int getOffSet() {

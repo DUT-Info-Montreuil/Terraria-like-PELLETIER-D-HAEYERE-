@@ -2,7 +2,7 @@ package Terraria.modele;
 
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
-import org.omg.CORBA.PUBLIC_MEMBER;
+
 
 public abstract class Acteur {
     private int pv;
