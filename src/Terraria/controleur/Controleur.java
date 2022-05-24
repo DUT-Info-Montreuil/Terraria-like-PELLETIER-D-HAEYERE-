@@ -7,6 +7,13 @@ import Terraria.modele.Joueur;
 import Terraria.modele.*;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import Terraria.modele.Tile;
+import Terraria.vue.MonObservateurTerrain;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.ParallelCamera;
@@ -14,6 +21,7 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
@@ -32,8 +40,9 @@ public class Controleur implements Initializable {
     @FXML
     private Pane pane;
     private Timeline timeline;
-    Environnement e1;
+    private Environnement e1;
     public final int sprit_hauteur = 16;
+
 
     public final int sprit_largeur = 16 ;
     private ArrayList<Block> allBlock = new ArrayList<>() ;
@@ -47,6 +56,34 @@ public class Controleur implements Initializable {
 
 
         Joueur hero = new Joueur(20, 5, 50, -40, e1, "hero"  , new HitBox( 50 ,  30 ,24 , 14 , true ));
+
+   /* public final int sprit_largeur = 16;
+    private EventHandler<MouseEvent> eventHandler;
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+
+        e1 = new Environnement(InitialisationEnvironnement.loadMap("ress/terrain2.json"));
+        HashMap<Integer, Image> mapLienIdImage = loadTile(e1.getMap());
+        Joueur hero = new Joueur(20, 5, 40, 40, e1, "hero");
+        Image test = new Image(String.valueOf(getClass().getResource("/persoIdle.png")));
+        ImageView testIV = new ImageView(test);
+        pane.getChildren().add(testIV);
+        testIV.setX(250);
+        testIV.setY(250);
+
+       */
+         eventHandler = new EventHandler<MouseEvent>() {     //Initialisation eventHandler
+                @Override
+                public void handle(MouseEvent e) {
+                    System.out.println("Hello World");                  //Action quand cliqué
+                    ImageView imageClicked = (ImageView) e.getSource();
+                    e1.getTerrain().remove(Integer.parseInt(imageClicked.getId()));
+                    e1.getTerrain().add(Integer.parseInt(imageClicked.getId()),0);
+                    System.out.println(e1.getTerrain());
+                }
+            } ;
+
 
         e1.setJoueur1(hero);
         Scene scene = new Scene(pane, e1.getLargeur() * sprit_largeur, e1.getHauteur() * sprit_hauteur);
@@ -63,6 +100,7 @@ public class Controleur implements Initializable {
 
 
 
+
         ajoutSprite(hero);
 
         System.out.println(pane.getScene().getHeight());
@@ -70,12 +108,21 @@ public class Controleur implements Initializable {
         pane.getScene().getCamera().layoutXProperty().bind(hero.getXProprety().subtract(pane.getScene().getWidth() / 2));
         pane.getScene().getCamera().layoutYProperty().bind(hero.getYProprety().subtract(pane.getScene().getHeight() / 2));
 
+        this.e1.getTerrain().addListener(new MonObservateurTerrain(pane,mapLienIdImage,eventHandler));
+
+
+        //Registering the event filter
+
+
 
         launchTimeLine();
         timeline.setCycleCount(timeline.INDEFINITE);
         timeline.play();
 
     }
+
+
+   
 
     public void launchTimeLine() {
         timeline = new Timeline(new KeyFrame(Duration.millis(32.66), actionEvent -> {
@@ -106,6 +153,7 @@ public class Controleur implements Initializable {
 
     }
 
+
     public HashMap<Tile,Image> loadTile(JSONObject map) {
 
         ArrayList<Tile> tiles = e1.getAllTiles() ;
@@ -115,13 +163,15 @@ public class Controleur implements Initializable {
             Image image = new Image((String.valueOf(getClass().getResource("/" + t.getImagePath() ))));
             mapLienIdImage.put(t, image);
 
+
         }
         return mapLienIdImage;
     }
 
-    private void afficheMap(Environnement e1,HashMap<Tile,Image> hashMapData) {
 
-        ArrayList<Integer> listeTiles = e1.getTerrain();
+    private void afficheMap(Environnement e1, HashMap<Integer, Image> hashMapData) {
+        ObservableList<Integer> listeTiles = e1.getTerrain();
+>
         int posX = 0;
         int posY = 0;
         int nbr = 0;
@@ -130,7 +180,10 @@ public class Controleur implements Initializable {
         System.out.println("-----------------------------------------");
         ImageView imageView;
         System.out.println(hashMapData);
+
         ArrayList<Tile> tiles  = e1.getAllTiles() ;
+
+
         for (int i = 0; i < e1.getLargeur(); i++) {
             for (int j = 0; j < e1.getHauteur(); j++) {
                 for (Tile t :tiles ) {
@@ -141,6 +194,9 @@ public class Controleur implements Initializable {
                         imageView.setY(posY);
                         imageView.setId(Integer.toString(b.getId()));
                         allBlock.add(b) ;
+                        imageView.addEventFilter(MouseEvent.MOUSE_CLICKED, eventHandler);
+
+
 
                         pane.getChildren().add(imageView);
                         listImageView.add(imageView);
@@ -150,10 +206,12 @@ public class Controleur implements Initializable {
                 }
 
 
+               
+
+
                 nbr++;
                 posX += 16;
-
-
+               
             }
             posX = 0;
             posY += 16;
@@ -167,6 +225,8 @@ public class Controleur implements Initializable {
         pane.getChildren().add(imageViewSpriteHero);
         imageViewSpriteHero.translateXProperty().bind(a.getXProprety());
         imageViewSpriteHero.translateYProperty().bind(a.getYProprety());
+
+
     }
 
     @FXML
