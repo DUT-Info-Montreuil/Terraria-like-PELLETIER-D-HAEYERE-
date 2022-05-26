@@ -8,4 +8,4 @@
 <?import javafx.scene.layout.*?>
 
 
-<Pane fx:id="pane" focusTraversable="true" maxHeight="600.0" maxWidth="600.0" minHeight="600.0" minWidth="600.0" onKeyPressed="#mouvements" onKeyReleased="#stopMouvement" prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Terraria.controleur.Controleur" />
+<Pane fx:id="pane" focusTraversable="true" maxHeight="2000.0" maxWidth="2000.0" minHeight="600.0" minWidth="600.0" onKeyPressed="#mouvements" onKeyReleased="#stopMouvement" prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Terraria.controleur.Controleur" />

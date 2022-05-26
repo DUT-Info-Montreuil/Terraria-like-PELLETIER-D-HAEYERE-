@@ -18,7 +18,7 @@ public class Environnement {
     private int hauteur;
     private int largeur;
 
-    private ArrayList<Integer> terrain;
+    private ObservableList<Integer> terrain;
     private ArrayList<Tile> allTiles;
 
     private Joueur joueur1;
@@ -39,6 +39,7 @@ public class Environnement {
 
 
     public Environnement(JSONObject map) {
+        System.out.println(map);
         this.map = map;
         this.terrain= FXCollections.observableArrayList();
         JSONArray layers = (JSONArray) map.get("layers");

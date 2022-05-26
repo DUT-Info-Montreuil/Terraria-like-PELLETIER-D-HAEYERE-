@@ -46,11 +46,12 @@ public class Controleur implements Initializable {
 
     public final int sprit_largeur = 16 ;
     private ArrayList<Block> allBlock = new ArrayList<>() ;
+    private EventHandler<MouseEvent> eventHandler;
 
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        e1 = new Environnement(InitialisationEnvironnement.loadMap("ress/terrain2.json"));
+        e1 = new Environnement(InitialisationEnvironnement.loadMap("ress/terrain3.json"));
 
         HashMap<Tile, Image> mapLienIdImage = loadTile(e1.getMap());
 
@@ -58,7 +59,7 @@ public class Controleur implements Initializable {
         Joueur hero = new Joueur(20, 5, 50, -40, e1, "hero"  , new HitBox( 50 ,  30 ,24 , 14 , true ));
 
    /* public final int sprit_largeur = 16;
-    private EventHandler<MouseEvent> eventHandler;
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -169,9 +170,9 @@ public class Controleur implements Initializable {
     }
 
 
-    private void afficheMap(Environnement e1, HashMap<Integer, Image> hashMapData) {
+    private void afficheMap(Environnement e1, HashMap<Tile, Image> hashMapData) {
         ObservableList<Integer> listeTiles = e1.getTerrain();
->
+
         int posX = 0;
         int posY = 0;
         int nbr = 0;
@@ -184,8 +185,8 @@ public class Controleur implements Initializable {
         ArrayList<Tile> tiles  = e1.getAllTiles() ;
 
 
-        for (int i = 0; i < e1.getLargeur(); i++) {
-            for (int j = 0; j < e1.getHauteur(); j++) {
+        for (int i = 0; i < e1.getHauteur(); i++) {
+            for (int j = 0; j < e1.getLargeur(); j++) {
                 for (Tile t :tiles ) {
                     if (t.getId() == listeTiles.get(nbr)) {
                         Block b = new Block(posX , posY , t) ;
