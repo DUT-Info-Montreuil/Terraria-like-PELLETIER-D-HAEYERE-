@@ -110,7 +110,7 @@ public abstract class Acteur {
     }
     public void saute(){
         if (!isFalling){
-            this.posY.setValue(posY.getValue()-50);
+            this.posY.setValue(posY.getValue()-90);
         }
 
 

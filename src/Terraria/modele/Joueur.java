@@ -51,9 +51,9 @@ public class Joueur extends Acteur{
                         int d = this.getBox().getX().intValue() + this.getBox().getWidth();
                         int  aPrime = block.getBoxX().intValue() ;
                         int cPrime = block.getBoxX().intValue() ;
-                        System.out.println("yes");
+                       // System.out.println("yes");
                             if (( b <= aPrime &&  d >= aPrime) || (b <= cPrime && d >= cPrime)){
-                            System.out.println("test");
+                            //System.out.println("test");
                             this.setPosY(block.getBoxY().intValue()- this.getBox().getHeight());
                             return 1 ;
                         }

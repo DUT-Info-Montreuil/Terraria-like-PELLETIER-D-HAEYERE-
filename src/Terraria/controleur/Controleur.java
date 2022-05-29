@@ -74,8 +74,10 @@ public class Controleur implements Initializable {
         testIV.setY(250);
 
        */
-         eventHandler = new EventHandler<MouseEvent>() {     //Initialisation eventHandler
+         eventHandler = new EventHandler<MouseEvent>() {
+             //Initialisation eventHandler
                 @Override
+
                 public void handle(MouseEvent e) {
                     System.out.println("Hello World");                  //Action quand cliqué
                     ImageView imageClicked = (ImageView) e.getSource();
@@ -97,7 +99,7 @@ public class Controleur implements Initializable {
 
         e1.loadLayers();
         afficheMap(e1,mapLienIdImage);
-        afficherColision(allBlock ,hero , true);
+        afficherColision(allBlock ,hero , false);
 
 
 
