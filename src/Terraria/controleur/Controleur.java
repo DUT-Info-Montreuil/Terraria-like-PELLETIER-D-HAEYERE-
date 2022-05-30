@@ -99,7 +99,7 @@ public class Controleur implements Initializable {
 
         e1.loadLayers();
         afficheMap(e1,mapLienIdImage);
-        afficherColision(allBlock ,hero , false);
+        afficherColision(allBlock ,hero , true);
 
 
 
