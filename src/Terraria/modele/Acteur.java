@@ -3,13 +3,15 @@ package Terraria.modele;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 
+import java.util.ArrayList;
+
 
 public abstract class Acteur {
     private int pv;
     private int vitesse;
     private IntegerProperty posX,posY;
     private  int direction;
-
+    private ArrayList<Item>inventaire;
     private int multiplicateurSaut;
     private boolean isFalling;
     private boolean isJumping;
@@ -59,7 +61,7 @@ public abstract class Acteur {
         this.multiplicateurSaut=10;
         this.isJumping=false;
         this.box = b ;
-
+        this.inventaire = new ArrayList<Item>();
 
     }
 
