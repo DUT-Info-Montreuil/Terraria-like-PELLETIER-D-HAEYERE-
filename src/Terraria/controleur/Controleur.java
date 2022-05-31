@@ -57,7 +57,9 @@ public class Controleur implements Initializable {
         HashMap<Tile, Image> mapLienIdImage = loadTile(e1.getMap());
 
         this.e1.getListActeur().addListener(new MonObservateurListActeur(e1,pane));
+
         Joueur hero = new Joueur(20, 5, 50, -40, e1, "hero"  , new HitBox( 50 ,  30 ,24 , 14 , true ));
+        //Zombie z = new Zombie(20 , 5 ,200 , 208, e1 , "Zombie" , new HitBox() )
         e1.addActeur(hero);
    /* public final int sprit_largeur = 16;
 
@@ -100,7 +102,7 @@ public class Controleur implements Initializable {
 
         e1.loadLayers();
         afficheMap(e1,mapLienIdImage);
-        afficherColision(allBlock ,hero , false);
+        afficherColision(allBlock ,hero , true);
 
 
 

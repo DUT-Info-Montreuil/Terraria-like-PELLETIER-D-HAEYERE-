@@ -5,8 +5,7 @@ import java.util.ArrayList;
 public class Joueur extends Acteur{
     public Joueur(int pv, int vitesse, int posX, int posY, Environnement environnement, String id , HitBox h ) {
         super(pv, vitesse, posX, posY, environnement, id , h);
-        h.getY().bind(this.getYProprety());
-        h.getX().bind(this.getXProprety());
+
     }
 
 
@@ -57,6 +56,14 @@ public class Joueur extends Acteur{
                         //
                             if ( ( b <= aPrime &&  d >= aPrime) || (b <= cPrime && d >= cPrime)) {
                                 //System.out.println("test");
+                                /*for (Block bl:blocks) {
+                                    if (bl.getBox().getX().intValue() == block.getBox().getX().intValue() && bl.getBox().isSolide()){
+                                        if (bl.getBox().getY().intValue() == block.getBox().getY().intValue() + bl.getBox().getHeight()){
+                                            this.setPosY(block.getBoxY().intValue() - this.getBox().getHeight());
+                                            return 0 ;
+                                        }
+                                    }
+                                }*/
                                 this.setPosY(block.getBoxY().intValue() - this.getBox().getHeight());
                                 System.out.println("gauche");
 

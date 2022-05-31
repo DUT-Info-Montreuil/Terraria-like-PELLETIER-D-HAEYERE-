@@ -59,6 +59,8 @@ public abstract class Acteur {
         this.multiplicateurSaut=10;
         this.isJumping=false;
         this.box = b ;
+        b.getY().bind(this.getYProprety());
+        b.getX().bind(this.getXProprety());
 
 
     }
