@@ -21,8 +21,8 @@ public class InitialisationEnvironnement {
             Object obj = jsonParser.parse(reader);
 
             JSONObject map = (JSONObject) obj;
-            System.out.println(map);
-            System.out.println("Map loaded");
+//            System.out.println(map);
+//            System.out.println("Map loaded");
             return map;
 
         } catch (FileNotFoundException e) {
