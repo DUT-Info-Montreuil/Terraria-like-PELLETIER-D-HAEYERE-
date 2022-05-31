@@ -23,6 +23,10 @@ public class Environnement {
 
     private Joueur joueur1;
     private JSONArray tiles;
+    private  ObservableList<Acteur>listActeur;
+
+
+
 
     public ArrayList<Tile> getAllTiles() {
         return allTiles;
@@ -39,7 +43,7 @@ public class Environnement {
 
 
     public Environnement(JSONObject map) {
-        System.out.println(map);
+//        System.out.println(map);
         this.map = map;
         this.terrain= FXCollections.observableArrayList();
         JSONArray layers = (JSONArray) map.get("layers");
@@ -55,6 +59,12 @@ public class Environnement {
         JSONObject subtileSets = (JSONObject) tileSets.get(0);
         this.tiles = (JSONArray) subtileSets.get("tiles");
         this.loadTile();
+
+        this.listActeur = FXCollections.observableArrayList();
+    }
+
+    public ObservableList<Acteur> getListActeur() {
+        return listActeur;
     }
 
     public ObservableList<Integer> getTerrain() {
@@ -71,9 +81,11 @@ public class Environnement {
             JSONObject currentLayer = layersIterator.next();
             layers.add(currentLayer);
         }
-        System.out.println("All layers loaded");
+//        System.out.println("All layers loaded");
     }
-
+    public void addActeur(Acteur a){
+        listActeur.add(a);
+    }
     public void loadTile() {
         JSONArray tiles = this.tiles;
         this.allTiles = new ArrayList<>();

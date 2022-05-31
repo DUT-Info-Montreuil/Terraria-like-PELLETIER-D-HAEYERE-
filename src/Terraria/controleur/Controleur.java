@@ -5,6 +5,7 @@ import Terraria.modele.Acteur;
 import Terraria.modele.Environnement;
 import Terraria.modele.Joueur;
 import Terraria.modele.*;
+import Terraria.vue.MonObservateurListActeur;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import Terraria.modele.Tile;
@@ -55,9 +56,9 @@ public class Controleur implements Initializable {
 
         HashMap<Tile, Image> mapLienIdImage = loadTile(e1.getMap());
 
-
+        this.e1.getListActeur().addListener(new MonObservateurListActeur(e1,pane));
         Joueur hero = new Joueur(20, 5, 50, -40, e1, "hero"  , new HitBox( 50 ,  30 ,24 , 14 , true ));
-
+        e1.addActeur(hero);
    /* public final int sprit_largeur = 16;
 
 
@@ -79,11 +80,11 @@ public class Controleur implements Initializable {
                 @Override
 
                 public void handle(MouseEvent e) {
-                    System.out.println("Hello World");                  //Action quand cliqué
+//                    System.out.println("Hello World");                  //Action quand cliqué
                     ImageView imageClicked = (ImageView) e.getSource();
                     e1.getTerrain().remove(Integer.parseInt(imageClicked.getId()));
                     e1.getTerrain().add(Integer.parseInt(imageClicked.getId()),0);
-                    System.out.println(e1.getTerrain());
+//                    System.out.println(e1.getTerrain());
                 }
             } ;
 
@@ -99,14 +100,14 @@ public class Controleur implements Initializable {
 
         e1.loadLayers();
         afficheMap(e1,mapLienIdImage);
-        afficherColision(allBlock ,hero , true);
+        afficherColision(allBlock ,hero , false);
 
 
 
 
-        ajoutSprite(hero);
+        //ajoutSprite(hero);
 
-        System.out.println(pane.getScene().getHeight());
+        //System.out.println(pane.getScene().getHeight());
 
         pane.getScene().getCamera().layoutXProperty().bind(hero.getXProprety().subtract(pane.getScene().getWidth() / 2));
         pane.getScene().getCamera().layoutYProperty().bind(hero.getYProprety().subtract(pane.getScene().getHeight() / 2));
@@ -117,7 +118,7 @@ public class Controleur implements Initializable {
         //Registering the event filter
 
 
-
+        (pane.lookup("#"+e1.getJoueur1().getId())).toFront();
         launchTimeLine();
         timeline.setCycleCount(timeline.INDEFINITE);
         timeline.play();
@@ -178,11 +179,11 @@ public class Controleur implements Initializable {
         int posX = 0;
         int posY = 0;
         int nbr = 0;
-        System.out.println("-----------------------------------------");
-        System.out.println(listeTiles);
-        System.out.println("-----------------------------------------");
+//        System.out.println("-----------------------------------------");
+//        System.out.println(listeTiles);
+//        System.out.println("-----------------------------------------");
         ImageView imageView;
-        System.out.println(hashMapData);
+//        System.out.println(hashMapData);
 
         ArrayList<Tile> tiles  = e1.getAllTiles() ;
 
@@ -221,16 +222,16 @@ public class Controleur implements Initializable {
         }
     }
 
-    private void ajoutSprite(Acteur a) {
-        Image imageSpriteHero = new Image(String.valueOf(getClass().getResource("/persoIdle.png"))); // a modifier quand ajout d'autre acteur
-        ImageView imageViewSpriteHero = new ImageView(imageSpriteHero);
-        imageViewSpriteHero.setId(a.getId());
-        pane.getChildren().add(imageViewSpriteHero);
-        imageViewSpriteHero.translateXProperty().bind(a.getXProprety());
-        imageViewSpriteHero.translateYProperty().bind(a.getYProprety());
-
-
-    }
+//    private void ajoutSprite(Acteur a) {
+//        Image imageSpriteHero = new Image(String.valueOf(getClass().getResource("/persoIdle.png"))); // a modifier quand ajout d'autre acteur
+//        ImageView imageViewSpriteHero = new ImageView(imageSpriteHero);
+//        imageViewSpriteHero.setId(a.getId());
+//        pane.getChildren().add(imageViewSpriteHero);
+//        imageViewSpriteHero.translateXProperty().bind(a.getXProprety());
+//        imageViewSpriteHero.translateYProperty().bind(a.getYProprety());
+//
+//
+//    }
 
     @FXML
     public void mouvements(KeyEvent keyEvent) {
@@ -266,7 +267,7 @@ public class Controleur implements Initializable {
 
     public void afficherColision(ArrayList<Block> blocks , Acteur a , boolean affiche ){
         if (affiche){
-            System.out.println(blocks.size());
+//            System.out.println(blocks.size());
             Rectangle rec = new Rectangle(a.getBox().getX().intValue() , a.getBox().getY().intValue() , a.getBox().getWidth(), a.getBox().getHeight()) ;
             rec.setFill(Color.TRANSPARENT);
             rec.setStroke(Color.RED);

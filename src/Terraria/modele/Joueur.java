@@ -50,6 +50,7 @@ public class Joueur extends Acteur{
                     if (this.getBox().getY().intValue() + this.getBox().getHeight() >= block.getBoxY().intValue() && this.getBox().getY().intValue() + this.getBox().getHeight() <= block.getBox().getY().intValue() + block.getOffSet() ){
                         int b = this.getBox().getX().intValue() ;
                         int d = this.getBox().getX().intValue() + this.getBox().getWidth();
+
                         int aPrime = block.getBoxX().intValue() ;
                         int cPrime = block.getBoxX().intValue() + block.getBox().getWidth();
                        // System.out.println("yes");
@@ -64,6 +65,7 @@ public class Joueur extends Acteur{
                             }else {
                                 System.out.println("rien");
                             }
+
                     }
 
 
