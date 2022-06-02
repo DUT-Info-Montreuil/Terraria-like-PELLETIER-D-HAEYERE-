@@ -65,13 +65,12 @@ public class Joueur extends Acteur{
                                     }
                                 }*/
                                 this.setPosY(block.getBoxY().intValue() - this.getBox().getHeight());
-                                System.out.println("gauche");
 
+                                this.setFalling(false);
                                 return 1;
 
-                            }else {
-                                System.out.println("rien");
                             }
+
 
                     }
 
@@ -85,6 +84,7 @@ public class Joueur extends Acteur{
 
 
             }
+            this.setFalling(true);
             return  0;
         }
 

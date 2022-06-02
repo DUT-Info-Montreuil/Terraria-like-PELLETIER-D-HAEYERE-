@@ -24,6 +24,7 @@ public class Environnement {
     private Joueur joueur1;
     private JSONArray tiles;
     private  ObservableList<Acteur>listActeur;
+    private ArrayList<Ennemi> listEnnemi = new ArrayList<>();
 
 
 
@@ -125,7 +126,16 @@ public class Environnement {
         public Joueur getJoueur1 () {
             return joueur1;
         }
+
+    public ArrayList<Ennemi> getListEnnemi() {
+
+        return listEnnemi;
     }
+
+    public void addEnnemi(Ennemi e) {
+        listEnnemi.add(e);
+    }
+}
 
 
 
