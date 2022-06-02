@@ -15,7 +15,7 @@ public abstract class Acteur {
     private int multiplicateurSaut;
     private boolean isFalling;
     private boolean isJumping;
-
+    private int reach;
     private HitBox box ;
 
 
@@ -62,7 +62,7 @@ public abstract class Acteur {
         this.isJumping=false;
         this.box = b ;
         this.inventaire = new ArrayList<Item>();
-
+        this.reach=4;
     }
 
     public int getPv() {
@@ -122,5 +122,7 @@ public abstract class Acteur {
 
     public IntegerProperty getYProprety(){return posY;}
 
-
+    public int getReach() {
+        return reach;
+    }
 }
