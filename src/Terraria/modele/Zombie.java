@@ -1,6 +1,8 @@
 package Terraria.modele;
 
 public class Zombie extends Ennemi{
+
+
     public Zombie(int pv, int vitesse, int posX, int posY, Environnement environnement, String id, HitBox b) {
         super(pv, vitesse, posX, posY, environnement, id, b);
     }

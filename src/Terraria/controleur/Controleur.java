@@ -48,6 +48,7 @@ public class Controleur implements Initializable {
     public final int sprit_largeur = 16 ;
     private ArrayList<Block> allBlock = new ArrayList<>() ;
     private EventHandler<MouseEvent> eventHandler;
+    private KeyHandler keyHandler ;
 
 
     @Override
@@ -98,7 +99,7 @@ public class Controleur implements Initializable {
 
 
         ParallelCamera camera = new ParallelCamera();
-        scene.setCamera(camera);
+        pane.getScene().setCamera(camera);
 
 
 
@@ -113,10 +114,13 @@ public class Controleur implements Initializable {
 
         //System.out.println(pane.getScene().getHeight());
 
-        pane.getScene().getCamera().layoutXProperty().bind(hero.getXProprety().subtract(pane.getScene().getWidth() / 2));
-        pane.getScene().getCamera().layoutYProperty().bind(hero.getYProprety().subtract(pane.getScene().getHeight() / 2));
+        // pane.getScene().getCamera().layoutXProperty().bind(hero.getXProprety().subtract(pane.getScene().getWidth() / 2));
+        //pane.getScene().getCamera().layoutYProperty().bind(hero.getYProprety().subtract(pane.getScene().getHeight() / 2));
 
-        KeyHandler keyHandler = new KeyHandler(pane);
+
+
+
+        keyHandler = new KeyHandler(pane);
         keyHandler.start();
 
 
@@ -141,6 +145,25 @@ public class Controleur implements Initializable {
 
     public void launchTimeLine() {
         timeline = new Timeline(new KeyFrame(Duration.millis(50), actionEvent -> {
+
+
+
+            if (keyHandler.isLeftPressed()){
+                e1.getJoueur1().setDirection(-1);
+            } if (keyHandler.isRightPressed()){
+                e1.getJoueur1().setDirection(1);
+            } if (keyHandler.isUpPressed()){
+                if (!e1.getJoueur1().isJumping()) {
+                    e1.getJoueur1().saute();
+                }
+            }
+            if (e1.getJoueur1().getDirection() == -1 && !keyHandler.isLeftPressed()){
+                e1.getJoueur1().setDirection(0);
+            }else if (e1.getJoueur1().getDirection() == 1 && !keyHandler.isRightPressed()){
+                e1.getJoueur1().setDirection(0);
+            }
+
+
 
             if(e1.getJoueur1().getDirection() == 1 && e1.getJoueur1().collideGaucheDroite(allBlock) != 1  ){
                 e1.getJoueur1().seDeplace();

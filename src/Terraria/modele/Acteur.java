@@ -101,9 +101,8 @@ public abstract class Acteur {
 
     public void seDeplace(){
         this.posX.setValue(posX.getValue()+(direction*vitesse*2));
-        if (isFalling){
-            this.posY.setValue(posY.getValue()+(1.5*vitesse));
-        }
+
+
 
 
     }
