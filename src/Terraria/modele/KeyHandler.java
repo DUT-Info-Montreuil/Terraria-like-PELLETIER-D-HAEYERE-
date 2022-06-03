@@ -51,6 +51,9 @@ public class KeyHandler {
         this.pane = pane;
     }
 
+
+
+
     private void keyPressed() {
         pane.setOnKeyPressed(e -> {
             switch (e.getCode()) {

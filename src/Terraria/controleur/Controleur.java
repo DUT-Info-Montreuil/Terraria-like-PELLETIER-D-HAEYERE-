@@ -5,6 +5,7 @@ import Terraria.modele.*;
 import Terraria.vue.MonObservateurListActeur;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -123,7 +124,7 @@ public class Controleur implements Initializable {
         e1.loadLayers();
 
         afficheMap(e1,mapLienIdImage);
-        afficherColision(allBlock ,hero ,e1.getListActeur() ,  true);
+        afficherColision(e1.getAllBlock() ,hero ,e1.getListActeur() ,  false);
 
 
 
@@ -195,7 +196,7 @@ public class Controleur implements Initializable {
 
 
                 for(Ennemi e : e1.getListEnnemi()){
-                    e.seDeplace(e1.getJoueur1());
+                    e.seDeplace(e1.getJoueur1() , e1.getAllBlock());
                 }
 
         }));

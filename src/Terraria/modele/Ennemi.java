@@ -1,7 +1,10 @@
 package Terraria.modele;
 
+import java.util.ArrayList;
+
 public class Ennemi extends Acteur {
-    int move = 0  ;
+    protected int move = 0  ;
+    protected int detectionRange = 10 ;
 
     public Ennemi (int pv, int vitesse, int posX, int posY, Environnement environnement, String id , HitBox b ) {
         super(pv , vitesse , posX , posY , environnement ,  id , b );
@@ -9,7 +12,7 @@ public class Ennemi extends Acteur {
 
 
 
-    public void seDeplace(Joueur j ) {
+    public void seDeplace(Joueur j, ArrayList<Block> allBlock) {
 
     }
 }

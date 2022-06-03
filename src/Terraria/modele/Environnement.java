@@ -141,13 +141,14 @@ public class Environnement {
         this.terrain.add(tileSupr, tileAdd);
     }
 
-    public void terrainToString(){
-        for (int i = 0; i <this.terrain.size() ; i++) {
-            if (i%50==0){
+    public void terrainToString() {
+        for (int i = 0; i < this.terrain.size(); i++) {
+            if (i % 50 == 0) {
                 System.out.print("\n");
             }
-            System.out.print(terrain.get(i)+"\t");
+            System.out.print(terrain.get(i) + "\t");
         }
+    }
 
     public ArrayList<Ennemi> getListEnnemi() {
 
