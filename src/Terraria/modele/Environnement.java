@@ -22,7 +22,11 @@ public class Environnement {
 
     private Joueur joueur1;
     private JSONArray tiles;
-    private ObservableList<Acteur> listActeur;
+
+    private  ObservableList<Acteur>listActeur;
+    private ArrayList<Ennemi> listEnnemi = new ArrayList<>();
+
+
 
 
     public ArrayList<Tile> getAllTiles() {
@@ -144,6 +148,14 @@ public class Environnement {
             }
             System.out.print(terrain.get(i)+"\t");
         }
+
+    public ArrayList<Ennemi> getListEnnemi() {
+
+        return listEnnemi;
+    }
+
+    public void addEnnemi(Ennemi e) {
+        listEnnemi.add(e);
     }
 }
 

@@ -38,6 +38,7 @@ public class Controleur implements Initializable {
     public final int sprit_largeur = 16;
 
     private EventHandler<MouseEvent> eventHandler;
+    private KeyHandler keyHandler ;
 
 
     @Override
@@ -46,17 +47,19 @@ public class Controleur implements Initializable {
 
         HashMap<Tile, Image> mapLienIdImage = loadTile(e1.getMap());
 
-        this.e1.getListActeur().addListener(new MonObservateurListActeur(e1, pane));
+
         Pioche piocheDep = new Pioche("piocheDep", 250, 10, e1);
-
         ItemBlock blockLave = new ItemBlock(20,"blockLave",e1,3);
-
+        this.e1.getListActeur().addListener(new MonObservateurListActeur(e1,pane));
         Joueur hero = new Joueur(20, 5, 50, -40, e1, "hero", new HitBox(50, 30, 24, 14, true), piocheDep);
-        System.out.println(piocheDep);
-
+        Zombie z = new Zombie(20 , 5 ,30 , 30, e1 , "Zombie" , new HitBox(50 , 30, 28 , 16 , true) );
         e1.addActeur(hero);
+        e1.addActeur(z);
+        e1.addEnnemi(z);
+       
 
 //
+
    /* public final int sprit_largeur = 16;
 
 
@@ -114,26 +117,39 @@ public class Controleur implements Initializable {
 
 
         ParallelCamera camera = new ParallelCamera();
-        scene.setCamera(camera);
+        pane.getScene().setCamera(camera);
 
 
         e1.loadLayers();
-        afficheMap(e1, mapLienIdImage);
-        afficherColision(e1.getAllBlock(), hero, false);
+
+        afficheMap(e1,mapLienIdImage);
+        afficherColision(allBlock ,hero ,e1.getListActeur() ,  true);
+
 
 
         //ajoutSprite(hero);
 
         //System.out.println(pane.getScene().getHeight());
 
-        pane.getScene().getCamera().layoutXProperty().bind(hero.getXProprety().subtract(pane.getScene().getWidth() / 2));
-        pane.getScene().getCamera().layoutYProperty().bind(hero.getYProprety().subtract(pane.getScene().getHeight() / 2));
+        // pane.getScene().getCamera().layoutXProperty().bind(hero.getXProprety().subtract(pane.getScene().getWidth() / 2));
+        //pane.getScene().getCamera().layoutYProperty().bind(hero.getYProprety().subtract(pane.getScene().getHeight() / 2));
+
+
+
+
+        keyHandler = new KeyHandler(pane);
+        keyHandler.start();
+
 
 
         //Registering the event filter
 
 
-        (pane.lookup("#" + e1.getJoueur1().getId())).toFront();
+        for(Acteur a : e1.getListActeur()){
+            pane.lookup("#"+a.getId()).toFront();
+        }
+        (pane.lookup("#"+e1.getJoueur1().getId())).toFront();
+
         launchTimeLine();
         timeline.setCycleCount(timeline.INDEFINITE);
         timeline.play();
@@ -142,8 +158,29 @@ public class Controleur implements Initializable {
 
 
     public void launchTimeLine() {
+
         ArrayList<Block> allBlock = e1.getAllBlock();
+
         timeline = new Timeline(new KeyFrame(Duration.millis(32.66), actionEvent -> {
+
+
+
+            if (keyHandler.isLeftPressed()){
+                e1.getJoueur1().setDirection(-1);
+            } if (keyHandler.isRightPressed()){
+                e1.getJoueur1().setDirection(1);
+            } if (keyHandler.isUpPressed()){
+                if (!e1.getJoueur1().isJumping()) {
+                    e1.getJoueur1().saute();
+                }
+            }
+            if (e1.getJoueur1().getDirection() == -1 && !keyHandler.isLeftPressed()){
+                e1.getJoueur1().setDirection(0);
+            }else if (e1.getJoueur1().getDirection() == 1 && !keyHandler.isRightPressed()){
+                e1.getJoueur1().setDirection(0);
+            }
+
+
 
             if (e1.getJoueur1().getDirection() == 1 && e1.getJoueur1().collideGaucheDroite(allBlock) != 1) {
                 e1.getJoueur1().seDeplace();
@@ -151,21 +188,15 @@ public class Controleur implements Initializable {
                 e1.getJoueur1().seDeplace();
             }
 
+                for(Acteur a : e1.getListActeur()){
+                    a.collideHautBas(allBlock);
+                    a.gravite();
+                }
 
-            switch (e1.getJoueur1().collideHautBas(allBlock)) {
-                case 0:
-                    e1.getJoueur1().setFalling(true);
 
-                    break;
-                case 1:
-                    e1.getJoueur1().setFalling(false);
-                    break;
-                case -1:
-                    break;
-
-            }
-            e1.getJoueur1().gravite();
-
+                for(Ennemi e : e1.getListEnnemi()){
+                    e.seDeplace(e1.getJoueur1());
+                }
 
         }));
 
@@ -216,6 +247,10 @@ public class Controleur implements Initializable {
                         e1.addBlock(b);
                         imageView.addEventFilter(MouseEvent.MOUSE_CLICKED, eventHandler);
 
+                        imageView.toBack();
+
+
+
                         pane.getChildren().add(imageView);
                         listImageView.add(imageView);
                     }
@@ -231,6 +266,19 @@ public class Controleur implements Initializable {
         }
     }
 
+
+//    private void ajoutSprite(Acteur a) {
+//        Image imageSpriteHero = new Image(String.valueOf(getClass().getResource("/persoIdle.png"))); // a modifier quand ajout d'autre acteur
+//        ImageView imageViewSpriteHero = new ImageView(imageSpriteHero);
+//        imageViewSpriteHero.setId(a.getId());
+//        pane.getChildren().add(imageViewSpriteHero);
+//        imageViewSpriteHero.translateXProperty().bind(a.getXProprety());
+//        imageViewSpriteHero.translateYProperty().bind(a.getYProprety());
+//
+//
+//    }
+
+    /*
     @FXML
     public void mouvements(KeyEvent keyEvent) {
         switch (keyEvent.getCode()) {
@@ -268,28 +316,36 @@ public class Controleur implements Initializable {
                 break;
 
         }
-    }
+    }*/
 
-    public void afficherColision(ArrayList<Block> blocks, Acteur a, boolean affiche) {
-        if (affiche) {
+
+
+
+
+
+    public void afficherColision(ArrayList<Block> blocks , Acteur a  , ObservableList<Acteur>allActeur, boolean affiche ){
+        if (affiche){
 //            System.out.println(blocks.size());
-            Rectangle rec = new Rectangle(a.getBox().getX().intValue(), a.getBox().getY().intValue(), a.getBox().getWidth(), a.getBox().getHeight());
-            rec.setFill(Color.TRANSPARENT);
-            rec.setStroke(Color.RED);
-            rec.xProperty().bind(a.getBox().getX());
-            rec.yProperty().bind(a.getBox().getY());
-            pane.getChildren().add(rec);
-            for (Block b : blocks) {
-                Rectangle r = new Rectangle(b.getBoxX().intValue(), b.getBoxY().intValue(), b.getTile().getWidth(), b.getTile().getHauteur());
+
+            for (Block b: blocks) {
+                Rectangle r = new Rectangle(b.getBoxX().intValue() , b.getBoxY().intValue() , b.getTile().getWidth(), b.getTile().getHauteur()) ;
+
                 r.setFill(Color.TRANSPARENT);
                 r.setStroke(Color.RED);
                 r.setX(b.getBoxX().intValue());
                 r.setY(b.getBoxY().intValue());
                 pane.getChildren().add(r);
 
+            }
+            for (Acteur a1: allActeur) {
+                Rectangle r = new Rectangle(a1.getBox().getX().intValue() , a1.getBox().getY().intValue() , a1.getBox().getWidth(), a1.getBox().getHeight()) ;
+                r.setFill(Color.TRANSPARENT);
+                r.setStroke(Color.YELLOW);
+                r.xProperty().bind(a1.getBox().getX());
+                r.yProperty().bind(a1.getBox().getY());
+                pane.getChildren().add(r) ;
 
             }
-
 
         }
 
