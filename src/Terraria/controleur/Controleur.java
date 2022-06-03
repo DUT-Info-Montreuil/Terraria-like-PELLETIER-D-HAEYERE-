@@ -49,7 +49,7 @@ public class Controleur implements Initializable {
         this.e1.getListActeur().addListener(new MonObservateurListActeur(e1, pane));
         Pioche piocheDep = new Pioche("piocheDep", 250, 10, e1);
 
-        ItemBlock blockLave = new ItemBlock(20,"blockLave",e1,3);
+        ItemBlock blockLave = new ItemBlock(0, "blockLave", e1, 3);
 
         Joueur hero = new Joueur(20, 5, 50, -40, e1, "hero", new HitBox(50, 30, 24, 14, true), piocheDep);
         System.out.println(piocheDep);
@@ -86,23 +86,24 @@ public class Controleur implements Initializable {
                 ImageView imageClicked = (ImageView) e.getSource();
                 int idDansLeTerrain = Integer.parseInt(imageClicked.getId());
                 int typeDeLaTile = e1.getTerrain().get(idDansLeTerrain);
-
+                e1.getJoueur1().getInventaire().toString();
                 if (e1.getJoueur1().checkDistanceInReach((int) imageClicked.getX(), (int) imageClicked.getY())) {
-
                     e1.getJoueur1().getItemEquipe().action(idDansLeTerrain);
-                    //System.out.println(idDansLeTerrain+"id avant le if");
-                    //System.out.println(typeDeLaTile+"valeur à lid avant le if");
-                    //System.out.println(e1.getJoueur1().getItemEquipe().cielEstModifiable(typeDeLaTile));
-                    if (e1.getJoueur1().getItemEquipe().cielEstModifiable(typeDeLaTile)){
-                        System.out.println("est ce que c'est du ciel ?");
+                    if (e1.getJoueur1().getItemEquipe().cielEstModifiable(typeDeLaTile)) {
                         modifTerrain(mapLienIdImage, imageClicked, Integer.parseInt(imageClicked.getId()));
+                        for (Item i : e1.getJoueur1().getInventaire()
+                        ) {
+                            if (i instanceof ItemBlock){
+                                ItemBlock block =(ItemBlock) i;
+                                if (block.getCode()==typeDeLaTile){
+                                    i.quantiteEnPlus();
+                                }
+                            }
+                        }
                     }
 
-//                        e1.terrainToString();
                 }
 
-
-//                    System.out.println(e1.getTerrain());
             }
         };
 
@@ -126,8 +127,8 @@ public class Controleur implements Initializable {
 
         //System.out.println(pane.getScene().getHeight());
 
-        pane.getScene().getCamera().layoutXProperty().bind(hero.getXProprety().subtract(pane.getScene().getWidth() / 2));
-        pane.getScene().getCamera().layoutYProperty().bind(hero.getYProprety().subtract(pane.getScene().getHeight() / 2));
+//        pane.getScene().getCamera().layoutXProperty().bind(hero.getXProprety().subtract(pane.getScene().getWidth() / 2));
+//        pane.getScene().getCamera().layoutYProperty().bind(hero.getYProprety().subtract(pane.getScene().getHeight() / 2));
 
 
         //Registering the event filter
