@@ -39,6 +39,9 @@ public class HitBox {
         this.x =  new SimpleIntegerProperty(x) ;
 
     }
+    public void inversionHitBox(){
+        this.isSolide=(!this.isSolide);
+    }
 
     public  HitBox (int x ,int  y , int height , int width , boolean solide){
         this.isSolide = solide ;

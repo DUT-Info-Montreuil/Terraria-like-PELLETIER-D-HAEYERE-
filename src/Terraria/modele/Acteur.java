@@ -11,11 +11,11 @@ public abstract class Acteur {
     private int vitesse;
     private IntegerProperty posX,posY;
     private  int direction;
-
+    private ArrayList<Item>inventaire;
     private int multiplicateurSaut;
     private boolean isFalling;
     private boolean isJumping;
-
+    private int reach;
     private HitBox box ;
 
 
@@ -61,8 +61,11 @@ public abstract class Acteur {
         this.multiplicateurSaut=10;
         this.isJumping=false;
         this.box = b ;
+        this.inventaire = new ArrayList<Item>();
+        this.reach=4;
         b.getY().bind(this.getYProprety());
         b.getX().bind(this.getXProprety());
+
 
 
     }
@@ -106,6 +109,13 @@ public abstract class Acteur {
 
 
     }
+    public void addItem(Item item){
+        inventaire.add(item);
+    }
+    public ArrayList<Item> getInventaire() {
+        return inventaire;
+    }
+
     public void gravite(){
         if (isFalling){
             this.posY.setValue(posY.getValue()+(vitesse));
@@ -123,6 +133,11 @@ public abstract class Acteur {
 
     public IntegerProperty getYProprety(){return posY;}
 
+
+    public int getReach() {
+        return reach;
+    }
+  
     public int collideGaucheDroite(ArrayList<Block> blocks ) {
         for (Block block: blocks) {
             if (block.getBox().isSolide()) {
@@ -185,5 +200,6 @@ public abstract class Acteur {
         this.setFalling(true);
         return 0;
     }
+
 
 }

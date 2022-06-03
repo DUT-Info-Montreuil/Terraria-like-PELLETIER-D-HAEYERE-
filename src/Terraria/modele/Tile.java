@@ -1,8 +1,5 @@
 package Terraria.modele;
 
-import javafx.scene.image.Image;
-
-
 public class Tile {
     private HitBox box;
     private int id;

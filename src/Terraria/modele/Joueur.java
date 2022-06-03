@@ -2,9 +2,19 @@ package Terraria.modele;
 
 import java.util.ArrayList;
 
+
 public class Joueur extends Acteur{
-    public Joueur(int pv, int vitesse, int posX, int posY, Environnement environnement, String id , HitBox h ) {
+    private Item itemEquipe;
+    public Joueur(int pv, int vitesse, int posX, int posY, Environnement environnement, String id , HitBox h ,Item itemEquipe) {
         super(pv, vitesse, posX, posY, environnement, id , h);
+
+        h.getY().bind(this.getYProprety());
+        h.getX().bind(this.getXProprety());
+        this.itemEquipe=itemEquipe;
+    }
+
+    public void setItemEquipe(Item itemEquipe) {
+        this.itemEquipe = itemEquipe;
 
     }
 
@@ -66,11 +76,13 @@ public class Joueur extends Acteur{
                                 }*/
                                 this.setPosY(block.getBoxY().intValue() - this.getBox().getHeight());
 
+                                //System.out.println("gauche");
+
                                 this.setFalling(false);
                                 return 1;
 
-                            }
 
+                            }
 
                     }
 
@@ -88,6 +100,21 @@ public class Joueur extends Acteur{
             return  0;
         }
 
+        public boolean checkDistanceInReach(int posX, int posY){
+            if ((valABS(this.getPosX()-posX)<this.getReach()*16)&&(valABS(this.getPosY()-posY)<this.getReach()*16)){
+                return true;
+            }
+            return false;
+        }
 
+        public int valABS(int valeur){
+        if (valeur<0)
+            return -valeur;
+        return valeur;
+        }
+
+    public Item getItemEquipe() {
+        return this.itemEquipe;
+    }
 }
 
