@@ -20,4 +20,11 @@ public abstract class Item {
     public Environnement getEnvironnement() {
         return environnement;
     }
+
+    public int getQuantite() {
+        return quantite;
+    }
+    public void quantiteEnMoins(){
+        this.quantite--;
+    }
 }

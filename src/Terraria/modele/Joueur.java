@@ -12,6 +12,10 @@ public class Joueur extends Acteur{
         this.itemEquipe=itemEquipe;
     }
 
+    public void setItemEquipe(Item itemEquipe) {
+        this.itemEquipe = itemEquipe;
+    }
+
 
     public int collideGaucheDroite(ArrayList<Block> blocks ){
         for (Block block: blocks) {

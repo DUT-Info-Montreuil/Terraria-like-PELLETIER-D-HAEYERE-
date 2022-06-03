@@ -48,8 +48,15 @@ public class Controleur implements Initializable {
 
         this.e1.getListActeur().addListener(new MonObservateurListActeur(e1, pane));
         Pioche piocheDep = new Pioche("piocheDep", 250, 10, e1);
+
+        ItemBlock blockLave = new ItemBlock(20,"blockLave",e1,3);
+
         Joueur hero = new Joueur(20, 5, 50, -40, e1, "hero", new HitBox(50, 30, 24, 14, true), piocheDep);
+        System.out.println(piocheDep);
+
         e1.addActeur(hero);
+
+//
    /* public final int sprit_largeur = 16;
 
 
@@ -101,6 +108,8 @@ public class Controleur implements Initializable {
 
 
         e1.setJoueur1(hero);
+        e1.getJoueur1().addItem(piocheDep);
+        e1.getJoueur1().addItem(blockLave);
         Scene scene = new Scene(pane, e1.getLargeur() * sprit_largeur, e1.getHauteur() * sprit_hauteur);
 
 
@@ -238,6 +247,13 @@ public class Controleur implements Initializable {
                 if (!e1.getJoueur1().isJumping()) {
                     e1.getJoueur1().saute();
                 }
+                break;
+            case P:
+                e1.getJoueur1().setItemEquipe(e1.getJoueur1().getInventaire().get(0));
+                break;
+            case L:
+                e1.getJoueur1().setItemEquipe(e1.getJoueur1().getInventaire().get(1));
+                break;
         }
     }
 
