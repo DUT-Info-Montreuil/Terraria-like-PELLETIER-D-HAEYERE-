@@ -11,6 +11,6 @@
     <orderEntry type="library" exported="" name="googlecode.json.simple" level="project" />
     <orderEntry type="library" exported="" name="json-simple-1.1.1" level="project" />
     <orderEntry type="library" name="lib1" level="project" />
-    <orderEntry type="library" exported="" name="javafx 1.1.0.18" level="project" />
+    <orderEntry type="library" name="lib" level="project" />
   </component>
 </module>
