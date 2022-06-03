@@ -16,7 +16,7 @@ public class Environnement {
     private JSONObject map;
     private int hauteur;
     private int largeur;
-
+    private ArrayList<Block> allBlock;
     private ArrayList<Integer> terrain;
     private ArrayList<Tile> allTiles;
 
@@ -58,6 +58,14 @@ public class Environnement {
         this.loadTile();
 
         this.listActeur = FXCollections.observableArrayList();
+        this.allBlock = new ArrayList<>();
+    }
+
+    public ArrayList<Block> getAllBlock() {
+        return allBlock;
+    }
+    public void addBlock(Block b){
+        this.allBlock.add(b);
     }
 
     public ObservableList<Acteur> getListActeur() {

@@ -36,7 +36,7 @@ public class Controleur implements Initializable {
 
 
     public final int sprit_largeur = 16;
-    private ArrayList<Block> allBlock = new ArrayList<>();
+
     private EventHandler<MouseEvent> eventHandler;
 
 
@@ -73,21 +73,25 @@ public class Controleur implements Initializable {
         eventHandler = new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent e) {
-                System.out.println("imgClicked");
-                e1.terrainToString();
+
+//                e1.terrainToString();
 
                 ImageView imageClicked = (ImageView) e.getSource();
-                if (Integer.parseInt(imageClicked.getId()) != 1) {
-                    System.out.println(Integer.parseInt(imageClicked.getId()));
-                    System.out.println("c'est pas de l'air");
-                    if (e1.getJoueur1().checkDistanceInReach((int) imageClicked.getX(), (int) imageClicked.getY())) {
-                        System.out.println("InReach");
-                        e1.getJoueur1().getItemEquipe().action(Integer.parseInt(imageClicked.getId()));
-                        modifTerrain(mapLienIdImage,imageClicked,Integer.parseInt(imageClicked.getId()));
-                        e1.terrainToString();
+                int idDansLeTerrain = Integer.parseInt(imageClicked.getId());
+                int typeDeLaTile = e1.getTerrain().get(idDansLeTerrain);
+
+                if (e1.getJoueur1().checkDistanceInReach((int) imageClicked.getX(), (int) imageClicked.getY())) {
+
+                    e1.getJoueur1().getItemEquipe().action(idDansLeTerrain);
+                    //System.out.println(idDansLeTerrain+"id avant le if");
+                    //System.out.println(typeDeLaTile+"valeur à lid avant le if");
+                    //System.out.println(e1.getJoueur1().getItemEquipe().cielEstModifiable(typeDeLaTile));
+                    if (e1.getJoueur1().getItemEquipe().cielEstModifiable(typeDeLaTile)){
+                        System.out.println("est ce que c'est du ciel ?");
+                        modifTerrain(mapLienIdImage, imageClicked, Integer.parseInt(imageClicked.getId()));
                     }
-                }else {
-                    System.out.println("c'est de l'air");
+
+//                        e1.terrainToString();
                 }
 
 
@@ -106,7 +110,7 @@ public class Controleur implements Initializable {
 
         e1.loadLayers();
         afficheMap(e1, mapLienIdImage);
-        afficherColision(allBlock, hero, false);
+        afficherColision(e1.getAllBlock(), hero, false);
 
 
         //ajoutSprite(hero);
@@ -129,6 +133,7 @@ public class Controleur implements Initializable {
 
 
     public void launchTimeLine() {
+        ArrayList<Block> allBlock = e1.getAllBlock();
         timeline = new Timeline(new KeyFrame(Duration.millis(32.66), actionEvent -> {
 
             if (e1.getJoueur1().getDirection() == 1 && e1.getJoueur1().collideGaucheDroite(allBlock) != 1) {
@@ -199,7 +204,7 @@ public class Controleur implements Initializable {
                         imageView.setX(posX);
                         imageView.setY(posY);
                         imageView.setId(Integer.toString(b.getId()));
-                        allBlock.add(b);
+                        e1.addBlock(b);
                         imageView.addEventFilter(MouseEvent.MOUSE_CLICKED, eventHandler);
 
                         pane.getChildren().add(imageView);
@@ -274,18 +279,21 @@ public class Controleur implements Initializable {
 
     }
 
-    public void modifTerrain(HashMap<Tile, Image> mapLienIdImage,ImageView imageClicked, int id) {
+    public void modifTerrain(HashMap<Tile, Image> mapLienIdImage, ImageView imageClicked, int id) {
         System.out.println("testDestruction");
+        imageClicked.removeEventFilter(MouseEvent.MOUSE_CLICKED, eventHandler);
         pane.getChildren().remove(imageClicked);
         for (Tile t : e1.getAllTiles()
         ) {
 
-            if (t.getId()==e1.getTerrain().get(id)){
+            if (t.getId() == e1.getTerrain().get(id)) {
                 ImageView newTile = new ImageView(mapLienIdImage.get(t));
                 newTile.setId(imageClicked.getId());
                 newTile.setX(imageClicked.getX());
                 newTile.setY(imageClicked.getY());
                 pane.getChildren().add(newTile);
+                newTile.addEventFilter(MouseEvent.MOUSE_CLICKED, eventHandler);
+                newTile.toBack();
             }
         }
 

@@ -7,7 +7,15 @@ public class Block {
 
     private int x;
     private int y;
+    private Tile tile;
+    private  int  id  ;
+    private static int idCount = 0 ;
+    private final int offSet = 10     ;
+    private HitBox box ;
 
+    public int getOffSet() {
+        return offSet;
+    }
     public int getX() {
         return x;
     }
@@ -19,17 +27,6 @@ public class Block {
     public Tile getTile() {
         return tile;
     }
-
-    private Tile tile;
-    private  int  id  ;
-    private static int idCount = 0 ;
-    private final int offSet = 10     ;
-    private HitBox box ;
-
-    public int getOffSet() {
-        return offSet;
-    }
-
     public Block (int x , int y , Tile t){
         this.x = x ;
         this.y = y ;

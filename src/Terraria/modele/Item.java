@@ -13,6 +13,9 @@ public abstract class Item {
     }
     public void action(int cible){
     }
+    public boolean cielEstModifiable(int cible){
+        return false;
+    }
 
     public Environnement getEnvironnement() {
         return environnement;
