@@ -3,6 +3,7 @@ package Terraria.vue;
 import Terraria.modele.Acteur;
 import Terraria.modele.Environnement;
 import Terraria.modele.Joueur;
+import Terraria.modele.Zombie;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
@@ -15,7 +16,7 @@ public class ViewActeur extends ImageView {
 
     public ViewActeur(Acteur acteur, Pane pane, Environnement environnement) {
         super();
-        System.out.println("truc");
+
         this.acteur = acteur;
         this.pane = pane;
         this.environnement = environnement;
@@ -23,14 +24,21 @@ public class ViewActeur extends ImageView {
         this.setId(acteur.getId());
         this.translateXProperty().bind(acteur.getXProprety());
         this.translateYProperty().bind(acteur.getYProprety());
-        System.out.println("wallo");
+
         if(acteur instanceof Joueur){
-            System.out.println("test");
+
 
 
             Image imageSpriteHero = new Image(String.valueOf(getClass().getResource("/persoIdle.png")));
 
             this.setImage(imageSpriteHero);
+        }else if (acteur instanceof Zombie){
+            System.out.println("test");
+            Image imageZombie = new Image(String.valueOf(getClass().getResource("/Sprite-0027.png"))) ;
+
+            this.setImage(imageZombie);
+
+
         }
         this.toFront();
     }
