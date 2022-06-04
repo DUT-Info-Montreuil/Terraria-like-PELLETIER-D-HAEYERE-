@@ -90,7 +90,7 @@ public abstract class Acteur {
         return posY.getValue();
     }
 
-    public boolean getAlive() {
+    public boolean getisAlive() {
         return isAlive;
     }
 

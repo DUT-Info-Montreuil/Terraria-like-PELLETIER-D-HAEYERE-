@@ -15,47 +15,53 @@ public class Zombie extends Ennemi{
 
 
     public void seDeplace(Joueur j , ArrayList<Block>allBlock){
-        if (this.getBox().getX().intValue()+this.getBox().getWidth()+16*detectionRange >= j.getBox().getX().intValue() && j.getBox().getX().intValue() >= this.getBox().getX().intValue()){
+        if (j.getBox().getY().intValue() <= this.getBox().getY().intValue()+16*detectionRange && j.getBox().getY().intValue() >= this.getBox().getY().intValue()-16*detectionRange){
+            if (this.getBox().getX().intValue()+this.getBox().getWidth()+16*detectionRange >= j.getBox().getX().intValue() && j.getBox().getX().intValue() >= this.getBox().getX().intValue()){
 
 
 
 
-            //System.out.println("in range right");
-            System.out.println(this.collideGaucheDroite(allBlock));
-            if ((this.collideGaucheDroite(allBlock) != 1)){
-                this.setPosX(this.getPosX()+1*this.getVitesse());
+                //System.out.println("in range right");
+                //System.out.println(this.collideGaucheDroite(allBlock));
+                if ((this.collideGaucheDroite(allBlock) != 1)){
+                    this.setPosX(this.getPosX()+1*this.getVitesse());
 
-            }else{
-                this.saute();
-                this.setPosX(this.getPosX()+1*this.getVitesse());
+                }else{
+                    this.saute();
+                    this.setPosX(this.getPosX()+1*this.getVitesse());
+                }
+
+
+
+            }else if (this.getBox().getX().intValue()-16*detectionRange <= j.getBox().getX().intValue()+j.getBox().getWidth() && j.getBox().getX().intValue() <= this.getBox().getX().intValue()){
+                //System.out.println("in range left");
+
+
+                if ((this.collideGaucheDroite(allBlock) != -1)){
+                    this.setPosX(this.getPosX()+(-1*this.getVitesse()));
+                }else{
+
+                    this.saute();
+                    this.setPosX(this.getPosX()+(-1*this.getVitesse()));
+                }
+
+
             }
 
-
-
-        }else if (this.getBox().getX().intValue()-16*detectionRange <= j.getBox().getX().intValue()+j.getBox().getWidth() && j.getBox().getX().intValue() <= this.getBox().getX().intValue()){
-            //System.out.println("in range left");
-
-
-            if ((this.collideGaucheDroite(allBlock) != -1)){
-                this.setPosX(this.getPosX()+(-1*this.getVitesse()));
-            }else{
-
-                this.saute();
-                this.setPosX(this.getPosX()+(-1*this.getVitesse()));
-            }
-
-
-        }else {
+        }
+        else {
             //System.out.println("not in range");
             move++;
             if (move % 5 == 0) {
+
                 int result = (int) (Math.random() * 3) - 1;
                 //System.out.println("moving " + result);
-                System.out.println("collision a gauche");
-                System.out.println(this.collideGaucheDroite(allBlock) != -1);
-                System.out.println("collision a droite");
-                System.out.println(this.collideGaucheDroite(allBlock) != 1);
-                System.out.println(this.collideGaucheDroite(allBlock));
+                //System.out.println("collision a gauche");
+                //System.out.println(this.collideGaucheDroite(allBlock) != -1);
+                //System.out.println("collision a droite");
+                //System.out.println(this.collideGaucheDroite(allBlock) != 1);
+
+                //System.out.println(this.collideGaucheDroite(allBlock));
                 if ((result == -1) && (this.collideGaucheDroite(allBlock) != -1) ) {
                     this.setPosX(this.getPosX() + result * this.getVitesse());
                 }else if ((result == 1) && (this.collideGaucheDroite(allBlock) != 1)) {

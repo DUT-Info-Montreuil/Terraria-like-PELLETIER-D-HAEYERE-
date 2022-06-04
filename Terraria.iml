@@ -6,11 +6,12 @@
       <sourceFolder url="file://$MODULE_DIR$/ress" type="java-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
     </content>
-    <orderEntry type="jdk" jdkName="openjdk-18" jdkType="JavaSDK" />
+    <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" exported="" name="googlecode.json.simple" level="project" />
     <orderEntry type="library" exported="" name="json-simple-1.1.1" level="project" />
     <orderEntry type="library" name="lib1" level="project" />
-    <orderEntry type="library" exported="" name="javafx 1.1.0.18" level="project" />
+    <orderEntry type="library" name="lib" level="project" />
+    <orderEntry type="library" name="javafx 1.18.0.1" level="project" />
   </component>
 </module>
