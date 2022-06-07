@@ -23,7 +23,8 @@ public class Environnement {
     private Joueur joueur1;
     private JSONArray tiles;
 
-    private  ObservableList<Acteur>listActeur;
+    private ObservableList<Acteur>listActeur;
+    private ObservableList<Item>ItemList;
     private ArrayList<Ennemi> listEnnemi = new ArrayList<>();
 
 
