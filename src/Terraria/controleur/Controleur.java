@@ -58,6 +58,13 @@ public class Controleur implements Initializable {
         e1.addEnnemi(z);
 
 
+        Image imgInv = new Image(String.valueOf(getClass().getResource("/inventaire.png")));
+        ImageView imgViewInv = new ImageView(imgInv);
+        pane.getChildren().add(imgViewInv);
+        imgViewInv.setVisible(false);
+        imgViewInv.setX(600);
+        imgViewInv.setY(10);
+        imgViewInv.setId("inv");
 //
 
    /* public final int sprit_largeur = 16;
@@ -156,7 +163,7 @@ public class Controleur implements Initializable {
             pane.lookup("#" + a.getId()).toFront();
         }
         (pane.lookup("#" + e1.getJoueur1().getId())).toFront();
-
+        imgViewInv.toFront();
         launchTimeLine();
         timeline.setCycleCount(timeline.INDEFINITE);
         timeline.play();
@@ -170,7 +177,12 @@ public class Controleur implements Initializable {
 
         timeline = new Timeline(new KeyFrame(Duration.millis(32.66), actionEvent -> {
 
-
+            if (keyHandler.isInventoryTyped()){
+                pane.lookup("#inv").setVisible(true);
+            }
+            if (!keyHandler.isInventoryTyped()){
+                pane.lookup("#inv").setVisible(false);
+            }
             if (keyHandler.isLeftPressed()) {
                 e1.getJoueur1().setDirection(-1);
             }
@@ -371,6 +383,15 @@ public class Controleur implements Initializable {
             }
         }
 
+    }
+
+    public void affichageInventaire(){
+        for (Item i:e1.getJoueur1().getInventaire()
+             ) {
+            if (i.getQuantite()!=0){
+
+            }
+        }
     }
 
 
