@@ -1,5 +1,6 @@
 package Terraria.modele;
 
+import Terraria.vue.OnGroundItem;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import org.json.simple.JSONArray;
@@ -24,7 +25,7 @@ public class Environnement {
     private JSONArray tiles;
 
     private ObservableList<Acteur>listActeur;
-    private ObservableList<Item>ItemList;
+    private ObservableList<OnGroundItem> OnGroundItemList;
     private ArrayList<Ennemi> listEnnemi = new ArrayList<>();
 
 
