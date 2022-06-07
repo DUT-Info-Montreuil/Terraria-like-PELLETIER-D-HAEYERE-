@@ -5,7 +5,7 @@ import Terraria.modele.Item;
 import javafx.collections.ListChangeListener;
 import javafx.scene.layout.Pane;
 
-public class monObservateurItem implements ListChangeListener<Item> {
+public class MonObservateurItem implements ListChangeListener<Item> {
     private Environnement environnement;
     private Pane pane;
 
