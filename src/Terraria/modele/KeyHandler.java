@@ -70,7 +70,7 @@ public class KeyHandler {
                     upPressed = true;
                     break;
                 case TAB:
-                    inventoryTyped = true;
+                    inventoryTyped = !this.inventoryTyped;
                     break;
             }
         });
@@ -92,9 +92,7 @@ public class KeyHandler {
                 case SPACE:
                     upPressed = false;
                     break;
-                case TAB:
-                    inventoryTyped =false;
-                    break;
+
             }
         });
     }
