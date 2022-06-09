@@ -32,7 +32,19 @@ public abstract class Item {
     public void quantiteEnMoins() {
         this.quantite--;
     }
+
+
+    public boolean isConsomable() {
+        return consomable;
+    }
+
+    public String getId() {
+        return id;
+    }
+}
+
     public void quantiteEnPlus() {
         this.quantite++;
     }
 }
+

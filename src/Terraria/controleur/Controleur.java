@@ -140,8 +140,11 @@ public class Controleur implements Initializable {
 
         e1.loadLayers();
 
-        afficheMap(e1, mapLienIdImage);
-        afficherColision(e1.getAllBlock(), hero, e1.getListActeur(), false);
+
+        afficheMap(e1,mapLienIdImage);
+        afficherColision(e1.getAllBlock() ,hero ,e1.getListActeur() ,  false);
+
+
 
 
         //ajoutSprite(hero);
@@ -213,9 +216,11 @@ public class Controleur implements Initializable {
             }
 
 
-            for (Ennemi e : e1.getListEnnemi()) {
-                e.seDeplace(e1.getJoueur1());
-            }
+
+                for(Ennemi e : e1.getListEnnemi()){
+                    e.seDeplace(e1.getJoueur1() , e1.getAllBlock());
+                }
+
 
         }));
 
