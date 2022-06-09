@@ -24,8 +24,8 @@ public class MonObservateurListActeur implements ListChangeListener<Acteur> {
                 ViewActeur viewActeur = new ViewActeur(a,pane,environnement);
 
             }
-            for (Acteur a : c.getRemoved()
-            ) {
+            for (Acteur a : c.getRemoved()) {
+                pane.getChildren().remove(pane.lookup("#"+a.getId()));
 
             }
 

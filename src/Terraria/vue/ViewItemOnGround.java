@@ -1,7 +1,8 @@
 package Terraria.vue;
 
 import Terraria.modele.Environnement;
-import Terraria.modele.Item;
+import Terraria.modele.OnGroundItem;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 
@@ -12,9 +13,11 @@ public class ViewItemOnGround extends ImageView {
     private Pane pane;
     private Environnement environnement;
 
-    public ViewItemOnGround(OnGroundItem item, Pane pane, Environnement environnement) {
+    public ViewItemOnGround(OnGroundItem item, Pane pane, Environnement environnement , String img) {
         super();
 
+
+        this.setImage(new Image(String.valueOf(getClass().getResource("/"+img))));
         this.item = item;
         this.pane = pane;
         this.environnement = environnement;

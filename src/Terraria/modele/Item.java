@@ -5,10 +5,11 @@ public abstract class Item {
     private String id;
     private boolean consomable;
     private Environnement environnement;
+    private static int count = 0;
 
-    public Item(int quantite, String id, boolean consomable, Environnement environnement) {
+    public Item(int quantite, boolean consomable, Environnement environnement) {
         this.quantite = quantite;
-        this.id = id;
+        this.id = "item " + count;
         this.consomable = consomable;
         this.environnement = environnement;
     }
