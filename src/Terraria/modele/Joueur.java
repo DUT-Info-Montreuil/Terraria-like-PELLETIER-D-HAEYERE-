@@ -11,11 +11,12 @@ public class Joueur extends Acteur{
         h.getY().bind(this.getYProprety());
         h.getX().bind(this.getXProprety());
         this.itemEquipe=itemEquipe;
+        initInv();
     }
 
     public void setItemEquipe(Item itemEquipe) {
         this.itemEquipe = itemEquipe;
-
+        System.out.println("changement item");
     }
 
 
@@ -115,6 +116,16 @@ public class Joueur extends Acteur{
 
     public Item getItemEquipe() {
         return this.itemEquipe;
+    }
+
+    public void initInv(){
+        for (Tile t:environnement.getAllTiles()
+             ) {
+            if (t.getId()!=1){
+                this.addItem(new ItemBlock(0,environnement,t.getId()));
+            }
+
+        }
     }
 }
 
