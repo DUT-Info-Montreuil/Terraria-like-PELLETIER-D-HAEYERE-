@@ -13,7 +13,6 @@ import javafx.scene.ParallelCamera;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
@@ -39,7 +38,7 @@ public class Controleur implements Initializable {
     public final int sprit_largeur = 16;
 
     private EventHandler<MouseEvent> eventHandler;
-    private KeyHandler keyHandler ;
+    private KeyHandler keyHandler;
 
 
     @Override
@@ -50,15 +49,22 @@ public class Controleur implements Initializable {
 
 
         Pioche piocheDep = new Pioche("piocheDep", 250, 10, e1);
-        ItemBlock blockLave = new ItemBlock(20,"blockLave",e1,3);
-        this.e1.getListActeur().addListener(new MonObservateurListActeur(e1,pane));
+        ItemBlock blockLave = new ItemBlock(20, "blockLave", e1, 3);
+        this.e1.getListActeur().addListener(new MonObservateurListActeur(e1, pane));
         Joueur hero = new Joueur(20, 5, 50, -40, e1, "hero", new HitBox(50, 30, 24, 14, true), piocheDep);
-        Zombie z = new Zombie(20 , 5 ,30 , 30, e1 , "Zombie" , new HitBox(50 , 30, 28 , 16 , true) );
+        Zombie z = new Zombie(20, 5, 30, 30, e1, "Zombie", new HitBox(50, 30, 28, 16, true));
         e1.addActeur(hero);
         e1.addActeur(z);
         e1.addEnnemi(z);
-       
 
+
+        Image imgInv = new Image(String.valueOf(getClass().getResource("/inventaire.png")));
+        ImageView imgViewInv = new ImageView(imgInv);
+        pane.getChildren().add(imgViewInv);
+        imgViewInv.setVisible(false);
+        imgViewInv.setX(600);
+        imgViewInv.setY(10);
+        imgViewInv.setId("inv");
 //
 
    /* public final int sprit_largeur = 16;
@@ -97,9 +103,20 @@ public class Controleur implements Initializable {
                     //System.out.println(idDansLeTerrain+"id avant le if");
                     //System.out.println(typeDeLaTile+"valeur à lid avant le if");
                     //System.out.println(e1.getJoueur1().getItemEquipe().cielEstModifiable(typeDeLaTile));
-                    if (e1.getJoueur1().getItemEquipe().cielEstModifiable(typeDeLaTile)){
+                    if (e1.getJoueur1().getItemEquipe().cielEstModifiable(typeDeLaTile)) {
                         System.out.println("est ce que c'est du ciel ?");
                         modifTerrain(mapLienIdImage, imageClicked, Integer.parseInt(imageClicked.getId()));
+                        for (Item i : e1.getJoueur1().getInventaire()
+                        ) {
+                            if (i instanceof ItemBlock) {
+                                ItemBlock block = (ItemBlock) i;
+                                if (block.getCode() == typeDeLaTile) {
+                                    i.quantiteEnPlus();
+                                }
+                            }
+                        }
+
+
                     }
 
 //                        e1.terrainToString();
@@ -123,8 +140,10 @@ public class Controleur implements Initializable {
 
         e1.loadLayers();
 
+
         afficheMap(e1,mapLienIdImage);
         afficherColision(e1.getAllBlock() ,hero ,e1.getListActeur() ,  false);
+
 
 
 
@@ -136,21 +155,18 @@ public class Controleur implements Initializable {
         //pane.getScene().getCamera().layoutYProperty().bind(hero.getYProprety().subtract(pane.getScene().getHeight() / 2));
 
 
-
-
         keyHandler = new KeyHandler(pane);
         keyHandler.start();
-
 
 
         //Registering the event filter
 
 
-        for(Acteur a : e1.getListActeur()){
-            pane.lookup("#"+a.getId()).toFront();
+        for (Acteur a : e1.getListActeur()) {
+            pane.lookup("#" + a.getId()).toFront();
         }
-        (pane.lookup("#"+e1.getJoueur1().getId())).toFront();
-
+        (pane.lookup("#" + e1.getJoueur1().getId())).toFront();
+        imgViewInv.toFront();
         launchTimeLine();
         timeline.setCycleCount(timeline.INDEFINITE);
         timeline.play();
@@ -164,23 +180,28 @@ public class Controleur implements Initializable {
 
         timeline = new Timeline(new KeyFrame(Duration.millis(32.66), actionEvent -> {
 
-
-
-            if (keyHandler.isLeftPressed()){
+            if (keyHandler.isInventoryTyped()){
+                pane.lookup("#inv").setVisible(true);
+            }
+            if (!keyHandler.isInventoryTyped()){
+                pane.lookup("#inv").setVisible(false);
+            }
+            if (keyHandler.isLeftPressed()) {
                 e1.getJoueur1().setDirection(-1);
-            } if (keyHandler.isRightPressed()){
+            }
+            if (keyHandler.isRightPressed()) {
                 e1.getJoueur1().setDirection(1);
-            } if (keyHandler.isUpPressed()){
+            }
+            if (keyHandler.isUpPressed()) {
                 if (!e1.getJoueur1().isJumping()) {
                     e1.getJoueur1().saute();
                 }
             }
-            if (e1.getJoueur1().getDirection() == -1 && !keyHandler.isLeftPressed()){
+            if (e1.getJoueur1().getDirection() == -1 && !keyHandler.isLeftPressed()) {
                 e1.getJoueur1().setDirection(0);
-            }else if (e1.getJoueur1().getDirection() == 1 && !keyHandler.isRightPressed()){
+            } else if (e1.getJoueur1().getDirection() == 1 && !keyHandler.isRightPressed()) {
                 e1.getJoueur1().setDirection(0);
             }
-
 
 
             if (e1.getJoueur1().getDirection() == 1 && e1.getJoueur1().collideGaucheDroite(allBlock) != 1) {
@@ -189,15 +210,17 @@ public class Controleur implements Initializable {
                 e1.getJoueur1().seDeplace();
             }
 
-                for(Acteur a : e1.getListActeur()){
-                    a.collideHautBas(allBlock);
-                    a.gravite();
-                }
+            for (Acteur a : e1.getListActeur()) {
+                a.collideHautBas(allBlock);
+                a.gravite();
+            }
+
 
 
                 for(Ennemi e : e1.getListEnnemi()){
                     e.seDeplace(e1.getJoueur1() , e1.getAllBlock());
                 }
+
 
         }));
 
@@ -249,7 +272,6 @@ public class Controleur implements Initializable {
                         imageView.addEventFilter(MouseEvent.MOUSE_CLICKED, eventHandler);
 
                         imageView.toBack();
-
 
 
                         pane.getChildren().add(imageView);
@@ -320,16 +342,12 @@ public class Controleur implements Initializable {
     }*/
 
 
-
-
-
-
-    public void afficherColision(ArrayList<Block> blocks , Acteur a  , ObservableList<Acteur>allActeur, boolean affiche ){
-        if (affiche){
+    public void afficherColision(ArrayList<Block> blocks, Acteur a, ObservableList<Acteur> allActeur, boolean affiche) {
+        if (affiche) {
 //            System.out.println(blocks.size());
 
-            for (Block b: blocks) {
-                Rectangle r = new Rectangle(b.getBoxX().intValue() , b.getBoxY().intValue() , b.getTile().getWidth(), b.getTile().getHauteur()) ;
+            for (Block b : blocks) {
+                Rectangle r = new Rectangle(b.getBoxX().intValue(), b.getBoxY().intValue(), b.getTile().getWidth(), b.getTile().getHauteur());
 
                 r.setFill(Color.TRANSPARENT);
                 r.setStroke(Color.RED);
@@ -338,13 +356,13 @@ public class Controleur implements Initializable {
                 pane.getChildren().add(r);
 
             }
-            for (Acteur a1: allActeur) {
-                Rectangle r = new Rectangle(a1.getBox().getX().intValue() , a1.getBox().getY().intValue() , a1.getBox().getWidth(), a1.getBox().getHeight()) ;
+            for (Acteur a1 : allActeur) {
+                Rectangle r = new Rectangle(a1.getBox().getX().intValue(), a1.getBox().getY().intValue(), a1.getBox().getWidth(), a1.getBox().getHeight());
                 r.setFill(Color.TRANSPARENT);
                 r.setStroke(Color.YELLOW);
                 r.xProperty().bind(a1.getBox().getX());
                 r.yProperty().bind(a1.getBox().getY());
-                pane.getChildren().add(r) ;
+                pane.getChildren().add(r);
 
             }
 
@@ -370,6 +388,15 @@ public class Controleur implements Initializable {
             }
         }
 
+    }
+
+    public void affichageInventaire(){
+        for (Item i:e1.getJoueur1().getInventaire()
+             ) {
+            if (i.getQuantite()!=0){
+
+            }
+        }
     }
 
 

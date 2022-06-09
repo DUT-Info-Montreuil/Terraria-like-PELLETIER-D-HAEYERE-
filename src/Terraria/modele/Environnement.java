@@ -152,6 +152,7 @@ public class Environnement {
         }
     }
 
+  
     public ArrayList<Ennemi> getListEnnemi() {
 
         return listEnnemi;

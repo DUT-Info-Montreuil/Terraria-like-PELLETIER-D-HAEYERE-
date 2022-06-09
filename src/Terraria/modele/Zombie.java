@@ -21,6 +21,7 @@ public class Zombie extends Ennemi{
 
 
 
+
                 //System.out.println("in range right");
                 //System.out.println(this.collideGaucheDroite(allBlock));
                 if ((this.collideGaucheDroite(allBlock) != 1)){
@@ -35,6 +36,7 @@ public class Zombie extends Ennemi{
 
             }else if (this.getBox().getX().intValue()-16*detectionRange <= j.getBox().getX().intValue()+j.getBox().getWidth() && j.getBox().getX().intValue() <= this.getBox().getX().intValue()){
                 //System.out.println("in range left");
+
 
 
                 if ((this.collideGaucheDroite(allBlock) != -1)){
