@@ -34,8 +34,8 @@ public class MonObservateurTerrain implements ListChangeListener<Integer> {
                 testIV.setId(imageSupr.getId());
                 paneJeu.getChildren().remove(imageSupr);
                 paneJeu.getChildren().add(testIV);
-//                System.out.println("testremove");
-//                System.out.println(c.getFrom());
+//              System.out.println("testremove");
+//              System.out.println(c.getFrom());
                 ImageView newIV = new ImageView((Image) mapImage.get(0));
                 testIV.addEventFilter(MouseEvent.MOUSE_CLICKED, eventHandler);
 

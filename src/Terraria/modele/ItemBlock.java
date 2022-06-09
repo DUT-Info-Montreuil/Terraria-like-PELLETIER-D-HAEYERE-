@@ -3,8 +3,8 @@ package Terraria.modele;
 public class ItemBlock extends Item {
     private int code;
 
-    public ItemBlock(int quantite, String id, Environnement environnement, int code) {
-        super(quantite, id, false, environnement);
+    public ItemBlock(int quantite,  Environnement environnement, int code) {
+        super(quantite, false, environnement);
         this.code = code;
     }
 
