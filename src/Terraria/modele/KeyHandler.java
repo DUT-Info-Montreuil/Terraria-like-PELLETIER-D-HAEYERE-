@@ -1,11 +1,10 @@
 package Terraria.modele;
 
 import javafx.scene.layout.Pane;
-import javafx.scene.*;
-import javafx.scene.input.*;
 
 public class KeyHandler {
     private boolean rightPressed, leftPressed, upPressed, downPressed;
+    private boolean inventoryTyped;
     private boolean slotTwoTyped;
     private boolean slotThreeTyped;
     private boolean slotFourTyped;
@@ -15,7 +14,6 @@ public class KeyHandler {
     private boolean slotEightTyped;
     private boolean slotNineTyped;
     private boolean slotTenTyped;
-
 
 
     public boolean isRightPressed() {
@@ -28,6 +26,10 @@ public class KeyHandler {
 
     public boolean isUpPressed() {
         return upPressed;
+    }
+
+    public boolean isInventoryTyped() {
+        return inventoryTyped;
     }
 
     private Pane pane;
@@ -47,6 +49,7 @@ public class KeyHandler {
         slotFourTyped = false;
         slotThreeTyped = false;
         slotTwoTyped = false;
+        inventoryTyped=false;
         boolean slotOneTyped = false;
         this.pane = pane;
     }
@@ -57,17 +60,20 @@ public class KeyHandler {
     private void keyPressed() {
         pane.setOnKeyPressed(e -> {
             switch (e.getCode()) {
-                case D :
+                case D:
                     rightPressed = true;
                     break;
-                case Q :
+                case Q:
                     leftPressed = true;
                     break;
-                case S :
+                case S:
                     downPressed = true;
                     break;
                 case SPACE:
                     upPressed = true;
+                    break;
+                case TAB:
+                    inventoryTyped = !this.inventoryTyped;
                     break;
             }
         });
@@ -77,18 +83,19 @@ public class KeyHandler {
         pane.setOnKeyReleased(e -> {
             //System.out.println(e.getCode());
             switch (e.getCode()) {
-                case D :
+                case D:
                     rightPressed = false;
                     break;
-                case Q :
+                case Q:
                     leftPressed = false;
                     break;
-                case S :
+                case S:
                     downPressed = false;
                     break;
                 case SPACE:
                     upPressed = false;
                     break;
+
             }
         });
     }

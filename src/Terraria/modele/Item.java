@@ -5,15 +5,20 @@ public abstract class Item {
     private String id;
     private boolean consomable;
     private Environnement environnement;
-    public Item(int quantite, String id,boolean consomable,Environnement environnement) {
+    private static int count = 0;
+
+    public Item(int quantite, boolean consomable, Environnement environnement) {
         this.quantite = quantite;
-        this.id = id;
+        this.id = "item " + count;
         this.consomable = consomable;
-        this.environnement=environnement;
+        this.environnement = environnement;
     }
-    public void action(int cible){
+
+    public void action(int cible) {
     }
-    public boolean cielEstModifiable(int cible){
+
+
+    public boolean cielEstModifiable(int cible) {
         return false;
     }
 
@@ -24,7 +29,23 @@ public abstract class Item {
     public int getQuantite() {
         return quantite;
     }
-    public void quantiteEnMoins(){
+
+    public void quantiteEnMoins() {
         this.quantite--;
     }
+
+
+    public boolean isConsomable() {
+        return consomable;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+
+    public void quantiteEnPlus() {
+        this.quantite++;
+    }
 }
+

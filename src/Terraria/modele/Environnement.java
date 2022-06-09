@@ -23,7 +23,8 @@ public class Environnement {
     private Joueur joueur1;
     private JSONArray tiles;
 
-    private  ObservableList<Acteur>listActeur;
+    private ObservableList<Acteur>listActeur;
+    private ObservableList<OnGroundItem> OnGroundItemList ;
     private ArrayList<Ennemi> listEnnemi = new ArrayList<>();
 
 
@@ -62,6 +63,7 @@ public class Environnement {
         this.loadTile();
 
         this.listActeur = FXCollections.observableArrayList();
+        this.OnGroundItemList = FXCollections.observableArrayList();
         this.allBlock = new ArrayList<>();
     }
 
@@ -150,6 +152,7 @@ public class Environnement {
         }
     }
 
+  
     public ArrayList<Ennemi> getListEnnemi() {
 
         return listEnnemi;
@@ -157,6 +160,11 @@ public class Environnement {
 
     public void addEnnemi(Ennemi e) {
         listEnnemi.add(e);
+    }
+
+
+    public ObservableList<OnGroundItem> getOnGroundItem(){
+        return OnGroundItemList;
     }
 }
 

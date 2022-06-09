@@ -24,7 +24,7 @@ public abstract class Acteur {
     }
 
     private String id;
-    private boolean isAlive;
+    protected boolean isAlive;
 
     public boolean isJumping() {
         return isJumping;
