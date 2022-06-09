@@ -34,7 +34,7 @@ public class MonObservateurItem implements ListChangeListener<OnGroundItem> {
 
 
             }
-            for (Item i : c.getRemoved()){
+            for (OnGroundItem i : c.getRemoved()){
                 pane.getChildren().remove(pane.lookup("#"+i.getId()));
             }
 

@@ -7,7 +7,7 @@ import javafx.beans.value.ObservableValue;
 
 import java.util.ArrayList;
 
-public class OnGroundItem extends Item {
+public class OnGroundItem {
     private SimpleIntegerProperty x;
     private SimpleIntegerProperty y;
     private String OngroundId ;
@@ -24,7 +24,8 @@ public class OnGroundItem extends Item {
     }
 
     public OnGroundItem(Item item,HitBox box ,  Environnement environnement , int x , int y) {
-        super(item.getQuantite(), item.isConsomable(), environnement);
+
+
         this.item = item;
         this.OngroundId = item.getId();
         this.x = new SimpleIntegerProperty(x);
@@ -85,7 +86,7 @@ public class OnGroundItem extends Item {
             }
         }
         this.setFalling(true);
-        System.out.println("falling");
+        //System.out.println("falling");
         return 0;
     }
 
