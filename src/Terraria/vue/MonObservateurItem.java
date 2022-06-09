@@ -26,9 +26,11 @@ public class MonObservateurItem implements ListChangeListener<OnGroundItem> {
         while (c.next()) {
             for (OnGroundItem i : c.getAddedSubList()
             ) {
+
                 if (i.getItem() instanceof RottenFlesh){
                     ViewItemOnGround viewItemOnGround = new ViewItemOnGround(i,pane,environnement,"RottenFlesh.png");
                 }
+
 
 
             }
