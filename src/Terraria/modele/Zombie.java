@@ -107,6 +107,6 @@ public class Zombie extends Ennemi {
         this.environnement.getListActeur().remove(this);
         this.environnement.getListEnnemi().remove(this);
         Item drop = new RottenFlesh(1, this.environnement);
-        this.environnement.getOnGroundItem().add(new OnGroundItem(drop,new HitBox(this.getPosX() ,this.getPosY() , 8 , 8 , true ) ,  this.environnement, this.getPosX(), this.getPosY()));
+        this.environnement.getOnGroundItem().add(new OnGroundItem(drop,new HitBox(this.getPosX() ,this.getPosY() , 16 , 16 , true ) ,  this.environnement, this.getPosX(), this.getPosY()));
     }
 }
