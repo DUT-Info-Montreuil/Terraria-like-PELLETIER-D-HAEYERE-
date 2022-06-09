@@ -43,15 +43,15 @@ public class Controleur implements Initializable {
     private KeyHandler keyHandler;
     private boolean affiche = false;
     private HashMap<Tile, Image> mapLienIdImage;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         e1 = new Environnement(InitialisationEnvironnement.loadMap("ress/terrain3.json"));
 
-         mapLienIdImage = loadTile(e1.getMap());
+        mapLienIdImage = loadTile(e1.getMap());
 
 
-        Pioche piocheDep = new Pioche( 250, 10, e1);
-        ItemBlock blockLave = new ItemBlock(20,  e1, 3);
+        Pioche piocheDep = new Pioche(250, 10, e1);
         this.e1.getListActeur().addListener(new MonObservateurListActeur(e1, pane));
         this.e1.getOnGroundItem().addListener(new MonObservateurItem(e1, pane));
         Joueur hero = new Joueur(20, 5, 50, -40, e1, "hero", new HitBox(50, 30, 24, 14, true), piocheDep);
@@ -98,14 +98,13 @@ public class Controleur implements Initializable {
 
                 ImageView imageClicked = (ImageView) e.getSource();
                 int idDansLeTerrain = Integer.parseInt(imageClicked.getId());
+
                 int typeDeLaTile = e1.getTerrain().get(idDansLeTerrain);
+
 
                 if (e1.getJoueur1().checkDistanceInReach((int) imageClicked.getX(), (int) imageClicked.getY())) {
 
                     e1.getJoueur1().getItemEquipe().action(idDansLeTerrain);
-                    //System.out.println(idDansLeTerrain+"id avant le if");
-                    //System.out.println(typeDeLaTile+"valeur à lid avant le if");
-                    //System.out.println(e1.getJoueur1().getItemEquipe().cielEstModifiable(typeDeLaTile));
                     if (e1.getJoueur1().getItemEquipe().cielEstModifiable(typeDeLaTile)) {
                         System.out.println("est ce que c'est du ciel ?");
                         modifTerrain(mapLienIdImage, imageClicked, Integer.parseInt(imageClicked.getId()));
@@ -133,7 +132,6 @@ public class Controleur implements Initializable {
 
         e1.setJoueur1(hero);
         e1.getJoueur1().addItem(piocheDep);
-        e1.getJoueur1().addItem(blockLave);
         Scene scene = new Scene(pane, e1.getLargeur() * sprit_largeur, e1.getHauteur() * sprit_hauteur);
 
 
@@ -144,10 +142,8 @@ public class Controleur implements Initializable {
         e1.loadLayers();
 
 
-        afficheMap(e1,mapLienIdImage);
-        afficherColision(e1.getAllBlock() ,hero ,e1.getListActeur() , e1.getOnGroundItem() ,  false);
-
-
+        afficheMap(e1, mapLienIdImage);
+        afficherColision(e1.getAllBlock(), hero, e1.getListActeur(), e1.getOnGroundItem(), false);
 
 
         //ajoutSprite(hero);
@@ -183,14 +179,15 @@ public class Controleur implements Initializable {
 
         timeline = new Timeline(new KeyFrame(Duration.millis(32.66), actionEvent -> {
 
-            if (keyHandler.isInventoryTyped()&&!affiche){
+            if (keyHandler.isInventoryTyped() && !affiche) {
                 pane.lookup("#inv").setVisible(true);
-                affiche=true;
+                affiche = true;
                 affichageInventaire();
             }
-            if (!keyHandler.isInventoryTyped()){
+            if (!keyHandler.isInventoryTyped() && affiche) {
                 pane.lookup("#inv").setVisible(false);
-                affiche=false;
+                affiche = false;
+                closeInv();
             }
             if (keyHandler.isLeftPressed()) {
                 e1.getJoueur1().setDirection(-1);
@@ -221,15 +218,14 @@ public class Controleur implements Initializable {
                 a.gravite();
             }
 
-            for(int i = 0; i < e1.getListEnnemi().size(); i++){
-                e1.getListEnnemi().get(i).seDeplace(e1.getJoueur1() , e1.getAllBlock());
+            for (int i = 0; i < e1.getListEnnemi().size(); i++) {
+                e1.getListEnnemi().get(i).seDeplace(e1.getJoueur1(), e1.getAllBlock());
             }
 
-            for(int i = 0; i < e1.getOnGroundItem().size(); i++){
+            for (int i = 0; i < e1.getOnGroundItem().size(); i++) {
                 e1.getOnGroundItem().get(i).collideHautBas(allBlock);
                 e1.getOnGroundItem().get(i).gravite();
             }
-
 
 
         }));
@@ -352,7 +348,7 @@ public class Controleur implements Initializable {
     }*/
 
 
-    public void afficherColision(ArrayList<Block> blocks, Acteur a, ObservableList<Acteur> allActeur,ObservableList<OnGroundItem> allOngroundItem , boolean affiche) {
+    public void afficherColision(ArrayList<Block> blocks, Acteur a, ObservableList<Acteur> allActeur, ObservableList<OnGroundItem> allOngroundItem, boolean affiche) {
         if (affiche) {
 //            System.out.println(blocks.size());
 
@@ -411,36 +407,62 @@ public class Controleur implements Initializable {
 
     }
 
-    public void affichageInventaire(){
+    public void affichageInventaire() {
         ImageView inventaire = (ImageView) pane.lookup("#inv");
-        int countCase =1;
-        int poseXDep =(int) inventaire.getX()+30;
-        int poseYDep =(int) inventaire.getY()+17;
+        int countCase = 1;
+        int poseXDep = (int) inventaire.getX() + 30;
+        int poseYDep = (int) inventaire.getY() + 17;
         int newPosX = poseXDep;
         int newPosY = poseYDep;
-        for (Item i:e1.getJoueur1().getInventaire()
-             ) {
-            if (i.getQuantite()!=0){
+        EventHandler<MouseEvent> invHandler = new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                ImageView imageClicked = (ImageView) event.getSource();
+                e1.getJoueur1().setItemEquipe(((ViewItem) imageClicked).getItem());
+
+            }
+        };
+        for (Item i : e1.getJoueur1().getInventaire()
+        ) {
+            if (i.getQuantite() != 0) {
                 try {
-                    ViewItem itemInv = new ViewItem(i,pane,e1,mapLienIdImage);
+                    ViewItem itemInv = new ViewItem(i, pane, e1, mapLienIdImage);
 
                     itemInv.toFront();
                     itemInv.setX(newPosX);
                     itemInv.setY(newPosY);
-                    newPosX=newPosX+37;
+
+                    itemInv.setId(i.getId());
+
+                    newPosX = newPosX + 37;
                     countCase++;
                     System.out.println(countCase);
-                    if (countCase%4==0){
-                        newPosX=poseXDep;
-                        newPosY=newPosY+37;
+                    if (countCase % 5 == 0) {
+                        newPosX = poseXDep;
+                        newPosY = newPosY + 37;
                     }
-                    itemInv.getPane().getChildren().add(itemInv);
-                }catch (Exception e){
+                    itemInv.addEventFilter(MouseEvent.MOUSE_CLICKED, invHandler);
+                    System.out.println("avant add");
+                    pane.getChildren().add(itemInv);
+                    System.out.println("apreès add");
+                } catch (Exception e) {
 
                 }
 
             }
         }
+
+    }
+
+    public void closeInv() {
+        for (Item i : e1.getJoueur1().getInventaire()
+        ) {
+
+            ImageView itemDansInv = (ImageView) pane.lookup("#" + i.getId());
+            pane.getChildren().remove(itemDansInv);
+
+        }
+
     }
 
 

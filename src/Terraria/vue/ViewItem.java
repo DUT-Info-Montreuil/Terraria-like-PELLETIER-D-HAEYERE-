@@ -15,7 +15,7 @@ public class ViewItem extends ImageView {
     private HashMap<Tile,Image>hashMap;
 
     public ViewItem(Item i, Pane pane, Environnement environnement,HashMap<Tile,Image>hashMap) {
-        super();
+
 
         this.item = i;
         this.pane = pane;
@@ -25,7 +25,7 @@ public class ViewItem extends ImageView {
         this.hashMap=hashMap;
         if (item instanceof Pioche){
             this.setImage(new Image(String.valueOf(getClass().getResource("/pioche.png"))));
-        }if (i instanceof ItemBlock){
+        }if (item instanceof ItemBlock){
             for (Tile t:environnement.getAllTiles()
                  ) {
                 if (t.getId()==((ItemBlock) i).getCode()){

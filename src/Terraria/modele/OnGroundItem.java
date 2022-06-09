@@ -77,7 +77,7 @@ public class OnGroundItem extends Item {
                         this.setPosY(block.getBoxY().intValue() - this.getBox().getHeight());
 
                         this.setFalling(false);
-                        System.out.println("collision");
+                        //System.out.println("collision");
                         return 1;
 
                     }

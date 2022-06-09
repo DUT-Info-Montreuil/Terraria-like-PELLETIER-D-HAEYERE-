@@ -44,9 +44,9 @@ public class Zombie extends Ennemi {
             } else {
                 //System.out.println("not in range");
                 move++;
-                die();
+                //die();
                 if (move % 5 == 0) {
-                    System.out.println("idle");
+                    //System.out.println("idle");
 
                     int result = (int) (Math.random() * 3) - 1;
                     //System.out.println("moving " + result);
