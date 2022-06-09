@@ -111,6 +111,7 @@ public abstract class Acteur {
     }
     public void addItem(Item item){
         inventaire.add(item);
+
     }
     public ArrayList<Item> getInventaire() {
         return inventaire;

@@ -3,6 +3,7 @@ package Terraria.controleur;
 
 import Terraria.modele.*;
 import Terraria.vue.MonObservateurListActeur;
+import Terraria.vue.ViewItem;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.collections.ObservableList;
@@ -39,13 +40,13 @@ public class Controleur implements Initializable {
 
     private EventHandler<MouseEvent> eventHandler;
     private KeyHandler keyHandler;
-
-
+    private boolean affiche = false;
+    private HashMap<Tile, Image> mapLienIdImage;
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         e1 = new Environnement(InitialisationEnvironnement.loadMap("ress/terrain3.json"));
 
-        HashMap<Tile, Image> mapLienIdImage = loadTile(e1.getMap());
+         mapLienIdImage = loadTile(e1.getMap());
 
 
         Pioche piocheDep = new Pioche("piocheDep", 250, 10, e1);
@@ -90,7 +91,7 @@ public class Controleur implements Initializable {
         eventHandler = new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent e) {
-
+                System.out.println(e1.getJoueur1().getInventaire());
 //                e1.terrainToString();
 
                 ImageView imageClicked = (ImageView) e.getSource();
@@ -180,11 +181,14 @@ public class Controleur implements Initializable {
 
         timeline = new Timeline(new KeyFrame(Duration.millis(32.66), actionEvent -> {
 
-            if (keyHandler.isInventoryTyped()){
+            if (keyHandler.isInventoryTyped()&&!affiche){
                 pane.lookup("#inv").setVisible(true);
+                affiche=true;
+                affichageInventaire();
             }
             if (!keyHandler.isInventoryTyped()){
                 pane.lookup("#inv").setVisible(false);
+                affiche=false;
             }
             if (keyHandler.isLeftPressed()) {
                 e1.getJoueur1().setDirection(-1);
@@ -391,9 +395,32 @@ public class Controleur implements Initializable {
     }
 
     public void affichageInventaire(){
+        ImageView inventaire = (ImageView) pane.lookup("#inv");
+        int countCase =1;
+        int poseXDep =(int) inventaire.getX()+30;
+        int poseYDep =(int) inventaire.getY()+17;
+        int newPosX = poseXDep;
+        int newPosY = poseYDep;
         for (Item i:e1.getJoueur1().getInventaire()
              ) {
             if (i.getQuantite()!=0){
+                try {
+                    ViewItem itemInv = new ViewItem(i,pane,e1,mapLienIdImage);
+
+                    itemInv.toFront();
+                    itemInv.setX(newPosX);
+                    itemInv.setY(newPosY);
+                    newPosX=newPosX+37;
+                    countCase++;
+                    System.out.println(countCase);
+                    if (countCase%4==0){
+                        newPosX=poseXDep;
+                        newPosY=newPosY+37;
+                    }
+                    itemInv.getPane().getChildren().add(itemInv);
+                }catch (Exception e){
+
+                }
 
             }
         }

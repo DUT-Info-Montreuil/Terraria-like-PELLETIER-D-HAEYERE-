@@ -41,10 +41,20 @@ public abstract class Item {
     public String getId() {
         return id;
     }
-}
+
 
     public void quantiteEnPlus() {
         this.quantite++;
+    }
+
+    @Override
+    public String toString() {
+        return "Item{" +
+                "quantite=" + quantite +
+                ", id='" + id + '\'' +
+                ", consomable=" + consomable +
+                ", environnement=" + environnement +
+                '}';
     }
 }
 

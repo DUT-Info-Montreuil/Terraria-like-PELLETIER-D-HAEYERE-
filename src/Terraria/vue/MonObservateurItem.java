@@ -16,7 +16,7 @@ public class MonObservateurItem implements ListChangeListener<Item> {
             for (Item i : c.getAddedSubList()
             ) {
                 System.out.println("test viewActeur");
-                ViewItem viewItem = new ViewItem(i,pane,environnement);
+
 
             }
             for (Item a : c.getRemoved()
