@@ -33,6 +33,8 @@ public class ViewItem extends ImageView {
                 }
             }
 
+        }if (item instanceof RottenFlesh) {
+            this.setImage(new Image(String.valueOf(getClass().getResource("/RottenFlesh.png"))));
         }
 
 
