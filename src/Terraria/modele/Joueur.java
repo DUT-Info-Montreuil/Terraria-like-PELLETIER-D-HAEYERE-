@@ -5,12 +5,14 @@ import java.util.ArrayList;
 
 public class Joueur extends Acteur{
     private Item itemEquipe;
+    private boolean toucheCrafting;
     public Joueur(int pv, int vitesse, int posX, int posY, Environnement environnement, String id , HitBox h ,Item itemEquipe) {
         super(pv, vitesse, posX, posY, environnement, id , h);
 
         h.getY().bind(this.getYProprety());
         h.getX().bind(this.getXProprety());
         this.itemEquipe=itemEquipe;
+        toucheCrafting = false;
         initInv();
     }
 
@@ -19,8 +21,13 @@ public class Joueur extends Acteur{
         System.out.println("changement item");
     }
 
+    public boolean isToucheCrafting() {
+        return toucheCrafting;
+    }
 
     public int collideGaucheDroite(ArrayList<Block> blocks ){
+        //code dupli avec joueur suprimmer ?
+
         for (Block block: blocks) {
             if (block.getBox().isSolide()) {
                 int a = this.getBox().getY().intValue()-1;
@@ -33,10 +40,13 @@ public class Joueur extends Acteur{
                     if (this.getBox().getX().intValue() <= block.getBoxX().intValue() + block.getTile().getWidth() && this.getBox().getX().intValue() + this.getBox().getWidth() >= block.getBoxX().intValue() + block.getTile().getWidth() ) {
                         //test collision gauche
                         this.setPosX(block.getBox().getX().intValue() + block.getBox().getWidth());
+                        this.toucheCrafting = true;
                         return - 1 ;
+
                     } else if (this.getBox().getX().intValue() <= block.getBoxX().intValue()  && this.getBox().getX().intValue() + this.getBox().getWidth() >= block.getBoxX().intValue() && this.getBox().getX().intValue() + this.getBox().getWidth() <= block.getBoxX().intValue() + block.getOffSet()  ) {
                         // test collision droite
                         this.setPosX(block.getBox().getX().intValue()-this.getBox().getWidth());
+                        this.toucheCrafting = true;
                         return 1 ;
                     }
                 }
@@ -46,6 +56,7 @@ public class Joueur extends Acteur{
 
 
         }
+        this.toucheCrafting = false;
         return 0 ;
         }
 
@@ -80,6 +91,7 @@ public class Joueur extends Acteur{
                                 //System.out.println("gauche");
 
                                 this.setFalling(false);
+                                this.toucheCrafting=true;
                                 return 1;
 
 
@@ -98,6 +110,7 @@ public class Joueur extends Acteur{
 
             }
             this.setFalling(true);
+            this.toucheCrafting=false;
             return  0;
         }
 

@@ -68,6 +68,15 @@ public class Controleur implements Initializable {
         imgViewInv.setX(600);
         imgViewInv.setY(10);
         imgViewInv.setId("inv");
+
+
+        Image imgCraft = new Image(String.valueOf(getClass().getResource("/Craft.png")));
+        ImageView imgViewCraft = new ImageView(imgCraft);
+        pane.getChildren().add(imgViewCraft);
+        imgViewCraft.setVisible(false);
+        imgViewCraft.setX(5);
+        imgViewCraft.setY(100);
+        imgViewCraft.setId("craft");
 //
 
    /* public final int sprit_largeur = 16;
@@ -166,6 +175,7 @@ public class Controleur implements Initializable {
         }
         (pane.lookup("#" + e1.getJoueur1().getId())).toFront();
         imgViewInv.toFront();
+        imgViewCraft.toFront();
         launchTimeLine();
         timeline.setCycleCount(timeline.INDEFINITE);
         timeline.play();
@@ -189,6 +199,20 @@ public class Controleur implements Initializable {
                 affiche = false;
                 closeInv();
             }
+
+
+            if (keyHandler.isInteractionTyped() && !e1.getJoueur1().isToucheCrafting()) {
+                pane.lookup("#inv").setVisible(true);
+                affiche = true;
+                affichageInventaire();
+            }
+            if (!keyHandler.isInventoryTyped() && affiche) {
+                pane.lookup("#inv").setVisible(false);
+                affiche = false;
+                closeInv();
+            }
+
+
             if (keyHandler.isLeftPressed()) {
                 e1.getJoueur1().setDirection(-1);
             }

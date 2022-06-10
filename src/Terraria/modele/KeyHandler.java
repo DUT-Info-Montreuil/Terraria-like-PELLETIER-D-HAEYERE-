@@ -5,6 +5,7 @@ import javafx.scene.layout.Pane;
 public class KeyHandler {
     private boolean rightPressed, leftPressed, upPressed, downPressed;
     private boolean inventoryTyped;
+    private boolean interactionTyped;
     private boolean slotTwoTyped;
     private boolean slotThreeTyped;
     private boolean slotFourTyped;
@@ -18,6 +19,10 @@ public class KeyHandler {
 
     public boolean isRightPressed() {
         return rightPressed;
+    }
+
+    public boolean isInteractionTyped() {
+        return interactionTyped;
     }
 
     public boolean isLeftPressed() {
@@ -50,6 +55,7 @@ public class KeyHandler {
         slotThreeTyped = false;
         slotTwoTyped = false;
         inventoryTyped=false;
+        interactionTyped=false;
         boolean slotOneTyped = false;
         this.pane = pane;
     }
@@ -75,6 +81,8 @@ public class KeyHandler {
                 case TAB:
                     inventoryTyped = !this.inventoryTyped;
                     break;
+                case E:
+                    interactionTyped= !this.interactionTyped;
             }
         });
     }

@@ -17,13 +17,13 @@ public abstract class Acteur {
     private boolean isJumping;
     protected int reach;
     private HitBox box ;
-
+    private String id;
 
     public void setDirection(int direction) {
         this.direction = direction;
     }
 
-    private String id;
+
     protected boolean isAlive;
 
     public boolean isJumping() {
