@@ -41,7 +41,8 @@ public class Controleur implements Initializable {
 
     private EventHandler<MouseEvent> eventHandler;
     private KeyHandler keyHandler;
-    private boolean affiche = false;
+    private boolean afficheInv = false;
+    private boolean afficheCraft = false;
     private HashMap<Tile, Image> mapLienIdImage;
 
     @Override
@@ -189,27 +190,25 @@ public class Controleur implements Initializable {
 
         timeline = new Timeline(new KeyFrame(Duration.millis(32.66), actionEvent -> {
 
-            if (keyHandler.isInventoryTyped() && !affiche) {
+            if (keyHandler.isInventoryTyped() && !afficheInv) {
                 pane.lookup("#inv").setVisible(true);
-                affiche = true;
+                afficheInv = true;
                 affichageInventaire();
             }
-            if (!keyHandler.isInventoryTyped() && affiche) {
+            if (!keyHandler.isInventoryTyped() && afficheInv) {
                 pane.lookup("#inv").setVisible(false);
-                affiche = false;
+                afficheInv = false;
                 closeInv();
             }
 
 
-            if (keyHandler.isInteractionTyped() && !e1.getJoueur1().isToucheCrafting()) {
-                pane.lookup("#inv").setVisible(true);
-                affiche = true;
-                affichageInventaire();
+            if (keyHandler.isInteractionTyped() && !afficheCraft&&e1.getJoueur1().isToucheCrafting()) {
+                pane.lookup("#craft").setVisible(true);
+                afficheCraft = true;
             }
-            if (!keyHandler.isInventoryTyped() && affiche) {
-                pane.lookup("#inv").setVisible(false);
-                affiche = false;
-                closeInv();
+            if (!keyHandler.isInteractionTyped() &&afficheCraft) {
+                pane.lookup("#craft").setVisible(false);
+                afficheCraft = false;
             }
 
 

@@ -120,7 +120,7 @@ public abstract class Acteur {
 
     public void gravite(){
         if (isFalling){
-            this.posY.setValue(posY.getValue()+(vitesse*1.5));
+            this.posY.setValue(posY.getValue()+(vitesse*2));
         }
     }
     public void saute(){
