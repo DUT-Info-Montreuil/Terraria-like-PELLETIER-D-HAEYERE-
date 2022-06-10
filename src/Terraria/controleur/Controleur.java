@@ -222,17 +222,12 @@ public class Controleur implements Initializable {
                 e1.getListEnnemi().get(i).seDeplace(e1.getJoueur1(), e1.getAllBlock());
             }
 
-                for (int i = 0; i < e1.getOnGroundItem().size(); i++) {
-                    e1.getOnGroundItem().get(i).collideHautBas(allBlock);
-                    e1.getOnGroundItem().get(i).gravite();
+            for (int i = 0; i < e1.getOnGroundItem().size(); i++) {
+                e1.getOnGroundItem().get(i).collideHautBas(allBlock);
+                e1.getOnGroundItem().get(i).gravite();
 
-
-                }
-
-
-
-
-
+            }
+                e1.getJoueur1().itemCollide(e1.getOnGroundItem());
 
 
 

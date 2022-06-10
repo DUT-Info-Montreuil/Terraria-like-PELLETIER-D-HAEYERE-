@@ -1,5 +1,7 @@
 package Terraria.modele;
 
+import javafx.collections.ObservableList;
+
 import java.util.ArrayList;
 
 
@@ -100,6 +102,36 @@ public class Joueur extends Acteur{
             this.setFalling(true);
             return  0;
         }
+
+
+
+
+    public int itemCollide(ObservableList<OnGroundItem> allItem){
+        for (int is= 0; is < allItem.size(); is++) {
+                int a = this.getBox().getY().intValue()-1;
+                int b = a + this.getBox().getHeight()-1 ;
+                int aPrime = i.getBox().getY().intValue()-1 ;
+                int bPrime = i.getBox().getX().intValue() + i.getBox().getHeight() -1;
+
+                if (( a >= aPrime && a <= bPrime) || (b >= aPrime && b <= bPrime)) {
+
+                    if (this.getBox().getX().intValue() <= i.getBox().getX().intValue() + i.getBox().getWidth() && this.getBox().getX().intValue() + this.getBox().getWidth() >= i.getBox().getX().intValue() + i.getBox().getWidth() ) {
+                        //test collision gauche
+                        System.out.println("in item");
+                        return - 1 ;
+                    } else if (this.getBox().getX().intValue() <= i.getBox().getX().intValue()  && this.getBox().getX().intValue() + this.getBox().getWidth() >= i.getBox().getX().intValue() && this.getBox().getX().intValue() + this.getBox().getWidth() <= i.getBox().getX().intValue()   ) {
+                        System.out.println("in item");
+                        return 1 ;
+                    }
+                }
+
+
+
+
+
+        }
+        return 0 ;
+    }
 
         public boolean checkDistanceInReach(int posX, int posY){
             if ((valABS(this.getPosX()-posX)<this.getReach()*16)&&(valABS(this.getPosY()-posY)<this.getReach()*16)){
