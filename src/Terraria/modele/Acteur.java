@@ -110,6 +110,7 @@ public abstract class Acteur {
 
     }
     public void addItem(Item item){
+
         inventaire.add(item);
 
     }

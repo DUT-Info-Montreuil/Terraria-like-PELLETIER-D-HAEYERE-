@@ -9,7 +9,7 @@ public abstract class Item {
 
     public Item(int quantite, boolean consomable, Environnement environnement) {
         this.quantite = quantite;
-        this.id = "item" + count;
+        this.id = "item" + count++;
         this.consomable = consomable;
         this.environnement = environnement;
     }
