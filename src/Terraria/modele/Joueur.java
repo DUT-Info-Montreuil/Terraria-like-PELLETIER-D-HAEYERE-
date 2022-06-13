@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 public class Joueur extends Acteur{
     private Item itemEquipe;
+    private ArrayList<unCoeur> allCoeurs ;
     public Joueur(int pv, int vitesse, int posX, int posY, Environnement environnement, String id , HitBox h ,Item itemEquipe) {
         super(pv, vitesse, posX, posY, environnement, id , h);
 
@@ -14,6 +15,11 @@ public class Joueur extends Acteur{
         h.getX().bind(this.getXProprety());
         this.itemEquipe=itemEquipe;
         initInv();
+
+        for (int i = 0; i < 10; i++) {
+            allCoeurs.add(new unCoeur(50+(8*i) , 50 , i+1));
+
+        }
     }
 
     public void setItemEquipe(Item itemEquipe) {
