@@ -1,12 +1,13 @@
 package Terraria.modele;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 
 public class Joueur extends Acteur {
     private Item itemEquipe;
     private boolean toucheCrafting;
-
+    private ArrayList<Recipe>listCraft = new ArrayList<Recipe>();
     public Joueur(int pv, int vitesse, int posX, int posY, Environnement environnement, String id, HitBox h, Item itemEquipe) {
         super(pv, vitesse, posX, posY, environnement, id, h);
 
@@ -14,7 +15,9 @@ public class Joueur extends Acteur {
         h.getX().bind(this.getXProprety());
         this.itemEquipe = itemEquipe;
         toucheCrafting = false;
+
         initInv();
+        initCraft();
     }
 
     public void setItemEquipe(Item itemEquipe) {
@@ -47,7 +50,7 @@ public class Joueur extends Acteur {
 
                         collisionCraft(block);
 
-                    } else if (this.getBox().getX().intValue() <= block.getBoxX().intValue() && this.getBox().getX().intValue() + this.getBox().getWidth() >= block.getBoxX().intValue() && this.getBox().getX().intValue() + this.getBox().getWidth() <= block.getBoxX().intValue() + block.getOffSet()) {
+                    } else if (this.getBox().getX().intValue() <= block.getBoxX().intValue() && this.getBox().getX().intValue() + this.getBox().getWidth() >= block.getBoxX().intValue() /*&& this.getBox().getX().intValue() + this.getBox().getWidth() <= block.getBoxX().intValue() + block.getOffSet()*/) {
                         // test collision droite
                         if (block.getBox().isSolide()) {
                             this.setPosX(block.getBox().getX().intValue() - this.getBox().getWidth());
@@ -140,12 +143,29 @@ public class Joueur extends Acteur {
     public void collisionCraft(Block b) {
 
         if (b.getTile().getId() == 26) {
-            System.out.println(b.getTile().getImagePath());
+
             this.toucheCrafting = true;
         } else {
             this.toucheCrafting = false;
-            System.out.println("plus de craft");
+
         }
+    }
+    public void initCraft(){
+        RottenFlesh r1 = new RottenFlesh(-1,this.getEnvironnement());
+        ArrayList<Item>listCraft= new ArrayList<Item>();
+        HashMap<Item,Integer>itemQuantite = new HashMap<Item,Integer>();
+        ItemBlock craft =new ItemBlock(0,this.getEnvironnement(),2);
+        listCraft.add(craft);
+        itemQuantite.put(craft,3);
+        craft = new ItemBlock(0,this.getEnvironnement(),4);
+        listCraft.add(craft);
+        itemQuantite.put(craft,2);
+        Recipe rec = new Recipe(this.getEnvironnement(),r1,"Joueur",listCraft,itemQuantite,this);
+        this.listCraft.add(rec);
+    }
+
+    public ArrayList<Recipe> getListCraft() {
+        return listCraft;
     }
 }
 

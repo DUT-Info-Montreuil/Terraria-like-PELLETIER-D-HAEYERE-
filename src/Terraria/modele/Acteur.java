@@ -19,6 +19,7 @@ public abstract class Acteur {
     private HitBox box ;
     private String id;
 
+
     public void setDirection(int direction) {
         this.direction = direction;
     }
@@ -68,6 +69,7 @@ public abstract class Acteur {
 
 
 
+
     }
 
     public int getPv() {
@@ -88,6 +90,10 @@ public abstract class Acteur {
 
     public int getPosY() {
         return posY.getValue();
+    }
+
+    public Environnement getEnvironnement() {
+        return environnement;
     }
 
     public boolean getisAlive() {

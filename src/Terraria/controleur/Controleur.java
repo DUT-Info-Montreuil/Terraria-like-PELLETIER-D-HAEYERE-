@@ -55,6 +55,7 @@ public class Controleur implements Initializable {
         Pioche piocheDep = new Pioche(250, 10, e1);
         this.e1.getListActeur().addListener(new MonObservateurListActeur(e1, pane));
         this.e1.getOnGroundItem().addListener(new MonObservateurItem(e1, pane));
+
         Joueur hero = new Joueur(20, 5, 50, -40, e1, "hero", new HitBox(50, 30, 24, 14, true), piocheDep);
         Zombie z = new Zombie(20, 5, 30, 30, e1, "Zombie", new HitBox(50, 30, 28, 16, true));
         e1.addActeur(hero);
@@ -190,6 +191,15 @@ public class Controleur implements Initializable {
 
         timeline = new Timeline(new KeyFrame(Duration.millis(32.66), actionEvent -> {
 
+            for (Recipe r : e1.getJoueur1().getListCraft()
+            ) {
+
+                r.isCraftable();
+                if (r.getCraftable()){
+                    System.out.println("ha oui oui oui");
+                }
+                else System.out.println("no");
+            }
             if (keyHandler.isInventoryTyped() && !afficheInv) {
                 pane.lookup("#inv").setVisible(true);
                 afficheInv = true;
@@ -202,11 +212,11 @@ public class Controleur implements Initializable {
             }
 
 
-            if (keyHandler.isInteractionTyped() && !afficheCraft&&e1.getJoueur1().isToucheCrafting()) {
+            if (keyHandler.isInteractionTyped() && !afficheCraft && e1.getJoueur1().isToucheCrafting()) {
                 pane.lookup("#craft").setVisible(true);
                 afficheCraft = true;
             }
-            if (!keyHandler.isInteractionTyped() &&afficheCraft) {
+            if (!keyHandler.isInteractionTyped() && afficheCraft) {
                 pane.lookup("#craft").setVisible(false);
                 afficheCraft = false;
             }
@@ -245,18 +255,12 @@ public class Controleur implements Initializable {
                 e1.getListEnnemi().get(i).seDeplace(e1.getJoueur1(), e1.getAllBlock());
             }
 
-                for (int i = 0; i < e1.getOnGroundItem().size(); i++) {
-                    e1.getOnGroundItem().get(i).collideHautBas(allBlock);
-                    e1.getOnGroundItem().get(i).gravite();
+            for (int i = 0; i < e1.getOnGroundItem().size(); i++) {
+                e1.getOnGroundItem().get(i).collideHautBas(allBlock);
+                e1.getOnGroundItem().get(i).gravite();
 
 
-                }
-
-
-
-
-
-
+            }
 
 
         }));
@@ -419,7 +423,6 @@ public class Controleur implements Initializable {
     }
 
     public void modifTerrain(HashMap<Tile, Image> mapLienIdImage, ImageView imageClicked, int id) {
-        System.out.println("testDestruction");
         imageClicked.removeEventFilter(MouseEvent.MOUSE_CLICKED, eventHandler);
         pane.getChildren().remove(imageClicked);
         for (Tile t : e1.getAllTiles()
