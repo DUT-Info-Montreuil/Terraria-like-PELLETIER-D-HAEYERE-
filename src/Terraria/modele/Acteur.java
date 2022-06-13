@@ -110,10 +110,23 @@ public abstract class Acteur {
 
     }
     public void addItem(Item item){
+        System.out.println("add item");
+        for (int i = 0 ; i < inventaire.size() ; i++){
+            if (!(inventaire.get(i) instanceof ItemBlock)){
+                Class c = inventaire.get(i).getClass();
+                if(c.equals(item.getClass())){
+                    inventaire.get(i).quantiteEnPlus();
+                    return;
+                }
+            }
 
+
+            }
         inventaire.add(item);
+        }
 
-    }
+
+
     public ArrayList<Item> getInventaire() {
         return inventaire;
     }
