@@ -225,6 +225,13 @@ public class Controleur implements Initializable {
             for (int i = 0; i < e1.getOnGroundItem().size(); i++) {
                 e1.getOnGroundItem().get(i).collideHautBas(allBlock);
                 e1.getOnGroundItem().get(i).gravite();
+                if (e1.getJoueur1().itemCollide(e1.getOnGroundItem()) != null){
+                    e1.getJoueur1().addItem(e1.getOnGroundItem().get(i).getItem());
+                    e1.getOnGroundItem().remove(i);
+
+
+
+                }
 
             }
                 e1.getJoueur1().itemCollide(e1.getOnGroundItem());
