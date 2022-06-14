@@ -5,6 +5,8 @@ public class unCoeur {
     private int y;
     private int limiteAllume ;
     private boolean allume ;
+    private int id ;
+    private static int count = 0 ;
 
 
 
@@ -13,6 +15,7 @@ public class unCoeur {
         this.y = y;
         this.allume = false ;
         this.limiteAllume = limiteAllume ;
+        this.id = this.count++;
     }
 
 
@@ -26,4 +29,18 @@ public class unCoeur {
     }
 
 
+    public boolean isAllume() {
+        return allume;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public int getX() {
+        return x;
+    }
+    public int getY() {
+        return y;
+    }
 }

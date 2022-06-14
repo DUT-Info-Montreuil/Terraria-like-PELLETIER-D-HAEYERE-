@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 
 public abstract class Acteur {
-    private int pv;
+    int pv;
     private int vitesse;
     private IntegerProperty posX,posY;
     private  int direction;
@@ -138,6 +138,7 @@ public abstract class Acteur {
     }
     public void saute(){
         if (!isFalling){
+            this.pv-- ;
             this.posY.setValue(posY.getValue()-multiplicateurSaut);
         }
 

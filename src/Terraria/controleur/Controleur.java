@@ -2,11 +2,10 @@ package Terraria.controleur;
 
 
 import Terraria.modele.*;
-import Terraria.vue.MonObservateurItem;
-import Terraria.vue.MonObservateurListActeur;
-import Terraria.vue.ViewItem;
+import Terraria.vue.*;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -43,6 +42,8 @@ public class Controleur implements Initializable {
     private KeyHandler keyHandler;
     private boolean affiche = false;
     private HashMap<Tile, Image> mapLienIdImage;
+    private HudView hudView;
+    private ViewCoeur vc ;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -54,8 +55,8 @@ public class Controleur implements Initializable {
         Pioche piocheDep = new Pioche(250, 10, e1);
         this.e1.getListActeur().addListener(new MonObservateurListActeur(e1, pane));
         this.e1.getOnGroundItem().addListener(new MonObservateurItem(e1, pane));
-        Joueur hero = new Joueur(20, 5, 50, -40, e1, "hero", new HitBox(50, 30, 24, 14, true), piocheDep);
-        Zombie z = new Zombie(20, 5, 30, 30, e1, "Zombie", new HitBox(50, 30, 28, 16, true));
+        Joueur hero = new Joueur(10, 5, 50, 50, e1, "hero", new HitBox(50, 30, 24, 14, true), piocheDep);
+        Zombie z = new Zombie(20, 5, 50, 50, e1, "Zombie", new HitBox(50, 30, 28, 16, true));
         e1.addActeur(hero);
         e1.addActeur(z);
         e1.addEnnemi(z);
@@ -63,11 +64,13 @@ public class Controleur implements Initializable {
 
         Image imgInv = new Image(String.valueOf(getClass().getResource("/inventaire.png")));
         ImageView imgViewInv = new ImageView(imgInv);
-        pane.getChildren().add(imgViewInv);
-        imgViewInv.setVisible(false);
         imgViewInv.setX(600);
         imgViewInv.setY(10);
+        pane.getChildren().add(imgViewInv);
+        imgViewInv.setVisible(false);
+
         imgViewInv.setId("inv");
+
 //
 
    /* public final int sprit_largeur = 16;
@@ -132,7 +135,7 @@ public class Controleur implements Initializable {
 
         e1.setJoueur1(hero);
         e1.getJoueur1().addItem(piocheDep);
-        Scene scene = new Scene(pane, e1.getLargeur() * sprit_largeur, e1.getHauteur() * sprit_hauteur);
+        Scene scene = new Scene(pane, 50*sprit_largeur, 32*sprit_hauteur);
 
 
         ParallelCamera camera = new ParallelCamera();
@@ -143,6 +146,7 @@ public class Controleur implements Initializable {
 
 
         afficheMap(e1, mapLienIdImage);
+
         afficherColision(e1.getAllBlock(), hero, e1.getListActeur(), e1.getOnGroundItem(), false);
 
 
@@ -150,7 +154,7 @@ public class Controleur implements Initializable {
 
         //System.out.println(pane.getScene().getHeight());
 
-        // pane.getScene().getCamera().layoutXProperty().bind(hero.getXProprety().subtract(pane.getScene().getWidth() / 2));
+        //pane.getScene().getCamera().layoutXProperty().bind(hero.getXProprety().subtract(pane.getScene().getWidth() / 2));
         //pane.getScene().getCamera().layoutYProperty().bind(hero.getYProprety().subtract(pane.getScene().getHeight() / 2));
 
 
@@ -165,10 +169,16 @@ public class Controleur implements Initializable {
             pane.lookup("#" + a.getId()).toFront();
         }
         (pane.lookup("#" + e1.getJoueur1().getId())).toFront();
+
+        //imgViewInv.translateXProperty().bind(e1.getJoueur1().getBox().getX().add(new SimpleIntegerProperty(200)) );
+        //imgViewInv.translateYProperty().bind(e1.getJoueur1().getBox().getY().subtract(new SimpleIntegerProperty(250) ));
         imgViewInv.toFront();
         launchTimeLine();
         timeline.setCycleCount(timeline.INDEFINITE);
         timeline.play();
+        hudView = new HudView(e1 , 10 ,10 , pane , e1);
+        vc = new ViewCoeur(e1.getJoueur1().getAllCoeurs(), pane);
+
 
     }
 
@@ -235,6 +245,8 @@ public class Controleur implements Initializable {
 
             }
                 e1.getJoueur1().itemCollide(e1.getOnGroundItem());
+                e1.getJoueur1().updateCoeur();
+                vc.afficherCoeur( e1.getJoueur1().getAllCoeurs() ,pane);
 
 
 
@@ -420,10 +432,17 @@ public class Controleur implements Initializable {
     public void affichageInventaire() {
         ImageView inventaire = (ImageView) pane.lookup("#inv");
         int countCase = 1;
+        //SimpleIntegerProperty poseXDep =  new SimpleIntegerProperty((int)inventaire.getX()) ;
+        //SimpleIntegerProperty poseYDep = new SimpleIntegerProperty((int)inventaire.getX()) ;
+        //poseXDep.bind(inventaire.xProperty().add(new SimpleIntegerProperty(30)));
+        //poseYDep.bind(inventaire.yProperty().add(new SimpleIntegerProperty(17)));
+
         int poseXDep = (int) inventaire.getX() + 30;
         int poseYDep = (int) inventaire.getY() + 17;
         int newPosX = poseXDep;
         int newPosY = poseYDep;
+
+
         EventHandler<MouseEvent> invHandler = new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
