@@ -1,7 +1,7 @@
-package Terraria.vue;
+package Terraria.vue.ViewObject;
 
 import Terraria.modele.Environnement;
-import Terraria.modele.OnGroundItem;
+import Terraria.modele.Item.OnGroundItem;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;

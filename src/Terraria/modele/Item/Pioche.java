@@ -1,4 +1,7 @@
-package Terraria.modele;
+package Terraria.modele.Item;
+
+import Terraria.modele.Block;
+import Terraria.modele.Environnement;
 
 public class Pioche extends ItemOutil {
 

@@ -1,4 +1,9 @@
-package Terraria.modele;
+package Terraria.modele.Acteur;
+
+import Terraria.modele.*;
+import Terraria.modele.Item.Item;
+import Terraria.modele.Item.ItemBlock;
+import Terraria.modele.Item.RottenFlesh;
 
 import java.util.ArrayList;
 import java.util.HashMap;

@@ -1,9 +1,9 @@
-package Terraria.vue;
+package Terraria.vue.ViewObject;
 
-import Terraria.modele.Acteur;
+import Terraria.modele.Acteur.Acteur;
 import Terraria.modele.Environnement;
-import Terraria.modele.Joueur;
-import Terraria.modele.Zombie;
+import Terraria.modele.Acteur.Joueur;
+import Terraria.modele.Acteur.Zombie;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;

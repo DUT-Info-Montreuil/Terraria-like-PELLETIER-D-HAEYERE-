@@ -1,5 +1,9 @@
 package Terraria.modele;
 
+import Terraria.modele.Acteur.Joueur;
+import Terraria.modele.Item.Item;
+import Terraria.modele.Item.ItemBlock;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -57,5 +61,9 @@ public class Recipe {
     }
     public boolean getCraftable(){
         return this.craftable;
+    }
+
+    public ArrayList<Item> getListItem() {
+        return listItem;
     }
 }

@@ -1,9 +1,12 @@
-package Terraria.modele;
+package Terraria.modele.Item;
+
+import Terraria.modele.Block;
+import Terraria.modele.Environnement;
 
 public class ItemBlock extends Item {
     private int code;
 
-    public ItemBlock(int quantite,  Environnement environnement, int code) {
+    public ItemBlock(int quantite, Environnement environnement, int code) {
         super(quantite, false, environnement);
         this.code = code;
     }

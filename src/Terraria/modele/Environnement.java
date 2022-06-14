@@ -1,5 +1,9 @@
 package Terraria.modele;
 
+import Terraria.modele.Acteur.Acteur;
+import Terraria.modele.Acteur.Ennemi;
+import Terraria.modele.Acteur.Joueur;
+import Terraria.modele.Item.OnGroundItem;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import org.json.simple.JSONArray;

@@ -1,10 +1,18 @@
 package Terraria.controleur;
 
 
+import Terraria.modele.Acteur.Acteur;
+import Terraria.modele.Acteur.Joueur;
+import Terraria.modele.Acteur.Zombie;
 import Terraria.modele.*;
-import Terraria.vue.MonObservateurItem;
-import Terraria.vue.MonObservateurListActeur;
-import Terraria.vue.ViewItem;
+import Terraria.modele.Item.Item;
+import Terraria.modele.Item.ItemBlock;
+import Terraria.modele.Item.OnGroundItem;
+import Terraria.modele.Item.Pioche;
+import Terraria.vue.ObservableList.MonObservateurItem;
+import Terraria.vue.ObservableList.MonObservateurListActeur;
+import Terraria.vue.ViewObject.ViewItem;
+import Terraria.vue.ViewObject.ViewRecipe;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.collections.ObservableList;
@@ -178,6 +186,11 @@ public class Controleur implements Initializable {
         (pane.lookup("#" + e1.getJoueur1().getId())).toFront();
         imgViewInv.toFront();
         imgViewCraft.toFront();
+        for (Recipe recipe : e1.getJoueur1().getListCraft()
+        ) {
+            ViewRecipe viewRecipe = new ViewRecipe(recipe, e1.getJoueur1(), pane);
+        }
+
         launchTimeLine();
         timeline.setCycleCount(timeline.INDEFINITE);
         timeline.play();
@@ -193,12 +206,7 @@ public class Controleur implements Initializable {
 
             for (Recipe r : e1.getJoueur1().getListCraft()
             ) {
-
                 r.isCraftable();
-                if (r.getCraftable()){
-                    System.out.println("ha oui oui oui");
-                }
-                else System.out.println("no");
             }
             if (keyHandler.isInventoryTyped() && !afficheInv) {
                 pane.lookup("#inv").setVisible(true);

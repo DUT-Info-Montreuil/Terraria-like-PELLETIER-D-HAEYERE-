@@ -1,7 +1,9 @@
-package Terraria.modele;
+package Terraria.modele.Item;
+
+import Terraria.modele.Environnement;
 
 public class RottenFlesh extends Item {
-    public RottenFlesh(int quantite ,Environnement environnement) {
+    public RottenFlesh(int quantite , Environnement environnement) {
         super(quantite, true, environnement);
     }
 
