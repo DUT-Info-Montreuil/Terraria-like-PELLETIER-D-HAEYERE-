@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 
 public abstract class Acteur {
-    private int pv;
+    int pv;
     private int vitesse;
     private IntegerProperty posX,posY;
     private  int direction;
