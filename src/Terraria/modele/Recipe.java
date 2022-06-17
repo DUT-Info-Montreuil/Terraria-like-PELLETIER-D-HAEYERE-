@@ -16,7 +16,7 @@ public class Recipe {
     private Joueur joueur;
     private Environnement environnement;
 
-    public Recipe(Environnement environnement, Item resultCraft, String ouCrafter, ArrayList<Item> listItem, HashMap<Item, Integer> quantiteItem,Joueur joueur) {
+    public Recipe(Environnement environnement, Item resultCraft, String ouCrafter, ArrayList<Item> listItem, HashMap<Item, Integer> quantiteItem, Joueur joueur) {
         this.resultCraft = resultCraft;
         this.ouCrafter = ouCrafter;
         this.listItem = listItem;
@@ -54,16 +54,38 @@ public class Recipe {
                 }
             }
         }
-        if (compteItem == listItem.size()){
+        if (compteItem == listItem.size()) {
             System.out.println("craft");
         }
         this.craftable = compteItem == listItem.size();
     }
-    public boolean getCraftable(){
+
+    public boolean getCraftable() {
         return this.craftable;
     }
 
     public ArrayList<Item> getListItem() {
         return listItem;
+    }
+
+    public void craftItem() {
+        this.isCraftable();
+        if (craftable) {
+            joueur.getInventaire().add(resultCraft);
+            for (Item itemInRecipe : listItem
+            ) {
+
+                for (int i = 0; i < joueur.getInventaire().size(); i++) {
+
+
+                    Class c = joueur.getInventaire().get(i).getClass();
+                    if (c.equals(itemInRecipe.getClass())) {
+                            joueur.getInventaire().get(i).removeQuantite(quantiteItem.get(itemInRecipe));
+
+                    }
+                }
+            }
+        }
+
     }
 }

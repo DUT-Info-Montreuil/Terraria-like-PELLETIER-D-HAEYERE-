@@ -5,14 +5,14 @@ import Terraria.modele.Environnement;
 public abstract class Item {
     private int quantite;
     private String id;
-    private boolean consomable;
+
     private Environnement environnement;
     private static int count = 0;
 
-    public Item(int quantite, boolean consomable, Environnement environnement) {
+    public Item(int quantite, Environnement environnement) {
         this.quantite = quantite;
         this.id = "item" + count++;
-        this.consomable = consomable;
+
         this.environnement = environnement;
     }
 
@@ -34,12 +34,13 @@ public abstract class Item {
 
     public void quantiteEnMoins() {
         this.quantite--;
+        if (this.quantite<0){
+            this.quantite=0;
+        }
     }
 
 
-    public boolean isConsomable() {
-        return consomable;
-    }
+
 
     public String getId() {
         return id;
@@ -49,13 +50,19 @@ public abstract class Item {
     public void quantiteEnPlus() {
         this.quantite++;
     }
-
+    public void removeQuantite(int quant){
+        this.quantite=quantite-quant;
+        if (this.quantite<0){
+            this.quantite=0;
+        }
+    }
+    public void removeItemFromInv(){}
     @Override
     public String toString() {
         return "Item{" +
                 "quantite=" + quantite +
                 ", id='" + id + '\'' +
-                ", consomable=" + consomable +
+
                 ", environnement=" + environnement +
                 '}';
     }

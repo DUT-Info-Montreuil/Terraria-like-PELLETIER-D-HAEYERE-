@@ -29,4 +29,5 @@ public class Pioche extends ItemOutil {
         //System.out.println(idCible+"valeur a l'id dans le if");
         return (idCible!=1);
     }
+
 }

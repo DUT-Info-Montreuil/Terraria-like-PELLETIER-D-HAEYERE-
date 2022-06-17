@@ -157,7 +157,7 @@ public class Joueur extends Acteur {
         }
     }
     public void initCraft(){
-        RottenFlesh r1 = new RottenFlesh(-1,this.getEnvironnement());
+        RottenFlesh r1 = new RottenFlesh(1,this.getEnvironnement());
         ArrayList<Item>listCraft= new ArrayList<Item>();
         HashMap<Item,Integer>itemQuantite = new HashMap<Item,Integer>();
         ItemBlock craft =new ItemBlock(0,this.getEnvironnement(),2);
@@ -172,6 +172,9 @@ public class Joueur extends Acteur {
         itemQuantite.put(craftP,1);
         Recipe rec = new Recipe(this.getEnvironnement(),r1,"Joueur",listCraft,itemQuantite,this);
         this.listCraft.add(rec);
+
+
+
     }
 
     public ArrayList<Recipe> getListCraft() {

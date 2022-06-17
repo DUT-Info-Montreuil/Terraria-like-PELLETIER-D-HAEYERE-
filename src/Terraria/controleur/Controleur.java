@@ -356,46 +356,6 @@ public class Controleur implements Initializable {
 //
 //    }
 
-    /*
-    @FXML
-    public void mouvements(KeyEvent keyEvent) {
-        switch (keyEvent.getCode()) {
-            case D:
-                e1.getJoueur1().setDirection(1);
-                break;
-            case Q:
-
-                e1.getJoueur1().setDirection(-1);
-
-
-                break;
-            case SPACE:
-                if (!e1.getJoueur1().isJumping()) {
-                    e1.getJoueur1().saute();
-                }
-                break;
-            case P:
-                e1.getJoueur1().setItemEquipe(e1.getJoueur1().getInventaire().get(0));
-                break;
-            case L:
-                e1.getJoueur1().setItemEquipe(e1.getJoueur1().getInventaire().get(1));
-                break;
-        }
-    }
-
-    @FXML
-    public void stopMouvement(KeyEvent keyEvent) {
-        switch (keyEvent.getCode()) {
-            case D:
-                e1.getJoueur1().setDirection(0);
-                break;
-            case Q:
-                e1.getJoueur1().setDirection(0);
-                break;
-
-        }
-    }*/
-
 
     public void afficherColision(ArrayList<Block> blocks, Acteur a, ObservableList<Acteur> allActeur, ObservableList<OnGroundItem> allOngroundItem, boolean affiche) {
         if (affiche) {
@@ -508,7 +468,7 @@ public class Controleur implements Initializable {
 
             ImageView itemDansInv = (ImageView) pane.lookup("#" + i.getId());
             pane.getChildren().remove(itemDansInv);
-
+            i.removeItemFromInv();
         }
 
     }
