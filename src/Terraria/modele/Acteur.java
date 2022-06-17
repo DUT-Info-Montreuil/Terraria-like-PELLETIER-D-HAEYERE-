@@ -138,7 +138,6 @@ public abstract class Acteur {
     }
     public void saute(){
         if (!isFalling){
-            this.pv-- ;
             this.posY.setValue(posY.getValue()-multiplicateurSaut);
         }
 
