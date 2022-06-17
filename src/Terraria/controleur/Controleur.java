@@ -39,6 +39,7 @@ public class Controleur implements Initializable {
     public final int sprit_largeur = 16;
 
     private EventHandler<MouseEvent> eventHandler;
+
     private KeyHandler keyHandler;
     private boolean affiche = false;
     private HashMap<Tile, Image> mapLienIdImage;
@@ -55,8 +56,8 @@ public class Controleur implements Initializable {
         Pioche piocheDep = new Pioche(250, 10, e1);
         this.e1.getListActeur().addListener(new MonObservateurListActeur(e1, pane));
         this.e1.getOnGroundItem().addListener(new MonObservateurItem(e1, pane));
-        Joueur hero = new Joueur(10, 5, 50, 50, e1, "hero", new HitBox(50, 30, 24, 14, true), piocheDep);
-        Zombie z = new Zombie(20, 5, 50, 50, e1, "Zombie", new HitBox(50, 30, 28, 16, true));
+        Joueur hero = new Joueur(10, 5, 50, 50, e1,  new HitBox(50, 30, 24, 14, true), piocheDep);
+        Zombie z = new Zombie(20, 5, 50, 50, e1, new HitBox(50, 30, 28, 16, true));
         e1.addActeur(hero);
         e1.addActeur(z);
         e1.addEnnemi(z);
@@ -131,6 +132,8 @@ public class Controleur implements Initializable {
 //                    System.out.println(e1.getTerrain());
             }
         };
+
+
 
 
         e1.setJoueur1(hero);

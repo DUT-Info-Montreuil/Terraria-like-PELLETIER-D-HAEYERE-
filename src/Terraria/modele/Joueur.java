@@ -13,8 +13,8 @@ public class Joueur extends Acteur{
     }
 
     private ArrayList<unCoeur> allCoeurs = new ArrayList<>();
-    public Joueur(int pv, int vitesse, int posX, int posY, Environnement environnement, String id , HitBox h ,Item itemEquipe) {
-        super(pv, vitesse, posX, posY, environnement, id , h);
+    public Joueur(int pv, int vitesse, int posX, int posY, Environnement environnement,  HitBox h ,Item itemEquipe) {
+        super(pv, vitesse, posX, posY, environnement, h);
 
         h.getY().bind(this.getYProprety());
         h.getX().bind(this.getXProprety());
@@ -145,10 +145,7 @@ public class Joueur extends Acteur{
     }
 
         public boolean checkDistanceInReach(int posX, int posY){
-            if ((valABS(this.getPosX()-posX)<this.getReach()*16)&&(valABS(this.getPosY()-posY)<this.getReach()*16)){
-                return true;
-            }
-            return false;
+                return (valABS(this.getPosX()-posX)<this.getReach()*16)&&(valABS(this.getPosY()-posY)<this.getReach()*16);
         }
 
         public int valABS(int valeur){
@@ -186,10 +183,11 @@ public class Joueur extends Acteur{
         }
     }
 
-    private void die() {
-
+    @Override
+    public void die() {
 
     }
+
 
 }
 
