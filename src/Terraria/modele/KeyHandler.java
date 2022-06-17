@@ -76,10 +76,12 @@ public class KeyHandler {
                     downPressed = true;
                     break;
                 case SPACE:
+
                     upPressed = true;
                     break;
                 case TAB:
                     inventoryTyped = !this.inventoryTyped;
+
                     break;
                 case E:
                     interactionTyped= !this.interactionTyped;
@@ -101,6 +103,7 @@ public class KeyHandler {
                     downPressed = false;
                     break;
                 case SPACE:
+
                     upPressed = false;
                     break;
 

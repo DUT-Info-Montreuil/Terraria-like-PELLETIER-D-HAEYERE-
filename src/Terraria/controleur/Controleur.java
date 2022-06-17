@@ -24,6 +24,7 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
@@ -186,9 +187,11 @@ public class Controleur implements Initializable {
         (pane.lookup("#" + e1.getJoueur1().getId())).toFront();
         imgViewInv.toFront();
         imgViewCraft.toFront();
+        int countRecipe =0;
         for (Recipe recipe : e1.getJoueur1().getListCraft()
         ) {
-            ViewRecipe viewRecipe = new ViewRecipe(recipe, e1.getJoueur1(), pane);
+            ViewRecipe viewRecipe = new ViewRecipe(recipe, e1.getJoueur1(), pane,e1,mapLienIdImage);
+            viewRecipe.setId("Hbox"+countRecipe);
         }
 
         launchTimeLine();
@@ -204,17 +207,20 @@ public class Controleur implements Initializable {
 
         timeline = new Timeline(new KeyFrame(Duration.millis(32.66), actionEvent -> {
 
-            for (Recipe r : e1.getJoueur1().getListCraft()
-            ) {
-                r.isCraftable();
+            for (int i = 0; i <e1.getJoueur1().getListCraft().size() ; i++) {
+               ViewRecipe viewrep = (ViewRecipe) pane.lookup("#Hbox"+i);
+               viewrep.recipeIsCraftable();
             }
+
             if (keyHandler.isInventoryTyped() && !afficheInv) {
+                pane.requestFocus();
                 pane.lookup("#inv").setVisible(true);
                 afficheInv = true;
                 affichageInventaire();
             }
             if (!keyHandler.isInventoryTyped() && afficheInv) {
                 pane.lookup("#inv").setVisible(false);
+                pane.requestFocus();
                 afficheInv = false;
                 closeInv();
             }

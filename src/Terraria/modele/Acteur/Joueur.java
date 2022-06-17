@@ -3,6 +3,7 @@ package Terraria.modele.Acteur;
 import Terraria.modele.*;
 import Terraria.modele.Item.Item;
 import Terraria.modele.Item.ItemBlock;
+import Terraria.modele.Item.Pioche;
 import Terraria.modele.Item.RottenFlesh;
 
 import java.util.ArrayList;
@@ -164,7 +165,11 @@ public class Joueur extends Acteur {
         itemQuantite.put(craft,3);
         craft = new ItemBlock(0,this.getEnvironnement(),4);
         listCraft.add(craft);
+
         itemQuantite.put(craft,2);
+        Pioche craftP = new Pioche(250, 10, environnement);
+        listCraft.add(craftP);
+        itemQuantite.put(craftP,1);
         Recipe rec = new Recipe(this.getEnvironnement(),r1,"Joueur",listCraft,itemQuantite,this);
         this.listCraft.add(rec);
     }
