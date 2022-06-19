@@ -1,9 +1,9 @@
-package Terraria.vue;
+package Terraria.vue.ViewObject;
 
 
-import Terraria.modele.Joueur;
+import Terraria.modele.Acteur.Joueur;
 import Terraria.modele.Environnement;
-import Terraria.modele.Item;
+import Terraria.modele.Item.Item;
 import Terraria.modele.Recipe;
 import Terraria.modele.Tile;
 import javafx.scene.control.Button;

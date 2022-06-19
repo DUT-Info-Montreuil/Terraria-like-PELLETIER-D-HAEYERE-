@@ -1,13 +1,16 @@
-package Terraria.modele;
+package Terraria.modele.Acteur;
 
-import javafx.collections.ObservableList;
+import Terraria.modele.*;
+import Terraria.modele.Item.Item;
+import Terraria.modele.Item.OnGroundItem;
+import Terraria.modele.Item.RottenFlesh;
 
 import java.util.ArrayList;
 
 public class Zombie extends Ennemi {
 
 
-    public Zombie(int pv, int vitesse, int posX, int posY, Environnement environnement,  HitBox b) {
+    public Zombie(int pv, int vitesse, int posX, int posY, Environnement environnement, HitBox b) {
         super(pv, vitesse, posX, posY, environnement, b);
         this.reach = 2;
 

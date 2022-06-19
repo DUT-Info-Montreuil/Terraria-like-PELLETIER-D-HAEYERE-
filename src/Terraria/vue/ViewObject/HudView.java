@@ -1,4 +1,4 @@
-package Terraria.vue;
+package Terraria.vue.ViewObject;
 
 import Terraria.modele.Environnement;
 import Terraria.modele.unCoeur;

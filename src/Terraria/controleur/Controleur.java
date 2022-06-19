@@ -1,20 +1,22 @@
 package Terraria.controleur;
 
 
-import Terraria.modele.Acteur;
-import Terraria.modele.Joueur;
-import Terraria.modele.Zombie;
+import Terraria.modele.Acteur.Acteur;
+import Terraria.modele.Acteur.Joueur;
+import Terraria.modele.Acteur.Zombie;
 import Terraria.modele.*;
 
-import Terraria.modele.Item;
-import Terraria.modele.ItemBlock;
-import Terraria.modele.OnGroundItem;
-import Terraria.modele.Pioche;
-import Terraria.vue.MonObservateurItem;
-import Terraria.vue.MonObservateurListActeur;
-import Terraria.vue.ViewFenetreCraft;
-import Terraria.vue.ViewFenetreInv;
+import Terraria.modele.Item.Item;
+import Terraria.modele.Item.ItemBlock;
+import Terraria.modele.Item.OnGroundItem;
+import Terraria.modele.Item.Pioche;
 
+import Terraria.vue.ObservableList.MonObservateurItem;
+import Terraria.vue.ObservableList.MonObservateurListActeur;
+import Terraria.vue.ViewObject.HudView;
+import Terraria.vue.ViewObject.ViewCoeur;
+import Terraria.vue.ViewObject.ViewFenetreCraft;
+import Terraria.vue.ViewObject.ViewFenetreInv;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.collections.ObservableList;
@@ -56,13 +58,10 @@ public class Controleur implements Initializable {
     private boolean affiche = false;
     private HashMap<Tile, Image> mapLienIdImage;
     private HudView hudView;
-    private ViewCoeur vc ;
-
-
-
-    private HashMap<Tile, Image> mapLienIdImage;
+    private ViewCoeur vc;
     private ViewFenetreInv imgViewInv;
     private ViewFenetreCraft imgViewCraft;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         e1 = new Environnement(InitialisationEnvironnement.loadMap("ress/terrain3.json"));
@@ -74,7 +73,7 @@ public class Controleur implements Initializable {
         this.e1.getListActeur().addListener(new MonObservateurListActeur(e1, pane));
         this.e1.getOnGroundItem().addListener(new MonObservateurItem(e1, pane));
 
-        Joueur hero = new Joueur(10, 5, 50, 50, e1,  new HitBox(50, 30, 24, 14, true), piocheDep);
+        Joueur hero = new Joueur(10, 5, 50, 50, e1, new HitBox(50, 30, 24, 14, true), piocheDep);
         Zombie z = new Zombie(10, 5, 50, 50, e1, new HitBox(50, 30, 28, 16, true));
 
         e1.addActeur(hero);
@@ -82,9 +81,8 @@ public class Controleur implements Initializable {
         e1.addEnnemi(z);
 
 
-
-        imgViewInv = new ViewFenetreInv(pane,e1,mapLienIdImage);
-        imgViewCraft = new ViewFenetreCraft(pane,e1,mapLienIdImage);
+        imgViewInv = new ViewFenetreInv(pane, e1, mapLienIdImage);
+        imgViewCraft = new ViewFenetreCraft(pane, e1, mapLienIdImage);
 
 
 
@@ -137,11 +135,9 @@ public class Controleur implements Initializable {
         };
 
 
-
-
         e1.setJoueur1(hero);
         e1.getJoueur1().addItem(piocheDep);
-        Scene scene = new Scene(pane, 50*sprit_largeur, 32*sprit_hauteur);
+        Scene scene = new Scene(pane, 50 * sprit_largeur, 32 * sprit_hauteur);
 
 
         ParallelCamera camera = new ParallelCamera();
@@ -156,7 +152,6 @@ public class Controleur implements Initializable {
         afficherColision(e1.getAllBlock(), hero, e1.getListActeur(), e1.getOnGroundItem(), false);
 
 
-
         //System.out.println(pane.getScene().getHeight());
 
         //pane.getScene().getCamera().layoutXProperty().bind(hero.getXProprety().subtract(pane.getScene().getWidth() / 2));
@@ -165,9 +160,6 @@ public class Controleur implements Initializable {
 
         keyHandler = new KeyHandler(pane);
         keyHandler.start();
-
-
-
 
 
         for (Acteur a : e1.getListActeur()) {
@@ -184,7 +176,7 @@ public class Controleur implements Initializable {
         launchTimeLine();
         timeline.setCycleCount(timeline.INDEFINITE);
         timeline.play();
-        hudView = new HudView(e1 , 10 ,10 , pane , e1);
+        hudView = new HudView(e1, 10, 10, pane, e1);
         vc = new ViewCoeur(e1.getJoueur1().getAllCoeurs(), pane);
 
 
@@ -199,19 +191,19 @@ public class Controleur implements Initializable {
             imgViewCraft.checkCraftable();
 
 
-            if (keyHandler.isInventoryTyped() ) {
+            if (keyHandler.isInventoryTyped()) {
                 pane.requestFocus();
                 pane.lookup("#inv").setVisible(true);
                 imgViewInv.affichageInventaire();
             }
-            if (!keyHandler.isInventoryTyped() ) {
+            if (!keyHandler.isInventoryTyped()) {
                 pane.lookup("#inv").setVisible(false);
                 pane.requestFocus();
                 imgViewInv.closeInv();
             }
 
 
-            if (keyHandler.isInteractionTyped() ) {
+            if (keyHandler.isInteractionTyped()) {
                 pane.lookup("#FenetreCraft").setVisible(true);
                 pane.requestFocus();
                 imgViewCraft.afficheCraft();
@@ -260,21 +252,17 @@ public class Controleur implements Initializable {
                 e1.getOnGroundItem().get(i).collideHautBas(allBlock);
                 e1.getOnGroundItem().get(i).gravite();
 
-                if (e1.getJoueur1().itemCollide(e1.getOnGroundItem()) != null){
+                if (e1.getJoueur1().itemCollide(e1.getOnGroundItem()) != null) {
                     e1.getJoueur1().addItem(e1.getOnGroundItem().get(i).getItem());
                     e1.getOnGroundItem().remove(i);
-
 
 
                 }
 
             }
-                e1.getJoueur1().itemCollide(e1.getOnGroundItem());
-                e1.getJoueur1().updateCoeur();
-                vc.afficherCoeur( e1.getJoueur1().getAllCoeurs() ,pane);
-
-
-            }
+            e1.getJoueur1().itemCollide(e1.getOnGroundItem());
+            e1.getJoueur1().updateCoeur();
+            vc.afficherCoeur(e1.getJoueur1().getAllCoeurs(), pane);
 
 
         }));
@@ -411,11 +399,6 @@ public class Controleur implements Initializable {
         }
 
     }
-
-
-
-
-
 
 
 }

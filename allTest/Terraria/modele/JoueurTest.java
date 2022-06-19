@@ -1,6 +1,8 @@
 package Terraria.modele;
 
 import Terraria.controleur.InitialisationEnvironnement;
+import Terraria.modele.Acteur.Joueur;
+import Terraria.modele.Item.Pioche;
 import junit.framework.TestCase;
 import org.junit.Test;
 

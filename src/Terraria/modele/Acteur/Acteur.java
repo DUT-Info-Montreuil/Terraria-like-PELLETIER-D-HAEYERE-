@@ -1,5 +1,8 @@
-package Terraria.modele;
+package Terraria.modele.Acteur;
 
+import Terraria.modele.*;
+import Terraria.modele.Item.Item;
+import Terraria.modele.Item.ItemBlock;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 

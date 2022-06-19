@@ -1,7 +1,7 @@
-package Terraria.vue;
+package Terraria.vue.ViewObject;
 
 import Terraria.modele.Environnement;
-import Terraria.modele.Item;
+import Terraria.modele.Item.Item;
 import Terraria.modele.Tile;
 import javafx.event.EventHandler;
 import javafx.scene.image.Image;
