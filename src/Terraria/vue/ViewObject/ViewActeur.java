@@ -1,6 +1,7 @@
 package Terraria.vue.ViewObject;
 
 import Terraria.modele.Acteur.Acteur;
+import Terraria.modele.Acteur.Blop;
 import Terraria.modele.Environnement;
 import Terraria.modele.Acteur.Joueur;
 import Terraria.modele.Acteur.Zombie;
@@ -33,12 +34,15 @@ public class ViewActeur extends ImageView {
 
             this.setImage(imageSpriteHero);
         }else if (acteur instanceof Zombie){
-            System.out.println("test");
+
             Image imageZombie = new Image(String.valueOf(getClass().getResource("/Sprite-0027.png"))) ;
 
             this.setImage(imageZombie);
 
 
+        }else if (acteur instanceof Blop){
+            Image imageBlop =  new Image(String.valueOf(getClass().getResource("/persoIdle.png"))) ;
+            this.setImage(imageBlop);
         }
         this.toFront();
     }

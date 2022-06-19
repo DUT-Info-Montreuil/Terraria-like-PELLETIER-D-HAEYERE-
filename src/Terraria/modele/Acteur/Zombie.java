@@ -108,7 +108,7 @@ public class Zombie extends Ennemi {
     }
     @Override
     public void die () {
-        System.out.println("je suis mor");
+
         this.isAlive = false;
         this.environnement.getListActeur().remove(this);
         this.environnement.getListEnnemi().remove(this);

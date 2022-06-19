@@ -6,6 +6,7 @@ import Terraria.modele.Acteur.Joueur;
 import Terraria.modele.Acteur.Zombie;
 import Terraria.modele.*;
 
+import Terraria.modele.Acteur.Blop;
 import Terraria.modele.Item.Item;
 import Terraria.modele.Item.ItemBlock;
 import Terraria.modele.Item.OnGroundItem;
@@ -75,10 +76,13 @@ public class Controleur implements Initializable {
 
         Joueur hero = new Joueur(10, 5, 30, 50, e1, new HitBox(50, 30, 24, 14, true), piocheDep);
         Zombie z = new Zombie(10, 5, 250, 50, e1, new HitBox(50, 30, 28, 16, true));
+        //Blop b = new Blop(5, 5, 160, 50, e1, new HitBox(50, 30, 24, 14, true) );
 
         e1.addActeur(hero);
         e1.addActeur(z);
         e1.addEnnemi(z);
+        //e1.addActeur(b);
+        //e1.addEnnemi(b);
 
 
         imgViewInv = new ViewFenetreInv(pane, e1, mapLienIdImage);
