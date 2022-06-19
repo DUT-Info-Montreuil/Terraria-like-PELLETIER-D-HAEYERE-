@@ -1,6 +1,6 @@
 package Terraria.modele;
 
-import javafx.beans.property.IntegerProperty;
+
 import javafx.beans.property.SimpleIntegerProperty;
 
 public class HitBox {

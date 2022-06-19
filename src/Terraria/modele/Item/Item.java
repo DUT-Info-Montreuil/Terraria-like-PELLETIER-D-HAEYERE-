@@ -50,6 +50,7 @@ public abstract class Item {
     public void quantiteEnPlus() {
         this.quantite++;
     }
+
     public void removeQuantite(int quant){
         this.quantite=quantite-quant;
         if (this.quantite<0){

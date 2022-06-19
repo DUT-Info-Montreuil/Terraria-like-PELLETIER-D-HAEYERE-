@@ -22,6 +22,7 @@ public class ViewRecipe extends HBox {
     private Button buttonCraft;
 
     public ViewRecipe(Recipe recipe, Joueur joueur, Pane pane, Environnement environnement, HashMap<Tile, Image> hashMap) {
+        ViewFenetreInv fenetreInv =(ViewFenetreInv) pane.lookup("#inv");
         int countItem = 1;
         this.recipe = recipe;
         this.joueur = joueur;
@@ -42,7 +43,7 @@ public class ViewRecipe extends HBox {
         buttonCraft = new Button();
         buttonCraft.setText("Craft");
         buttonCraft.setOnMouseClicked(e -> this.recipe.craftItem());
-        buttonCraft.setOnMouseReleased(e -> pane.requestFocus());
+        buttonCraft.setOnMouseReleased(e -> fenetreInv.refreshInv());
 
         this.getChildren().add(buttonCraft);
         pane.getChildren().add(this);
