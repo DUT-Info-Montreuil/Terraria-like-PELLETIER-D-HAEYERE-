@@ -1,6 +1,6 @@
 package Terraria.modele;
 
-public class unCoeur {
+public class UnCoeur {
     private int x;
     private int y;
     private int limiteAllume ;
@@ -10,7 +10,7 @@ public class unCoeur {
 
 
 
-    public unCoeur(int x, int y , int limiteAllume) {
+    public UnCoeur(int x, int y , int limiteAllume) {
         this.x = x;
         this.y = y;
         this.allume = false ;

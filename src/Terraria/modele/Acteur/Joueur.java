@@ -12,12 +12,12 @@ public class Joueur extends Acteur {
     private Item itemEquipe;
 
 
-    public ArrayList<unCoeur> getAllCoeurs() {
+    public ArrayList<UnCoeur> getAllCoeurs() {
         return allCoeurs;
     }
 
     private ArrayList<Recipe> listCraft = new ArrayList<Recipe>();
-    private ArrayList<unCoeur> allCoeurs = new ArrayList<>();
+    private ArrayList<UnCoeur> allCoeurs = new ArrayList<>();
 
     public Joueur(int pv, int vitesse, int posX, int posY, Environnement environnement, HitBox h, Item itemEquipe) {
         super(pv, vitesse, posX, posY, environnement, h);
@@ -30,6 +30,12 @@ public class Joueur extends Acteur {
 
         initInv();
         initCraft();
+
+
+        for (int i = 0; i < 10; i++) {
+            allCoeurs.add(new UnCoeur(94+(8*i) , 35 , i+1));
+
+        }
     }
 
     public void setItemEquipe(Item itemEquipe) {
@@ -186,7 +192,7 @@ public class Joueur extends Acteur {
         return listCraft;
     }
     public void updateCoeur(){
-        for (unCoeur c:allCoeurs) {
+        for (UnCoeur c:allCoeurs) {
             c.update(this.getPv());
         }
     }

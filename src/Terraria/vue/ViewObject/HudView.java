@@ -1,13 +1,9 @@
 package Terraria.vue.ViewObject;
 
 import Terraria.modele.Environnement;
-import Terraria.modele.unCoeur;
-import javafx.beans.property.SimpleIntegerProperty;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
-
-import java.util.ArrayList;
 
 public class HudView extends ImageView {
     private Environnement environnement;

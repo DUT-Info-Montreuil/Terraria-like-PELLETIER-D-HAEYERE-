@@ -1,6 +1,6 @@
 package Terraria.vue.ViewObject;
 
-import Terraria.modele.unCoeur;
+import Terraria.modele.UnCoeur;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
@@ -10,8 +10,8 @@ import java.util.ArrayList;
 public class ViewCoeur {
     private ArrayList<ImageView> allCoeursImageView = new ArrayList<>();
 
-    public  ViewCoeur( ArrayList<unCoeur> allCoeurs, Pane pane){
-        for(unCoeur unCoeur : allCoeurs){
+    public  ViewCoeur(ArrayList<UnCoeur> allCoeurs, Pane pane){
+        for(UnCoeur unCoeur : allCoeurs){
             ImageView imageCoeur = new ImageView(new Image(String.valueOf(getClass().getResource("/heinkeur.png"))));
             imageCoeur.setTranslateX(unCoeur.getX());
             imageCoeur.setTranslateY(unCoeur.getY());
@@ -21,8 +21,8 @@ public class ViewCoeur {
     }
 
 
-    public void afficherCoeur(ArrayList<unCoeur> allCoeurs , Pane pane){
-        for (unCoeur unCoeur: allCoeurs) {
+    public void afficherCoeur(ArrayList<UnCoeur> allCoeurs , Pane pane){
+        for (UnCoeur unCoeur: allCoeurs) {
             if (unCoeur.isAllume()) {
                 if (pane.lookup("#coeur"+unCoeur.getId()) == null) {
                     for(ImageView imageCoeur : this.allCoeursImageView) {

@@ -73,8 +73,8 @@ public class Controleur implements Initializable {
         this.e1.getListActeur().addListener(new MonObservateurListActeur(e1, pane));
         this.e1.getOnGroundItem().addListener(new MonObservateurItem(e1, pane));
 
-        Joueur hero = new Joueur(10, 5, 50, 50, e1, new HitBox(50, 30, 24, 14, true), piocheDep);
-        Zombie z = new Zombie(10, 5, 50, 50, e1, new HitBox(50, 30, 28, 16, true));
+        Joueur hero = new Joueur(10, 5, 30, 50, e1, new HitBox(50, 30, 24, 14, true), piocheDep);
+        Zombie z = new Zombie(10, 5, 250, 50, e1, new HitBox(50, 30, 28, 16, true));
 
         e1.addActeur(hero);
         e1.addActeur(z);

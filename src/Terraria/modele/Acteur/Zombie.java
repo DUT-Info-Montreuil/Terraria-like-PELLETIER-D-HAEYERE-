@@ -28,7 +28,7 @@ public class Zombie extends Ennemi {
                     this.setPosX(this.getPosX() + 1 * this.getVitesse());
                     if (this.playerCollide() == 1) {
                         this.environnement.getJoueur1().takeDomage(1);
-                        this.environnement.getJoueur1().setPosX(this.environnement.getJoueur1().getPosX() + 10);
+
                     }
                 } else {
                     this.saute();
@@ -40,13 +40,13 @@ public class Zombie extends Ennemi {
                 //System.out.println("in range left");
 
 
-                if ((this.collideGaucheDroite(allBlock) != -1)) {
-                    this.setPosX(this.getPosX() + (-1 * this.getVitesse()));
+
+
                     if ((this.collideGaucheDroite(allBlock) != 1)) {
                         this.setPosX(this.getPosX() + -1 * this.getVitesse());
                         if (this.playerCollide() == -1) {
                             this.environnement.getJoueur1().takeDomage(1);
-                            this.environnement.getJoueur1().setPosX(this.environnement.getJoueur1().getPosX() - 10);
+
                         }
                     } else {
 
@@ -55,7 +55,7 @@ public class Zombie extends Ennemi {
                     }
 
 
-                }
+
             }else {
                 //System.out.println("not in range");
                 move++;
