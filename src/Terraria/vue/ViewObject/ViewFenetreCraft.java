@@ -34,14 +34,18 @@ public class ViewFenetreCraft extends ImageView {
     public void afficheCraft() {
         int countRecipe = 0;
         if (!afficheCraft) {
-            afficheCraft=true;
+
             for (Recipe recipe : e1.getJoueur1().getListCraft()
             ) {
                 ViewRecipe viewRecipe = new ViewRecipe(recipe, e1.getJoueur1(), pane, e1, mapLienIdImage);
                 viewRecipe.setTranslateX(this.getX() + 15);
-                viewRecipe.setTranslateY(this.getY() +(countRecipe+1)*10);
+                viewRecipe.setTranslateY(20+this.getY() +(countRecipe+2)*10*countRecipe+1);
                 viewRecipe.setId("Hbox" + countRecipe);
+                countRecipe++;
+                System.out.println(viewRecipe);
+
             }
+            afficheCraft=true;
         }
     }
     public void closeCraft(){
@@ -57,10 +61,18 @@ public class ViewFenetreCraft extends ImageView {
     public void checkCraftable() {
         if (afficheCraft) {
             for (int i = 0; i < e1.getJoueur1().getListCraft().size(); i++) {
+              //  System.out.println(e1.getJoueur1().getListCraft());
+              //  System.out.println(e1.getJoueur1().getListCraft().size());
                 ViewRecipe viewrep = (ViewRecipe) pane.lookup("#Hbox" + i);
-                viewrep.recipeIsCraftable();
+                System.out.println(viewrep);
+
+
+                   viewrep.recipeIsCraftable();
+
+
             }
         }
+
 
     }
 }

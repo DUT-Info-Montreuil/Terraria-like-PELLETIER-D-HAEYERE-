@@ -46,6 +46,9 @@ public class ViewRecipe extends HBox {
         buttonCraft.setOnMouseReleased(e -> fenetreInv.refreshInv());
 
         this.getChildren().add(buttonCraft);
+        ViewItem itemresult =new ViewItem(recipe.getResultCraft(),pane,environnement,hashMap);
+        this.getChildren().add(itemresult);
+        itemresult.setId("viewrep" + countItem);
         pane.getChildren().add(this);
 
     }

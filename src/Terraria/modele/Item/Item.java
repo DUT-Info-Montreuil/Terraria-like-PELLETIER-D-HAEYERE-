@@ -5,20 +5,27 @@ import Terraria.modele.Environnement;
 public abstract class Item {
     private int quantite;
     private String id;
-
+    private int degatSurMob;
     private Environnement environnement;
     private static int count = 0;
 
-    public Item(int quantite, Environnement environnement) {
+    public Item(int quantite, Environnement environnement,int degatSurMob) {
         this.quantite = quantite;
         this.id = "item" + count++;
-
+        this.degatSurMob = degatSurMob;
         this.environnement = environnement;
     }
 
     public void action(int cible) {
     }
 
+    public void setDegatSurMob(int degatSurMob) {
+        this.degatSurMob = degatSurMob;
+    }
+
+    public int getDegatSurMob() {
+        return degatSurMob;
+    }
 
     public boolean cielEstModifiable(int cible) {
         return false;

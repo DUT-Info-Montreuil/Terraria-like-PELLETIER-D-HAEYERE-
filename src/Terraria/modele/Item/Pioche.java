@@ -10,19 +10,21 @@ public class Pioche extends ItemOutil {
     }
 
     public void action(int idTileModif) {
-
-        if (this.getEnvironnement().getTerrain().get(idTileModif)!=1){
-            //System.out.println("suprimmable");
-            this.getEnvironnement().changementTerrain(idTileModif, 1);
-            for (Block b : this.getEnvironnement().getAllBlock()
-            ) {
-                if (b.getId() == idTileModif) {
-                    //System.out.println("tile found");
-                    b.getBox().setHitBoxFals();
+        if (idTileModif>0){
+            if (this.getEnvironnement().getTerrain().get(idTileModif)!=1){
+                //System.out.println("suprimmable");
+                this.getEnvironnement().changementTerrain(idTileModif, 1);
+                for (Block b : this.getEnvironnement().getAllBlock()
+                ) {
+                    if (b.getId() == idTileModif) {
+                        //System.out.println("tile found");
+                        b.getBox().setHitBoxFals();
+                    }
                 }
             }
         }
-            //System.out.println("de l'air");
+
+
 
     }
     public boolean cielEstModifiable(int idCible){

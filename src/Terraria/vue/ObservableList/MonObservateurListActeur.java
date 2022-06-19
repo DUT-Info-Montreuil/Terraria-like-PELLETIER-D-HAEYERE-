@@ -38,7 +38,7 @@ public class MonObservateurListActeur implements ListChangeListener<Acteur> {
                     if (idActeur.equals(e1.getListActeur().get(i).getId())){
                         System.out.println("id found");
                         if (e1.getListActeur().get(i) instanceof Ennemi){
-                            e1.getListActeur().get(i).takeDomage(2);
+                            e1.getListActeur().get(i).takeDomage(environnement.getJoueur1().getItemEquipe().getDegatSurMob());
                             System.out.println("domage take ;<");
                         }
                     }

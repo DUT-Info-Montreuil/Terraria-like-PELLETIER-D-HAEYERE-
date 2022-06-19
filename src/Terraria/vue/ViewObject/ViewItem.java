@@ -1,10 +1,7 @@
 package Terraria.vue.ViewObject;
 
 import Terraria.modele.*;
-import Terraria.modele.Item.Item;
-import Terraria.modele.Item.ItemBlock;
-import Terraria.modele.Item.Pioche;
-import Terraria.modele.Item.RottenFlesh;
+import Terraria.modele.Item.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
@@ -29,6 +26,9 @@ public class ViewItem extends ImageView {
         this.hashMap=hashMap;
         if (item instanceof Pioche){
             this.setImage(new Image(String.valueOf(getClass().getResource("/pioche.png"))));
+        }
+        if (item instanceof Hache){
+            this.setImage(new Image(String.valueOf(getClass().getResource("/hache.png"))));
         }if (item instanceof ItemBlock){
             for (Tile t:environnement.getAllTiles()
                  ) {
