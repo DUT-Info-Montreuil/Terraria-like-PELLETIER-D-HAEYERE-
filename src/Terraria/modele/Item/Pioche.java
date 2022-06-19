@@ -18,7 +18,7 @@ public class Pioche extends ItemOutil {
             ) {
                 if (b.getId() == idTileModif) {
                     //System.out.println("tile found");
-                    b.getBox().inversionHitBox();
+                    b.getBox().setHitBoxFals();
                 }
             }
         }

@@ -99,10 +99,13 @@ public class ViewFenetreInv extends ImageView {
 
     }
     public void refreshInv(){
-        pane.requestFocus();
+        System.out.println("test");
+
         if (afficheInv){
+            System.out.println("dans affiche inv");
             this.closeInv();
             this.affichageInventaire();
         }
+        pane.requestFocus();
     }
 }

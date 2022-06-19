@@ -21,7 +21,7 @@ public class ItemBlock extends Item {
                 ) {
                     if (b.getId() == idTileModif) {
                         //System.out.println("tile found");
-                        b.getBox().inversionHitBox();
+                        b.getBox().setHitBoxTrue();
                     }
                 }
             }
