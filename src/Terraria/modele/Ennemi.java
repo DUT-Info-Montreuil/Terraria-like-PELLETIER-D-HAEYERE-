@@ -1,8 +1,4 @@
-package Terraria.modele.Acteur;
-
-import Terraria.modele.Block;
-import Terraria.modele.Environnement;
-import Terraria.modele.HitBox;
+package Terraria.modele;
 
 import java.util.ArrayList;
 

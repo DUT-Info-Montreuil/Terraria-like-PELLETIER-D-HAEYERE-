@@ -1,10 +1,10 @@
-package Terraria.vue.ViewObject;
+package Terraria.vue;
 
 import Terraria.modele.*;
-import Terraria.modele.Item.Item;
-import Terraria.modele.Item.ItemBlock;
-import Terraria.modele.Item.Pioche;
-import Terraria.modele.Item.RottenFlesh;
+import Terraria.modele.Item;
+import Terraria.modele.ItemBlock;
+import Terraria.modele.Pioche;
+import Terraria.modele.RottenFlesh;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;

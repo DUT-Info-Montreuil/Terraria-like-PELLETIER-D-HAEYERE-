@@ -1,6 +1,4 @@
-package Terraria.modele.Item;
-
-import Terraria.modele.Environnement;
+package Terraria.modele;
 
 public abstract class ItemOutil extends Item {
     private int durabilte;

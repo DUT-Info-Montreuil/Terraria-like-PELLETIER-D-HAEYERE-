@@ -1,9 +1,5 @@
-package Terraria.modele.Item;
+package Terraria.modele;
 
-import Terraria.modele.Block;
-import Terraria.modele.Environnement;
-import Terraria.modele.HitBox;
-import Terraria.modele.Item.Item;
 import javafx.beans.property.SimpleIntegerProperty;
 
 import java.util.ArrayList;

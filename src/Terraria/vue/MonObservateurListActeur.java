@@ -1,8 +1,8 @@
-package Terraria.vue.ObservableList;
+package Terraria.vue;
 
-import Terraria.modele.Acteur.Acteur;
+import Terraria.modele.Acteur;
 import Terraria.modele.Environnement;
-import Terraria.vue.ViewObject.ViewActeur;
+import Terraria.vue.ViewActeur;
 import javafx.collections.ListChangeListener;
 import javafx.scene.layout.Pane;
 

@@ -1,25 +1,22 @@
 package Terraria.controleur;
 
 
-import Terraria.modele.Acteur.Acteur;
-import Terraria.modele.Acteur.Joueur;
-import Terraria.modele.Acteur.Zombie;
+import Terraria.modele.Acteur;
+import Terraria.modele.Joueur;
+import Terraria.modele.Zombie;
 import Terraria.modele.*;
 
-import Terraria.modele.Item.Item;
-import Terraria.modele.Item.ItemBlock;
-import Terraria.modele.Item.OnGroundItem;
-import Terraria.modele.Item.Pioche;
-import Terraria.vue.ObservableList.MonObservateurItem;
-import Terraria.vue.ObservableList.MonObservateurListActeur;
-import Terraria.vue.ViewObject.ViewFenetreCraft;
-import Terraria.vue.ViewObject.ViewFenetreInv;
-
-import Terraria.vue.ViewObject.ViewRecipe;
+import Terraria.modele.Item;
+import Terraria.modele.ItemBlock;
+import Terraria.modele.OnGroundItem;
+import Terraria.modele.Pioche;
+import Terraria.vue.MonObservateurItem;
+import Terraria.vue.MonObservateurListActeur;
+import Terraria.vue.ViewFenetreCraft;
+import Terraria.vue.ViewFenetreInv;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.beans.property.SimpleIntegerProperty;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -29,7 +26,6 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;

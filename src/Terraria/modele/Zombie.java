@@ -1,9 +1,4 @@
-package Terraria.modele.Acteur;
-
-import Terraria.modele.*;
-import Terraria.modele.Item.Item;
-import Terraria.modele.Item.OnGroundItem;
-import Terraria.modele.Item.RottenFlesh;
+package Terraria.modele;
 
 import java.util.ArrayList;
 

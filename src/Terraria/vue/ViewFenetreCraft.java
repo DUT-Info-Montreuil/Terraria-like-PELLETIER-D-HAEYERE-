@@ -1,4 +1,4 @@
-package Terraria.vue.ViewObject;
+package Terraria.vue;
 
 import Terraria.modele.Environnement;
 import Terraria.modele.Recipe;

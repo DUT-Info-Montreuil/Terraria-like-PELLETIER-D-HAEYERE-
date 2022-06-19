@@ -1,4 +1,4 @@
-package Terraria.modele.Item;
+package Terraria.modele;
 
 import Terraria.modele.Environnement;
 
