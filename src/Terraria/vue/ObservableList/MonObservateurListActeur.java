@@ -39,7 +39,7 @@ public class MonObservateurListActeur implements ListChangeListener<Acteur> {
 
                         if (e1.getListActeur().get(i) instanceof Ennemi){
                             e1.getListActeur().get(i).takeDomage(environnement.getJoueur1().getItemEquipe().getDegatSurMob());
-
+                            System.out.println(environnement.getJoueur1().getItemEquipe().getDegatSurMob());
                         }
                     }
                 }

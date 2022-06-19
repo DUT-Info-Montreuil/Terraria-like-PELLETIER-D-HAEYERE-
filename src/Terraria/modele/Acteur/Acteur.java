@@ -164,7 +164,7 @@ public abstract class Acteur {
     }
 
     public void takeDomage(int damage){
-        this.pv-- ;
+        this.pv=pv-damage ;
         if (this.pv<=0){
             die();
 
