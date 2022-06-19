@@ -177,15 +177,20 @@ public class Joueur extends Acteur {
         listCraft.add(craft);
 
         itemQuantite.put(craft, 2);
-        Pioche craftP = new Pioche(250, 10, environnement);
-        listCraft.add(craftP);
-        itemQuantite.put(craftP, 1);
         Recipe rec = new Recipe(this.getEnvironnement(), r1, "Joueur", listCraft, itemQuantite, this);
         this.listCraft.add(rec);
 
+        /////
 
+        Hache hache = new Hache(1,50,1, this.getEnvironnement());
+        ArrayList<Item> listCraftRecip2 = new ArrayList<Item>();
+        HashMap<Item, Integer> itemQuantiteRecip2 = new HashMap<Item, Integer>();
+        RottenFlesh craftRecip2 = new RottenFlesh(0, this.getEnvironnement());
+        listCraftRecip2.add(craftRecip2);
+        itemQuantiteRecip2.put(craftRecip2, 3);
 
-
+        Recipe rec2 = new Recipe(this.getEnvironnement(), hache, "Joueur", listCraftRecip2, itemQuantiteRecip2, this);
+        this.listCraft.add(rec2);
 
     }
     public ArrayList<Recipe> getListCraft() {

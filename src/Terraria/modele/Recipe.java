@@ -26,6 +26,9 @@ public class Recipe {
         this.craftable = false;
     }
 
+    public Item getResultCraft() {
+        return resultCraft;
+    }
 
     public void isCraftable() {
 

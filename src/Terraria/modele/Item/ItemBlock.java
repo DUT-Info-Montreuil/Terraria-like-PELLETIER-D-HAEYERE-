@@ -7,7 +7,7 @@ public class ItemBlock extends Item {
     private int code;
 
     public ItemBlock(int quantite, Environnement environnement, int code) {
-        super(quantite,  environnement);
+        super(quantite,  environnement,1);
         this.code = code;
     }
 

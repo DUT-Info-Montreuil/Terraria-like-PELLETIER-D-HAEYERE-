@@ -6,7 +6,7 @@ public abstract class ItemOutil extends Item {
     private int durabilte;
     private int niveau;
     public ItemOutil(int quantite, int durabilte, int niveau, Environnement environnement) {
-        super(quantite,environnement);
+        super(quantite,environnement,2);
         this.durabilte=durabilte;
         this.niveau=niveau;
     }
