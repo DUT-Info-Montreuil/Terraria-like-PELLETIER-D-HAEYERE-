@@ -1,22 +1,31 @@
-package Terraria.modele;
+package Terraria.modele.Item;
+
+import Terraria.modele.Environnement;
 
 public abstract class Item {
     private int quantite;
     private String id;
-    private boolean consomable;
+    private int degatSurMob;
     private Environnement environnement;
     private static int count = 0;
 
-    public Item(int quantite, boolean consomable, Environnement environnement) {
+    public Item(int quantite, Environnement environnement,int degatSurMob) {
         this.quantite = quantite;
-        this.id = "item" + count;
-        this.consomable = consomable;
+        this.id = "item" + count++;
+        this.degatSurMob = degatSurMob;
         this.environnement = environnement;
     }
 
     public void action(int cible) {
     }
 
+    public void setDegatSurMob(int degatSurMob) {
+        this.degatSurMob = degatSurMob;
+    }
+
+    public int getDegatSurMob() {
+        return degatSurMob;
+    }
 
     public boolean cielEstModifiable(int cible) {
         return false;
@@ -32,12 +41,13 @@ public abstract class Item {
 
     public void quantiteEnMoins() {
         this.quantite--;
+        if (this.quantite<0){
+            this.quantite=0;
+        }
     }
 
 
-    public boolean isConsomable() {
-        return consomable;
-    }
+
 
     public String getId() {
         return id;
@@ -48,12 +58,19 @@ public abstract class Item {
         this.quantite++;
     }
 
+    public void removeQuantite(int quant){
+        this.quantite=quantite-quant;
+        if (this.quantite<0){
+            this.quantite=0;
+        }
+    }
+    public void removeItemFromInv(){}
     @Override
     public String toString() {
         return "Item{" +
                 "quantite=" + quantite +
                 ", id='" + id + '\'' +
-                ", consomable=" + consomable +
+
                 ", environnement=" + environnement +
                 '}';
     }

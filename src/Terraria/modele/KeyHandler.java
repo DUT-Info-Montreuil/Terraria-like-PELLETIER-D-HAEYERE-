@@ -5,19 +5,16 @@ import javafx.scene.layout.Pane;
 public class KeyHandler {
     private boolean rightPressed, leftPressed, upPressed, downPressed;
     private boolean inventoryTyped;
-    private boolean slotTwoTyped;
-    private boolean slotThreeTyped;
-    private boolean slotFourTyped;
-    private boolean slotFiveTyped;
-    private boolean slotSixTyped;
-    private boolean slotSevenTyped;
-    private boolean slotEightTyped;
-    private boolean slotNineTyped;
-    private boolean slotTenTyped;
+    private boolean interactionTyped;
+
 
 
     public boolean isRightPressed() {
         return rightPressed;
+    }
+
+    public boolean isInteractionTyped() {
+        return interactionTyped;
     }
 
     public boolean isLeftPressed() {
@@ -32,7 +29,7 @@ public class KeyHandler {
         return inventoryTyped;
     }
 
-    private Pane pane;
+    private final Pane pane;
 
 
     public KeyHandler(Pane pane) {
@@ -40,17 +37,9 @@ public class KeyHandler {
         leftPressed = false;
         upPressed = false;
         downPressed = false;
-        slotTenTyped = false;
-        slotNineTyped = false;
-        slotEightTyped = false;
-        slotSevenTyped = false;
-        slotSixTyped = false;
-        slotFiveTyped = false;
-        slotFourTyped = false;
-        slotThreeTyped = false;
-        slotTwoTyped = false;
         inventoryTyped=false;
-        boolean slotOneTyped = false;
+        interactionTyped=false;
+
         this.pane = pane;
     }
 
@@ -70,18 +59,22 @@ public class KeyHandler {
                     downPressed = true;
                     break;
                 case SPACE:
+
                     upPressed = true;
                     break;
                 case TAB:
                     inventoryTyped = !this.inventoryTyped;
+
                     break;
+                case E:
+                    interactionTyped= !this.interactionTyped;
             }
         });
     }
 
     private void keyReleased() {
         pane.setOnKeyReleased(e -> {
-            //System.out.println(e.getCode());
+
             switch (e.getCode()) {
                 case D:
                     rightPressed = false;
@@ -93,6 +86,7 @@ public class KeyHandler {
                     downPressed = false;
                     break;
                 case SPACE:
+
                     upPressed = false;
                     break;
 
@@ -100,9 +94,7 @@ public class KeyHandler {
         });
     }
 
-    public void setPanel(Pane pane) {
-        this.pane = pane;
-    }
+
 
     public void start() {
         this.keyPressed();

@@ -1,9 +1,9 @@
-package Terraria.modele;
+package Terraria.modele.Item;
 
+import Terraria.modele.Block;
 import Terraria.modele.Environnement;
-import Terraria.modele.Item;
+import Terraria.modele.HitBox;
 import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.value.ObservableValue;
 
 import java.util.ArrayList;
 
@@ -23,7 +23,7 @@ public class OnGroundItem {
         isFalling = falling;
     }
 
-    public OnGroundItem(Item item,HitBox box ,  Environnement environnement , int x , int y) {
+    public OnGroundItem(Item item, HitBox box , Environnement environnement , int x , int y) {
 
 
         this.item = item;
@@ -63,10 +63,10 @@ public class OnGroundItem {
 
                     int aPrime = block.getBoxX().intValue();
                     int cPrime = block.getBoxX().intValue() + block.getBox().getWidth();
-                    // System.out.println("yes");
-                    //
+
+
                     if ((b <= aPrime && d >= aPrime) || (b <= cPrime && d >= cPrime) ) {
-                        //System.out.println("test");
+
                                 /*for (Block bl:blocks) {
                                     if (bl.getBox().getX().intValue() == block.getBox().getX().intValue() && bl.getBox().isSolide()){
                                         if (bl.getBox().getY().intValue() == block.getBox().getY().intValue() + bl.getBox().getHeight()){
@@ -78,7 +78,7 @@ public class OnGroundItem {
                         this.setPosY(block.getBoxY().intValue() - this.getBox().getHeight());
 
                         this.setFalling(false);
-                        //System.out.println("collision");
+
                         return 1;
 
                     }
@@ -86,7 +86,7 @@ public class OnGroundItem {
             }
         }
         this.setFalling(true);
-        //System.out.println("falling");
+
         return 0;
     }
 

@@ -1,144 +1,23 @@
-package Terraria.modele;
+package Terraria.modele.Acteur;
 
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.SimpleIntegerProperty;
+import Terraria.modele.Block;
+import Terraria.modele.Environnement;
+import Terraria.modele.HitBox;
 
 import java.util.ArrayList;
 
+public abstract class Ennemi extends Acteur {
+    protected int move = 0  ;
+    protected int detectionRange = 10 ;
 
-public abstract class Acteur {
-    private int pv;
-    private int vitesse;
-    private IntegerProperty posX,posY;
-    private  int direction;
-    private ArrayList<Item>inventaire;
-    private int multiplicateurSaut;
-    private boolean isFalling;
-    private boolean isJumping;
-    protected int reach;
-    private HitBox box ;
-
-
-    public void setDirection(int direction) {
-        this.direction = direction;
+    public Ennemi (int pv, int vitesse, int posX, int posY, Environnement environnement, HitBox b ) {
+        super(pv , vitesse , posX , posY , environnement ,  b );
     }
 
-    private String id;
-    protected boolean isAlive;
 
-    public boolean isJumping() {
-        return isJumping;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    protected Environnement environnement;
-
-    public HitBox getBox() {
-        return box;
-    }
-
-    public boolean isFalling() {
-        return isFalling;
-    }
-
-    public void setFalling(boolean falling) {
-        isFalling = falling;
-    }
-
-    public Acteur(int pv, int vitesse, int posX, int posY, Environnement environnement, String id , HitBox b ) {
-        this.pv = pv;
-        this.vitesse = vitesse;
-        this.posX = new SimpleIntegerProperty(posX);
-        this.posY = new SimpleIntegerProperty(posY);
-        this.direction=0;
-        this.isAlive = true;
-        this.environnement = environnement;
-        this.id=id;
-        this.isFalling=true;
-        this.multiplicateurSaut=70;
-        this.isJumping=false;
-        this.box = b ;
-        this.inventaire = new ArrayList<Item>();
-        this.reach=4;
-        b.getY().bind(this.getYProprety());
-        b.getX().bind(this.getXProprety());
+    public abstract void die() ;
 
 
-
-    }
-
-    public int getPv() {
-        return pv;
-    }
-
-    public int getVitesse() {
-        return vitesse;
-    }
-
-    public int getDirection() {
-        return direction;
-    }
-
-    public int getPosX() {
-        return posX.getValue();
-    }
-
-    public int getPosY() {
-        return posY.getValue();
-    }
-
-    public boolean getisAlive() {
-        return isAlive;
-    }
-
-    public void setPosX(int posX) {
-        this.posX.set(posX);
-    }
-
-    public void setPosY(int posY) {
-        this.posY.set(posY);
-    }
-
-    public void seDeplace(){
-        this.posX.setValue(posX.getValue()+(direction*vitesse*2));
-
-
-
-
-    }
-    public void addItem(Item item){
-        inventaire.add(item);
-
-    }
-    public ArrayList<Item> getInventaire() {
-        return inventaire;
-    }
-
-    public void gravite(){
-        if (isFalling){
-            this.posY.setValue(posY.getValue()+(vitesse*1.5));
-        }
-    }
-    public void saute(){
-        if (!isFalling){
-            this.posY.setValue(posY.getValue()-multiplicateurSaut);
-        }
-
-
-
-    }
-    public IntegerProperty getXProprety(){return posX;}
-
-    public IntegerProperty getYProprety(){return posY;}
-
-
-    public int getReach() {
-        return reach;
-    }
-  
     public int collideGaucheDroite(ArrayList<Block> blocks ) {
         for (Block block: blocks) {
             if (block.getBox().isSolide()) {
@@ -170,6 +49,7 @@ public abstract class Acteur {
 
     public int collideHautBas(ArrayList<Block> blocks){
         for (Block block : blocks) {
+
             if (block.getBox().isSolide()) {
                 if (this.getBox().getY().intValue() + this.getBox().getHeight() >= block.getBoxY().intValue() && this.getBox().getY().intValue() + this.getBox().getHeight() <= block.getBox().getY().intValue() + block.getOffSet()) {
                     int b = this.getBox().getX().intValue();
@@ -177,10 +57,9 @@ public abstract class Acteur {
 
                     int aPrime = block.getBoxX().intValue();
                     int cPrime = block.getBoxX().intValue() + block.getBox().getWidth();
-                    // System.out.println("yes");
-                    //
+
                     if ((b <= aPrime && d >= aPrime) || (b <= cPrime && d >= cPrime)) {
-                        //System.out.println("test");
+
                                 /*for (Block bl:blocks) {
                                     if (bl.getBox().getX().intValue() == block.getBox().getX().intValue() && bl.getBox().isSolide()){
                                         if (bl.getBox().getY().intValue() == block.getBox().getY().intValue() + bl.getBox().getHeight()){
@@ -203,4 +82,8 @@ public abstract class Acteur {
     }
 
 
+
+    public void seDeplace(Joueur j, ArrayList<Block> allBlock) {
+
+    }
 }

@@ -1,6 +1,6 @@
 package Terraria.modele;
 
-import javafx.beans.property.IntegerProperty;
+
 import javafx.beans.property.SimpleIntegerProperty;
 
 public class HitBox {
@@ -39,9 +39,14 @@ public class HitBox {
         this.x =  new SimpleIntegerProperty(x) ;
 
     }
-    public void inversionHitBox(){
-        this.isSolide=(!this.isSolide);
+
+    public void setHitBoxFals(){
+        this.isSolide=false;
     }
+    public void setHitBoxTrue(){
+        this.isSolide=true;
+    }
+
 
     public  HitBox (int x ,int  y , int height , int width , boolean solide){
         this.isSolide = solide ;
