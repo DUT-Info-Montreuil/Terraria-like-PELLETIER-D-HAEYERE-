@@ -40,7 +40,7 @@ public class Zombie extends Ennemi {
                 if ((this.collideGaucheDroite(allBlock) != -1)) {
                     this.setPosX(this.getPosX() + (-1 * this.getVitesse()));
                     if ((this.collideGaucheDroite(allBlock) != 1)) {
-                        this.setPosX(this.getPosX() + 1 * this.getVitesse());
+                        this.setPosX(this.getPosX() + -1 * this.getVitesse());
                         if (this.playerCollide() == -1) {
                             this.environnement.getJoueur1().takeDomage(1);
                             this.environnement.getJoueur1().setPosX(this.environnement.getJoueur1().getPosX() - 10);
@@ -52,52 +52,52 @@ public class Zombie extends Ennemi {
                     }
 
 
-                } else {
-                    //System.out.println("not in range");
-                    move++;
-                    //die();
-                    if (move % 5 == 0) {
-                        //System.out.println("idle");
-                        int result = (int) (Math.random() * 3) - 1;
-                        //System.out.println("moving " + result);
-                        //System.out.println("collision a gauche");
-                        //System.out.println(this.collideGaucheDroite(allBlock) != -1);
-                        //System.out.println("collision a droite");
-                        //System.out.println(this.collideGaucheDroite(allBlock) != 1);
-                        //System.out.println(this.collideGaucheDroite(allBlock));
-                        if ((result == -1) && (this.collideGaucheDroite(allBlock) != -1)) {
-                            this.setPosX(this.getPosX() + result * this.getVitesse());
-                        } else if ((result == 1) && (this.collideGaucheDroite(allBlock) != 1)) {
-                            this.setPosX(this.getPosX() + result * this.getVitesse());
-                        } else if (this.collideGaucheDroite(allBlock) != 0) {
-                            this.saute();
-                            this.setPosX(this.getPosX() + result * this.getVitesse());
-                        }
-                    } else {
-                        //System.out.println("not in range");
-                        move++;
-
-                        if (move % 5 == 0) {
-                            System.out.println("idle");
-
-                            int result = (int) (Math.random() * 3) - 1;
-                            //System.out.println("moving " + result);
-                            //System.out.println("collision a gauche");
-                            //System.out.println(this.collideGaucheDroite(allBlock) != -1);
-                            //System.out.println("collision a droite");
-                            //System.out.println(this.collideGaucheDroite(allBlock) != 1);
-
-                            //System.out.println(this.collideGaucheDroite(allBlock));
-                            if ((result == -1) && (this.collideGaucheDroite(allBlock) != -1)) {
-                                this.setPosX(this.getPosX() + result * this.getVitesse());
-                            } else if ((result == 1) && (this.collideGaucheDroite(allBlock) != 1)) {
-                                this.setPosX(this.getPosX() + result * this.getVitesse());
-                            } else if (this.collideGaucheDroite(allBlock) != 0) {
-                                this.saute();
-                                this.setPosX(this.getPosX() + result * this.getVitesse());
-                            }
-                        }
+                }
+            }else {
+                //System.out.println("not in range");
+                move++;
+                //die();
+                if (move % 5 == 0) {
+                    //System.out.println("idle");
+                    int result = (int) (Math.random() * 3) - 1;
+                    //System.out.println("moving " + result);
+                    //System.out.println("collision a gauche");
+                    //System.out.println(this.collideGaucheDroite(allBlock) != -1);
+                    //System.out.println("collision a droite");
+                    //System.out.println(this.collideGaucheDroite(allBlock) != 1);
+                    //System.out.println(this.collideGaucheDroite(allBlock));
+                    if ((result == -1) && (this.collideGaucheDroite(allBlock) != -1)) {
+                        this.setPosX(this.getPosX() + result * this.getVitesse());
+                    } else if ((result == 1) && (this.collideGaucheDroite(allBlock) != 1)) {
+                        this.setPosX(this.getPosX() + result * this.getVitesse());
+                    } else if (this.collideGaucheDroite(allBlock) != 0) {
+                        this.saute();
+                        this.setPosX(this.getPosX() + result * this.getVitesse());
                     }
+                }
+            }
+                    } else {
+            //System.out.println("not in range");
+            move++;
+
+            if (move % 5 == 0) {
+                System.out.println("idle");
+
+                int result = (int) (Math.random() * 3) - 1;
+                //System.out.println("moving " + result);
+                //System.out.println("collision a gauche");
+                //System.out.println(this.collideGaucheDroite(allBlock) != -1);
+                //System.out.println("collision a droite");
+                //System.out.println(this.collideGaucheDroite(allBlock) != 1);
+
+                //System.out.println(this.collideGaucheDroite(allBlock));
+                if ((result == -1) && (this.collideGaucheDroite(allBlock) != -1)) {
+                    this.setPosX(this.getPosX() + result * this.getVitesse());
+                } else if ((result == 1) && (this.collideGaucheDroite(allBlock) != 1)) {
+                    this.setPosX(this.getPosX() + result * this.getVitesse());
+                } else if (this.collideGaucheDroite(allBlock) != 0) {
+                    this.saute();
+                    this.setPosX(this.getPosX() + result * this.getVitesse());
                 }
             }
         }

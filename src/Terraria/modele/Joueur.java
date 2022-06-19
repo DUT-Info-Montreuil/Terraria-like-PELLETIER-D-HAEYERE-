@@ -176,7 +176,7 @@ public class Joueur extends Acteur{
 
 
     public void takeDomage(int damage){
-        this.pv-- ;
+        this.pv -= damage ;
         if (this.pv<=0){
             die();
 
