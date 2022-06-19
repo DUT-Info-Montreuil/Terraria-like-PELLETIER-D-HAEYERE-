@@ -7,3 +7,5 @@ sauter => espace|
 
 inventaire => tab|
 interagire => clic souris|
+
+Fenêtre de craft => e |
