@@ -1,5 +1,9 @@
-package Terraria.modele;
+package Terraria.modele.Acteur;
 
+import Terraria.modele.Block;
+import Terraria.modele.Environnement;
+import Terraria.modele.HitBox;
+import Terraria.modele.Item.Item;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 
@@ -17,13 +21,14 @@ public abstract class Acteur {
     private boolean isJumping;
     protected int reach;
     private HitBox box ;
+    private String id;
 
 
     public void setDirection(int direction) {
         this.direction = direction;
     }
 
-    private String id;
+
     protected boolean isAlive;
 
     public boolean isJumping() {
@@ -68,6 +73,7 @@ public abstract class Acteur {
 
 
 
+
     }
 
     public int getPv() {
@@ -88,6 +94,10 @@ public abstract class Acteur {
 
     public int getPosY() {
         return posY.getValue();
+    }
+
+    public Environnement getEnvironnement() {
+        return environnement;
     }
 
     public boolean getisAlive() {
@@ -133,7 +143,7 @@ public abstract class Acteur {
 
     public void gravite(){
         if (isFalling){
-            this.posY.setValue(posY.getValue()+(vitesse*1.5));
+            this.posY.setValue(posY.getValue()+(vitesse*2));
         }
     }
     public void saute(){

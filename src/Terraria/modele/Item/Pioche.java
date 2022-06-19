@@ -1,4 +1,7 @@
-package Terraria.modele;
+package Terraria.modele.Item;
+
+import Terraria.modele.Block;
+import Terraria.modele.Environnement;
 
 public class Pioche extends ItemOutil {
 
@@ -15,7 +18,7 @@ public class Pioche extends ItemOutil {
             ) {
                 if (b.getId() == idTileModif) {
                     //System.out.println("tile found");
-                    b.getBox().inversionHitBox();
+                    b.getBox().setHitBoxFals();
                 }
             }
         }
@@ -26,4 +29,5 @@ public class Pioche extends ItemOutil {
         //System.out.println(idCible+"valeur a l'id dans le if");
         return (idCible!=1);
     }
+
 }

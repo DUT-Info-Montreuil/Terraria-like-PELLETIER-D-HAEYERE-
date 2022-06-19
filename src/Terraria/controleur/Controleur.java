@@ -1,8 +1,22 @@
 package Terraria.controleur;
 
 
+import Terraria.modele.Acteur.Acteur;
+import Terraria.modele.Acteur.Joueur;
+import Terraria.modele.Acteur.Zombie;
 import Terraria.modele.*;
-import Terraria.vue.*;
+
+import Terraria.modele.Item.Item;
+import Terraria.modele.Item.ItemBlock;
+import Terraria.modele.Item.OnGroundItem;
+import Terraria.modele.Item.Pioche;
+import Terraria.vue.ObservableList.MonObservateurItem;
+import Terraria.vue.ObservableList.MonObservateurListActeur;
+import Terraria.vue.ViewObject.ViewFenetreCraft;
+import Terraria.vue.ViewObject.ViewFenetreInv;
+
+import Terraria.vue.ViewObject.ViewRecipe;
+
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -15,6 +29,7 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
@@ -40,11 +55,17 @@ public class Controleur implements Initializable {
 
     private EventHandler<MouseEvent> eventHandler;
     private KeyHandler keyHandler;
+
     private boolean affiche = false;
     private HashMap<Tile, Image> mapLienIdImage;
     private HudView hudView;
     private ViewCoeur vc ;
 
+
+
+    private HashMap<Tile, Image> mapLienIdImage;
+    private ViewFenetreInv imgViewInv;
+    private ViewFenetreCraft imgViewCraft;
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         e1 = new Environnement(InitialisationEnvironnement.loadMap("ress/terrain3.json"));
@@ -55,40 +76,21 @@ public class Controleur implements Initializable {
         Pioche piocheDep = new Pioche(250, 10, e1);
         this.e1.getListActeur().addListener(new MonObservateurListActeur(e1, pane));
         this.e1.getOnGroundItem().addListener(new MonObservateurItem(e1, pane));
+
         Joueur hero = new Joueur(10, 5, 50, 50, e1, "hero", new HitBox(50, 30, 24, 14, true), piocheDep);
         Zombie z = new Zombie(20, 5, 50, 50, e1, "Zombie", new HitBox(50, 30, 28, 16, true));
+
         e1.addActeur(hero);
         e1.addActeur(z);
         e1.addEnnemi(z);
 
 
-        Image imgInv = new Image(String.valueOf(getClass().getResource("/inventaire.png")));
-        ImageView imgViewInv = new ImageView(imgInv);
-        imgViewInv.setX(600);
-        imgViewInv.setY(10);
-        pane.getChildren().add(imgViewInv);
-        imgViewInv.setVisible(false);
 
-        imgViewInv.setId("inv");
-
-//
-
-   /* public final int sprit_largeur = 16;
+        imgViewInv = new ViewFenetreInv(pane,e1,mapLienIdImage);
+        imgViewCraft = new ViewFenetreCraft(pane,e1,mapLienIdImage);
 
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
 
-        e1 = new Environnement(InitialisationEnvironnement.loadMap("ress/terrain2.json"));
-        HashMap<Integer, Image> mapLienIdImage = loadTile(e1.getMap());
-        Joueur hero = new Joueur(20, 5, 40, 40, e1, "hero");
-        Image test = new Image(String.valueOf(getClass().getResource("/persoIdle.png")));
-        ImageView testIV = new ImageView(test);
-        pane.getChildren().add(testIV);
-        testIV.setX(250);
-        testIV.setY(250);
-
-       */
 
 
         /*MOUSE EVENT*/
@@ -96,7 +98,8 @@ public class Controleur implements Initializable {
         eventHandler = new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent e) {
-                System.out.println(e1.getJoueur1().getInventaire());
+
+                //System.out.println(e1.getJoueur1().getInventaire());
 //                e1.terrainToString();
 
                 ImageView imageClicked = (ImageView) e.getSource();
@@ -108,8 +111,9 @@ public class Controleur implements Initializable {
                 if (e1.getJoueur1().checkDistanceInReach((int) imageClicked.getX(), (int) imageClicked.getY())) {
 
                     e1.getJoueur1().getItemEquipe().action(idDansLeTerrain);
+
                     if (e1.getJoueur1().getItemEquipe().cielEstModifiable(typeDeLaTile)) {
-                        System.out.println("est ce que c'est du ciel ?");
+
                         modifTerrain(mapLienIdImage, imageClicked, Integer.parseInt(imageClicked.getId()));
                         for (Item i : e1.getJoueur1().getInventaire()
                         ) {
@@ -117,6 +121,9 @@ public class Controleur implements Initializable {
                                 ItemBlock block = (ItemBlock) i;
                                 if (block.getCode() == typeDeLaTile) {
                                     i.quantiteEnPlus();
+                                    imgViewInv.refreshInv();
+                                    System.out.println("quantite ++");
+
                                 }
                             }
                         }
@@ -150,7 +157,6 @@ public class Controleur implements Initializable {
         afficherColision(e1.getAllBlock(), hero, e1.getListActeur(), e1.getOnGroundItem(), false);
 
 
-        //ajoutSprite(hero);
 
         //System.out.println(pane.getScene().getHeight());
 
@@ -162,7 +168,7 @@ public class Controleur implements Initializable {
         keyHandler.start();
 
 
-        //Registering the event filter
+
 
 
         for (Acteur a : e1.getListActeur()) {
@@ -173,6 +179,9 @@ public class Controleur implements Initializable {
         //imgViewInv.translateXProperty().bind(e1.getJoueur1().getBox().getX().add(new SimpleIntegerProperty(200)) );
         //imgViewInv.translateYProperty().bind(e1.getJoueur1().getBox().getY().subtract(new SimpleIntegerProperty(250) ));
         imgViewInv.toFront();
+        imgViewCraft.toFront();
+
+
         launchTimeLine();
         timeline.setCycleCount(timeline.INDEFINITE);
         timeline.play();
@@ -188,17 +197,33 @@ public class Controleur implements Initializable {
         ArrayList<Block> allBlock = e1.getAllBlock();
 
         timeline = new Timeline(new KeyFrame(Duration.millis(32.66), actionEvent -> {
+            imgViewCraft.checkCraftable();
 
-            if (keyHandler.isInventoryTyped() && !affiche) {
+
+            if (keyHandler.isInventoryTyped() ) {
+                pane.requestFocus();
                 pane.lookup("#inv").setVisible(true);
-                affiche = true;
-                affichageInventaire();
+                imgViewInv.affichageInventaire();
             }
-            if (!keyHandler.isInventoryTyped() && affiche) {
+            if (!keyHandler.isInventoryTyped() ) {
                 pane.lookup("#inv").setVisible(false);
-                affiche = false;
-                closeInv();
+                pane.requestFocus();
+                imgViewInv.closeInv();
             }
+
+
+            if (keyHandler.isInteractionTyped() ) {
+                pane.lookup("#FenetreCraft").setVisible(true);
+                pane.requestFocus();
+                imgViewCraft.afficheCraft();
+            }
+            if (!keyHandler.isInteractionTyped()) {
+                pane.lookup("#FenetreCraft").setVisible(false);
+                pane.requestFocus();
+                imgViewCraft.closeCraft();
+            }
+
+
             if (keyHandler.isLeftPressed()) {
                 e1.getJoueur1().setDirection(-1);
             }
@@ -235,6 +260,7 @@ public class Controleur implements Initializable {
             for (int i = 0; i < e1.getOnGroundItem().size(); i++) {
                 e1.getOnGroundItem().get(i).collideHautBas(allBlock);
                 e1.getOnGroundItem().get(i).gravite();
+
                 if (e1.getJoueur1().itemCollide(e1.getOnGroundItem()) != null){
                     e1.getJoueur1().addItem(e1.getOnGroundItem().get(i).getItem());
                     e1.getOnGroundItem().remove(i);
@@ -248,6 +274,8 @@ public class Controleur implements Initializable {
                 e1.getJoueur1().updateCoeur();
                 vc.afficherCoeur( e1.getJoueur1().getAllCoeurs() ,pane);
 
+
+            }
 
 
         }));
@@ -277,9 +305,6 @@ public class Controleur implements Initializable {
         int posX = 0;
         int posY = 0;
         int nbr = 0;
-//        System.out.println("-----------------------------------------");
-//        System.out.println(listeTiles);
-//        System.out.println("-----------------------------------------");
         ImageView imageView;
 //        System.out.println(hashMapData);
 
@@ -329,46 +354,6 @@ public class Controleur implements Initializable {
 //
 //    }
 
-    /*
-    @FXML
-    public void mouvements(KeyEvent keyEvent) {
-        switch (keyEvent.getCode()) {
-            case D:
-                e1.getJoueur1().setDirection(1);
-                break;
-            case Q:
-
-                e1.getJoueur1().setDirection(-1);
-
-
-                break;
-            case SPACE:
-                if (!e1.getJoueur1().isJumping()) {
-                    e1.getJoueur1().saute();
-                }
-                break;
-            case P:
-                e1.getJoueur1().setItemEquipe(e1.getJoueur1().getInventaire().get(0));
-                break;
-            case L:
-                e1.getJoueur1().setItemEquipe(e1.getJoueur1().getInventaire().get(1));
-                break;
-        }
-    }
-
-    @FXML
-    public void stopMouvement(KeyEvent keyEvent) {
-        switch (keyEvent.getCode()) {
-            case D:
-                e1.getJoueur1().setDirection(0);
-                break;
-            case Q:
-                e1.getJoueur1().setDirection(0);
-                break;
-
-        }
-    }*/
-
 
     public void afficherColision(ArrayList<Block> blocks, Acteur a, ObservableList<Acteur> allActeur, ObservableList<OnGroundItem> allOngroundItem, boolean affiche) {
         if (affiche) {
@@ -410,7 +395,6 @@ public class Controleur implements Initializable {
     }
 
     public void modifTerrain(HashMap<Tile, Image> mapLienIdImage, ImageView imageClicked, int id) {
-        System.out.println("testDestruction");
         imageClicked.removeEventFilter(MouseEvent.MOUSE_CLICKED, eventHandler);
         pane.getChildren().remove(imageClicked);
         for (Tile t : e1.getAllTiles()
@@ -429,70 +413,10 @@ public class Controleur implements Initializable {
 
     }
 
-    public void affichageInventaire() {
-        ImageView inventaire = (ImageView) pane.lookup("#inv");
-        int countCase = 1;
-        //SimpleIntegerProperty poseXDep =  new SimpleIntegerProperty((int)inventaire.getX()) ;
-        //SimpleIntegerProperty poseYDep = new SimpleIntegerProperty((int)inventaire.getX()) ;
-        //poseXDep.bind(inventaire.xProperty().add(new SimpleIntegerProperty(30)));
-        //poseYDep.bind(inventaire.yProperty().add(new SimpleIntegerProperty(17)));
-
-        int poseXDep = (int) inventaire.getX() + 30;
-        int poseYDep = (int) inventaire.getY() + 17;
-        int newPosX = poseXDep;
-        int newPosY = poseYDep;
 
 
-        EventHandler<MouseEvent> invHandler = new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                ImageView imageClicked = (ImageView) event.getSource();
-                e1.getJoueur1().setItemEquipe(((ViewItem) imageClicked).getItem());
 
-            }
-        };
-        for (Item i : e1.getJoueur1().getInventaire()
-        ) {
-            if (i.getQuantite() != 0) {
-                try {
-                    ViewItem itemInv = new ViewItem(i, pane, e1, mapLienIdImage);
 
-                    itemInv.toFront();
-                    itemInv.setX(newPosX);
-                    itemInv.setY(newPosY);
-
-                    itemInv.setId(i.getId());
-
-                    newPosX = newPosX + 37;
-                    countCase++;
-                    System.out.println(countCase);
-                    if (countCase % 5 == 0) {
-                        newPosX = poseXDep;
-                        newPosY = newPosY + 37;
-                    }
-                    itemInv.addEventFilter(MouseEvent.MOUSE_CLICKED, invHandler);
-                    System.out.println("avant add");
-                    pane.getChildren().add(itemInv);
-                    System.out.println("apreès add");
-                } catch (Exception e) {
-
-                }
-
-            }
-        }
-
-    }
-
-    public void closeInv() {
-        for (Item i : e1.getJoueur1().getInventaire()
-        ) {
-
-            ImageView itemDansInv = (ImageView) pane.lookup("#" + i.getId());
-            pane.getChildren().remove(itemDansInv);
-
-        }
-
-    }
 
 
 }
