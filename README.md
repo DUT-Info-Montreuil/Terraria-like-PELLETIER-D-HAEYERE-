@@ -13,5 +13,5 @@ interagire => clic souris|
 
 Fenêtre de craft => e |
 
-
+Hache = one shot du mob
 Cliquer sur le mob pour le tuer 
