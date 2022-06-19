@@ -33,7 +33,7 @@ public class ViewActeur extends ImageView {
 
             this.setImage(imageSpriteHero);
         }else if (acteur instanceof Zombie){
-            System.out.println("test");
+
             Image imageZombie = new Image(String.valueOf(getClass().getResource("/Sprite-0027.png"))) ;
 
             this.setImage(imageZombie);

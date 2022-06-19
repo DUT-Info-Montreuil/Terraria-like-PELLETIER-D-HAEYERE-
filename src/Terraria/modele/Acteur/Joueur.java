@@ -40,7 +40,6 @@ public class Joueur extends Acteur {
 
     public void setItemEquipe(Item itemEquipe) {
         this.itemEquipe = itemEquipe;
-        System.out.println("changement item");
     }
 
 
@@ -92,10 +91,10 @@ public class Joueur extends Acteur {
 
                 int aPrime = block.getBoxX().intValue();
                 int cPrime = block.getBoxX().intValue() + block.getBox().getWidth();
-                // System.out.println("yes");
+
                 //
                 if ((b <= aPrime && d >= aPrime) || (b <= cPrime && d >= cPrime)) {
-                    //System.out.println("test");
+
                                 /*for (Block bl:blocks) {
                                     if (bl.getBox().getX().intValue() == block.getBox().getX().intValue() && bl.getBox().isSolide()){
                                         if (bl.getBox().getY().intValue() == block.getBox().getY().intValue() + bl.getBox().getHeight()){
@@ -106,7 +105,7 @@ public class Joueur extends Acteur {
                                 }*/
 
 
-                    //System.out.println("gauche");
+
                     if (block.getBox().isSolide()) {
                         this.setPosY(block.getBoxY().intValue() - this.getBox().getHeight());
                         this.setFalling(false);
@@ -163,7 +162,7 @@ public class Joueur extends Acteur {
 
     @Override
     public void die() {
-
+        System.out.println("Vous êtes mort !");
     }
 
     public void initCraft() {
@@ -185,9 +184,9 @@ public class Joueur extends Acteur {
         Hache hache = new Hache(1,50,1, this.getEnvironnement());
         ArrayList<Item> listCraftRecip2 = new ArrayList<Item>();
         HashMap<Item, Integer> itemQuantiteRecip2 = new HashMap<Item, Integer>();
-        RottenFlesh craftRecip2 = new RottenFlesh(0, this.getEnvironnement());
+        RottenFlesh craftRecip2 = new RottenFlesh(1, this.getEnvironnement());
         listCraftRecip2.add(craftRecip2);
-        itemQuantiteRecip2.put(craftRecip2, 3);
+        itemQuantiteRecip2.put(craftRecip2, 1);
 
         Recipe rec2 = new Recipe(this.getEnvironnement(), hache, "Joueur", listCraftRecip2, itemQuantiteRecip2, this);
         this.listCraft.add(rec2);
@@ -211,11 +210,11 @@ public class Joueur extends Acteur {
             if (( a >= aPrime && a <= bPrime) || (b >= aPrime && b <= bPrime)) {
                 if (this.getBox().getX().intValue() <= allItem.get(is).getBox().getX().intValue() + allItem.get(is).getBox().getWidth() && this.getBox().getX().intValue() + this.getBox().getWidth() >= allItem.get(is).getBox().getX().intValue() + allItem.get(is).getBox().getWidth() ) {
                     //test collision gauche
-                    System.out.println("in item left");
+
                     return allItem.get(is);
                 }
                 if (this.getBox().getX().intValue() <= allItem.get(is).getBox().getX().intValue()  && this.getBox().getX().intValue() + this.getBox().getWidth() >= allItem.get(is).getBox().getX().intValue()   ) {
-                    System.out.println("in item right");
+
                     return allItem.get(is);
                 }
             }

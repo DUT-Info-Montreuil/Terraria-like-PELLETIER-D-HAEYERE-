@@ -67,8 +67,7 @@ public class ViewFenetreInv extends ImageView {
             };
             for (Item i : environnement.getJoueur1().getInventaire()
             ) {
-                System.out.println(i);
-                System.out.println(i.getQuantite());
+
                 if (i.getQuantite() != 0) {
                     try {
                         ViewItem itemInv = new ViewItem(i, pane, environnement, mapLienIdImage);
@@ -99,10 +98,10 @@ public class ViewFenetreInv extends ImageView {
 
     }
     public void refreshInv(){
-        System.out.println("test");
+
 
         if (afficheInv){
-            System.out.println("dans affiche inv");
+
             this.closeInv();
             this.affichageInventaire();
         }

@@ -94,9 +94,6 @@ public class Controleur implements Initializable {
             @Override
             public void handle(MouseEvent e) {
 
-                //System.out.println(e1.getJoueur1().getInventaire());
-//                e1.terrainToString();
-
                 ImageView imageClicked = (ImageView) e.getSource();
                 int idDansLeTerrain = Integer.parseInt(imageClicked.getId());
 
@@ -117,7 +114,6 @@ public class Controleur implements Initializable {
                                 if (block.getCode() == typeDeLaTile) {
                                     i.quantiteEnPlus();
                                     imgViewInv.refreshInv();
-                                    System.out.println("quantite ++");
 
                                 }
                             }
@@ -126,11 +122,10 @@ public class Controleur implements Initializable {
 
                     }
 
-//                        e1.terrainToString();
                 }
 
 
-//                    System.out.println(e1.getTerrain());
+
             }
         };
 
@@ -152,7 +147,7 @@ public class Controleur implements Initializable {
         afficherColision(e1.getAllBlock(), hero, e1.getListActeur(), e1.getOnGroundItem(), false);
 
 
-        //System.out.println(pane.getScene().getHeight());
+
 
         //pane.getScene().getCamera().layoutXProperty().bind(hero.getXProprety().subtract(pane.getScene().getWidth() / 2));
         //pane.getScene().getCamera().layoutYProperty().bind(hero.getYProprety().subtract(pane.getScene().getHeight() / 2));
@@ -293,7 +288,7 @@ public class Controleur implements Initializable {
         int posY = 0;
         int nbr = 0;
         ImageView imageView;
-//        System.out.println(hashMapData);
+
 
         ArrayList<Tile> tiles = e1.getAllTiles();
 
@@ -330,21 +325,10 @@ public class Controleur implements Initializable {
     }
 
 
-//    private void ajoutSprite(Acteur a) {
-//        Image imageSpriteHero = new Image(String.valueOf(getClass().getResource("/persoIdle.png"))); // a modifier quand ajout d'autre acteur
-//        ImageView imageViewSpriteHero = new ImageView(imageSpriteHero);
-//        imageViewSpriteHero.setId(a.getId());
-//        pane.getChildren().add(imageViewSpriteHero);
-//        imageViewSpriteHero.translateXProperty().bind(a.getXProprety());
-//        imageViewSpriteHero.translateYProperty().bind(a.getYProprety());
-//
-//
-//    }
-
 
     public void afficherColision(ArrayList<Block> blocks, Acteur a, ObservableList<Acteur> allActeur, ObservableList<OnGroundItem> allOngroundItem, boolean affiche) {
         if (affiche) {
-//            System.out.println(blocks.size());
+
 
             for (Block b : blocks) {
                 Rectangle r = new Rectangle(b.getBoxX().intValue(), b.getBoxY().intValue(), b.getTile().getWidth(), b.getTile().getHauteur());

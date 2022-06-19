@@ -12,12 +12,12 @@ public class Pioche extends ItemOutil {
     public void action(int idTileModif) {
         if (idTileModif>0){
             if (this.getEnvironnement().getTerrain().get(idTileModif)!=1){
-                //System.out.println("suprimmable");
+
                 this.getEnvironnement().changementTerrain(idTileModif, 1);
                 for (Block b : this.getEnvironnement().getAllBlock()
                 ) {
                     if (b.getId() == idTileModif) {
-                        //System.out.println("tile found");
+
                         b.getBox().setHitBoxFals();
                     }
                 }
@@ -28,7 +28,7 @@ public class Pioche extends ItemOutil {
 
     }
     public boolean cielEstModifiable(int idCible){
-        //System.out.println(idCible+"valeur a l'id dans le if");
+
         return (idCible!=1);
     }
 

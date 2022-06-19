@@ -91,7 +91,7 @@ public class KeyHandler {
 
     private void keyReleased() {
         pane.setOnKeyReleased(e -> {
-            //System.out.println(e.getCode());
+
             switch (e.getCode()) {
                 case D:
                     rightPressed = false;

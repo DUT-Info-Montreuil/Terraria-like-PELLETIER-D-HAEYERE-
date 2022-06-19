@@ -57,10 +57,9 @@ public abstract class Ennemi extends Acteur {
 
                     int aPrime = block.getBoxX().intValue();
                     int cPrime = block.getBoxX().intValue() + block.getBox().getWidth();
-                    // System.out.println("yes");
-                    //
+
                     if ((b <= aPrime && d >= aPrime) || (b <= cPrime && d >= cPrime)) {
-                        //System.out.println("test");
+
                                 /*for (Block bl:blocks) {
                                     if (bl.getBox().getX().intValue() == block.getBox().getX().intValue() && bl.getBox().isSolide()){
                                         if (bl.getBox().getY().intValue() == block.getBox().getY().intValue() + bl.getBox().getHeight()){
