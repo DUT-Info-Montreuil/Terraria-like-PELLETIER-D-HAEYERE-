@@ -6,10 +6,16 @@ import java.util.HashMap;
 
 public class Joueur extends Acteur {
     private Item itemEquipe;
-    private boolean toucheCrafting;
+
+
+    public ArrayList<unCoeur> getAllCoeurs() {
+        return allCoeurs;
+    }
     private ArrayList<Recipe>listCraft = new ArrayList<Recipe>();
-    public Joueur(int pv, int vitesse, int posX, int posY, Environnement environnement, String id, HitBox h, Item itemEquipe) {
-        super(pv, vitesse, posX, posY, environnement, id, h);
+    private ArrayList<unCoeur> allCoeurs = new ArrayList<>();
+    public Joueur(int pv, int vitesse, int posX, int posY, Environnement environnement,  HitBox h ,Item itemEquipe) {
+        super(pv, vitesse, posX, posY, environnement, h);
+
 
         h.getY().bind(this.getYProprety());
         h.getX().bind(this.getXProprety());
@@ -113,12 +119,11 @@ public class Joueur extends Acteur {
         return 0;
     }
 
-    public boolean checkDistanceInReach(int posX, int posY) {
-        if ((valABS(this.getPosX() - posX) < this.getReach() * 16) && (valABS(this.getPosY() - posY) < this.getReach() * 16)) {
-            return true;
-        }
-        return false;
-    }
+
+      public boolean checkDistanceInReach(int posX, int posY){
+               return (valABS(this.getPosX()-posX)<this.getReach()*16)&&(valABS(this.getPosY()-posY)<this.getReach()*16);
+      }
+  
 
     public int valABS(int valeur) {
         if (valeur < 0)
@@ -140,13 +145,14 @@ public class Joueur extends Acteur {
         }
     }
 
-    public void collisionCraft(Block b) {
+  
 
-        if (b.getTile().getId() == 26) {
+    public void takeDomage(int damage){
+        this.pv -= damage ;
+        if (this.pv<=0){
+            die();
 
-            this.toucheCrafting = true;
-        } else {
-            this.toucheCrafting = false;
+           
 
         }
     }
@@ -168,11 +174,15 @@ public class Joueur extends Acteur {
         this.listCraft.add(rec);
 
 
-
+    @Override
+    public void die() {
+      
+        }
     }
 
     public ArrayList<Recipe> getListCraft() {
         return listCraft;
     }
+
 }
 

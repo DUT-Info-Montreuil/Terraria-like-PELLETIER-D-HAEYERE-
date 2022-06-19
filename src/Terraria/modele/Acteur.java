@@ -17,7 +17,9 @@ public abstract class Acteur {
     private boolean isJumping;
     protected int reach;
     private HitBox box ;
+    private static int count = 0 ;
     private String id;
+
 
 
     public void setDirection(int direction) {
@@ -49,7 +51,7 @@ public abstract class Acteur {
         isFalling = falling;
     }
 
-    public Acteur(int pv, int vitesse, int posX, int posY, Environnement environnement, String id , HitBox b ) {
+    public Acteur(int pv, int vitesse, int posX, int posY, Environnement environnement, HitBox b ) {
         this.pv = pv;
         this.vitesse = vitesse;
         this.posX = new SimpleIntegerProperty(posX);
@@ -57,7 +59,7 @@ public abstract class Acteur {
         this.direction=0;
         this.isAlive = true;
         this.environnement = environnement;
-        this.id=id;
+        this.id="acteur"+count++;
         this.isFalling=true;
         this.multiplicateurSaut=70;
         this.isJumping=false;
@@ -221,6 +223,16 @@ public abstract class Acteur {
         this.setFalling(true);
         return 0;
     }
+
+    public void takeDomage(int damage){
+        this.pv-- ;
+        if (this.pv<=0){
+            die();
+
+        }
+    }
+
+    public abstract void die();
 
 
 }
