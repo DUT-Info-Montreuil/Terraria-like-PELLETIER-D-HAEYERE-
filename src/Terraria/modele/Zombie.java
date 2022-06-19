@@ -74,6 +74,7 @@ public class Zombie extends Ennemi {
                         this.saute();
                         this.setPosX(this.getPosX() + result * this.getVitesse());
                     }
+
                 }
             }
                     } else {

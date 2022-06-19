@@ -1,9 +1,9 @@
 package Terraria.vue;
 
 import Terraria.modele.Environnement;
-import Terraria.modele.Item;
 import Terraria.modele.OnGroundItem;
 import Terraria.modele.RottenFlesh;
+import Terraria.vue.ViewItemOnGround;
 import javafx.collections.ListChangeListener;
 import javafx.scene.layout.Pane;
 

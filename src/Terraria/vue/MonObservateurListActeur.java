@@ -1,6 +1,11 @@
 package Terraria.vue;
 
+
 import Terraria.modele.*;
+import Terraria.modele.Acteur;
+import Terraria.modele.Environnement;
+import Terraria.vue.ViewActeur;
+
 import javafx.collections.ListChangeListener;
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;

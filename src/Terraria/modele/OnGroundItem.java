@@ -1,9 +1,6 @@
 package Terraria.modele;
 
-import Terraria.modele.Environnement;
-import Terraria.modele.Item;
 import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.value.ObservableValue;
 
 import java.util.ArrayList;
 
@@ -23,7 +20,7 @@ public class OnGroundItem {
         isFalling = falling;
     }
 
-    public OnGroundItem(Item item,HitBox box ,  Environnement environnement , int x , int y) {
+    public OnGroundItem(Item item, HitBox box , Environnement environnement , int x , int y) {
 
 
         this.item = item;

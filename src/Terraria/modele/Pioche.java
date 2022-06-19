@@ -15,7 +15,7 @@ public class Pioche extends ItemOutil {
             ) {
                 if (b.getId() == idTileModif) {
                     //System.out.println("tile found");
-                    b.getBox().inversionHitBox();
+                    b.getBox().setHitBoxFals();
                 }
             }
         }
@@ -26,4 +26,5 @@ public class Pioche extends ItemOutil {
         //System.out.println(idCible+"valeur a l'id dans le if");
         return (idCible!=1);
     }
+
 }

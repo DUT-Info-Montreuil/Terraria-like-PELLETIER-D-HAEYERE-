@@ -18,13 +18,15 @@ public abstract class Acteur {
     protected int reach;
     private HitBox box ;
     private static int count = 0 ;
+    private String id;
+
 
 
     public void setDirection(int direction) {
         this.direction = direction;
     }
 
-    private String id;
+
     protected boolean isAlive;
 
     public boolean isJumping() {
@@ -69,6 +71,7 @@ public abstract class Acteur {
 
 
 
+
     }
 
     public int getPv() {
@@ -89,6 +92,10 @@ public abstract class Acteur {
 
     public int getPosY() {
         return posY.getValue();
+    }
+
+    public Environnement getEnvironnement() {
+        return environnement;
     }
 
     public boolean getisAlive() {
@@ -134,7 +141,7 @@ public abstract class Acteur {
 
     public void gravite(){
         if (isFalling){
-            this.posY.setValue(posY.getValue()+(vitesse*1.5));
+            this.posY.setValue(posY.getValue()+(vitesse*2));
         }
     }
     public void saute(){

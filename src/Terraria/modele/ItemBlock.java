@@ -3,8 +3,8 @@ package Terraria.modele;
 public class ItemBlock extends Item {
     private int code;
 
-    public ItemBlock(int quantite,  Environnement environnement, int code) {
-        super(quantite, false, environnement);
+    public ItemBlock(int quantite, Environnement environnement, int code) {
+        super(quantite,  environnement);
         this.code = code;
     }
 
@@ -18,7 +18,7 @@ public class ItemBlock extends Item {
                 ) {
                     if (b.getId() == idTileModif) {
                         //System.out.println("tile found");
-                        b.getBox().inversionHitBox();
+                        b.getBox().setHitBoxTrue();
                     }
                 }
             }
@@ -43,4 +43,5 @@ public class ItemBlock extends Item {
                 "code=" + code +
                 '}';
     }
+
 }
