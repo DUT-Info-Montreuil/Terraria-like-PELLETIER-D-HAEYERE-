@@ -46,9 +46,6 @@ public abstract class Acteur {
         return box;
     }
 
-    public boolean isFalling() {
-        return isFalling;
-    }
 
     public void setFalling(boolean falling) {
         isFalling = falling;
@@ -71,10 +68,6 @@ public abstract class Acteur {
         this.reach=4;
         b.getY().bind(this.getYProprety());
         b.getX().bind(this.getXProprety());
-
-
-
-
     }
 
     public int getPv() {
@@ -101,9 +94,7 @@ public abstract class Acteur {
         return environnement;
     }
 
-    public boolean getisAlive() {
-        return isAlive;
-    }
+
 
     public void setPosX(int posX) {
         this.posX.set(posX);
@@ -121,18 +112,17 @@ public abstract class Acteur {
 
     }
     public void addItem(Item item){
-        System.out.println("add item");
-        for (int i = 0 ; i < inventaire.size() ; i++){
-            if (!(inventaire.get(i) instanceof ItemBlock)){
-                Class c = inventaire.get(i).getClass();
-                if(c.equals(item.getClass())){
-                    inventaire.get(i).quantiteEnPlus();
+        for (Item value : inventaire) {
+            if (!(value instanceof ItemBlock)) {
+                Class c = value.getClass();
+                if (c.equals(item.getClass())) {
+                    value.quantiteEnPlus();
                     return;
                 }
             }
 
 
-            }
+        }
         inventaire.add(item);
         }
 
@@ -182,6 +172,4 @@ public abstract class Acteur {
     }
 
     public abstract void die();
-
-
 }

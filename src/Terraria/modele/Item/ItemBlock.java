@@ -15,24 +15,24 @@ public class ItemBlock extends Item {
 
         if (this.getQuantite() != 0) {
             if (this.getEnvironnement().getTerrain().get(idTileModif) == 1) {
-                //System.out.println("suprimmable");
+
                 this.getEnvironnement().changementTerrain(idTileModif, this.code);
                 for (Block b : this.getEnvironnement().getAllBlock()
                 ) {
                     if (b.getId() == idTileModif) {
-                        //System.out.println("tile found");
+
                         b.getBox().setHitBoxTrue();
                     }
                 }
             }
             this.quantiteEnMoins();
         }
-        //System.out.println("de l'air");
+
 
     }
 
     public boolean cielEstModifiable(int idCible) {
-        //System.out.println(idCible+"valeur a l'id dans le if");
+
         return (idCible == 1);
     }
 

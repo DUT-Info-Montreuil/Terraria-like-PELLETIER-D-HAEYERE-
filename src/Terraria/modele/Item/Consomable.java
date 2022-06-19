@@ -8,7 +8,7 @@ public class Consomable extends Item{
         super(quantite, environnement,1);
     }
     public boolean cielEstModifiable(int idCible){
-        //System.out.println(idCible+"valeur a l'id dans le if");
+
         return (idCible!=1);
     }
 }

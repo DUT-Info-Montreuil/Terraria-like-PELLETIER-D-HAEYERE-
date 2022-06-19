@@ -49,7 +49,7 @@ public class Environnement {
 
 
     public Environnement(JSONObject map) {
-//        System.out.println(map);
+
         this.map = map;
         this.terrain = new ArrayList<Integer>();
         JSONArray layers = (JSONArray) map.get("layers");
@@ -96,7 +96,7 @@ public class Environnement {
             JSONObject currentLayer = layersIterator.next();
             layers.add(currentLayer);
         }
-//        System.out.println("All layers loaded");
+
     }
 
     public void addActeur(Acteur a) {
@@ -147,13 +147,29 @@ public class Environnement {
         this.terrain.add(tileSupr, tileAdd);
     }
 
-    public void terrainToString() {
+    @Override
+    public String toString() {
         for (int i = 0; i < this.terrain.size(); i++) {
             if (i % 50 == 0) {
                 System.out.print("\n");
             }
             System.out.print(terrain.get(i) + "\t");
         }
+        return "Environnement{" +
+                "layers=" + layers +
+                ", map=" + map +
+                ", hauteur=" + hauteur +
+                ", largeur=" + largeur +
+                ", allBlock=" + allBlock +
+                ", terrain=" + terrain +
+                ", allTiles=" + allTiles +
+                ", joueur1=" + joueur1 +
+                ", tiles=" + tiles +
+                ", listActeur=" + listActeur +
+                ", OnGroundItemList=" + OnGroundItemList +
+                ", listEnnemi=" + listEnnemi +
+                '}';
+
     }
 
   

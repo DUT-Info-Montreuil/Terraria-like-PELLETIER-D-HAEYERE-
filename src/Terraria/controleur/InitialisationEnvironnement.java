@@ -18,9 +18,7 @@ public class InitialisationEnvironnement {
 
             Object obj = jsonParser.parse(reader);
 
-            JSONObject map = (JSONObject) obj;
-
-            return map;
+            return (JSONObject) obj;
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();

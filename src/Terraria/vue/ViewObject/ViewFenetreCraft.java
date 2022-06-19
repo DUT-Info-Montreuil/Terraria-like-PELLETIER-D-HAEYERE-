@@ -42,7 +42,7 @@ public class ViewFenetreCraft extends ImageView {
                 viewRecipe.setTranslateY(20+this.getY() +(countRecipe+2)*10*countRecipe+1);
                 viewRecipe.setId("Hbox" + countRecipe);
                 countRecipe++;
-                System.out.println(viewRecipe);
+
 
             }
             afficheCraft=true;
@@ -61,10 +61,9 @@ public class ViewFenetreCraft extends ImageView {
     public void checkCraftable() {
         if (afficheCraft) {
             for (int i = 0; i < e1.getJoueur1().getListCraft().size(); i++) {
-              //  System.out.println(e1.getJoueur1().getListCraft());
-              //  System.out.println(e1.getJoueur1().getListCraft().size());
+
                 ViewRecipe viewrep = (ViewRecipe) pane.lookup("#Hbox" + i);
-                System.out.println(viewrep);
+
 
 
                    viewrep.recipeIsCraftable();
