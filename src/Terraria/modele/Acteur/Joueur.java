@@ -16,8 +16,8 @@ public class Joueur extends Acteur {
         return allCoeurs;
     }
 
-    private ArrayList<Recipe> listCraft = new ArrayList<Recipe>();
-    private ArrayList<UnCoeur> allCoeurs = new ArrayList<>();
+    private final ArrayList<Recipe> listCraft = new ArrayList<Recipe>();
+    private final ArrayList<UnCoeur> allCoeurs = new ArrayList<>();
 
     public Joueur(int pv, int vitesse, int posX, int posY, Environnement environnement, HitBox h, Item itemEquipe) {
         super(pv, vitesse, posX, posY, environnement, h);
@@ -201,26 +201,23 @@ public class Joueur extends Acteur {
         }
     }
     public OnGroundItem itemCollide(ObservableList<OnGroundItem> allItem){
-        for (int is= 0; is < allItem.size(); is++) {
-            int a = this.getBox().getY().intValue()-1;
-            int b = a + this.getBox().getHeight()-1 ;
-            int aPrime = allItem.get(is).getBox().getY().intValue()-1 ;
-            int bPrime = allItem.get(is).getBox().getX().intValue() + allItem.get(is).getBox().getHeight() -1;
+        for (OnGroundItem onGroundItem : allItem) {
+            int a = this.getBox().getY().intValue() - 1;
+            int b = a + this.getBox().getHeight() - 1;
+            int aPrime = onGroundItem.getBox().getY().intValue() - 1;
+            int bPrime = onGroundItem.getBox().getX().intValue() + onGroundItem.getBox().getHeight() - 1;
 
-            if (( a >= aPrime && a <= bPrime) || (b >= aPrime && b <= bPrime)) {
-                if (this.getBox().getX().intValue() <= allItem.get(is).getBox().getX().intValue() + allItem.get(is).getBox().getWidth() && this.getBox().getX().intValue() + this.getBox().getWidth() >= allItem.get(is).getBox().getX().intValue() + allItem.get(is).getBox().getWidth() ) {
+            if ((a >= aPrime && a <= bPrime) || (b >= aPrime && b <= bPrime)) {
+                if (this.getBox().getX().intValue() <= onGroundItem.getBox().getX().intValue() + onGroundItem.getBox().getWidth() && this.getBox().getX().intValue() + this.getBox().getWidth() >= onGroundItem.getBox().getX().intValue() + onGroundItem.getBox().getWidth()) {
                     //test collision gauche
 
-                    return allItem.get(is);
+                    return onGroundItem;
                 }
-                if (this.getBox().getX().intValue() <= allItem.get(is).getBox().getX().intValue()  && this.getBox().getX().intValue() + this.getBox().getWidth() >= allItem.get(is).getBox().getX().intValue()   ) {
+                if (this.getBox().getX().intValue() <= onGroundItem.getBox().getX().intValue() && this.getBox().getX().intValue() + this.getBox().getWidth() >= onGroundItem.getBox().getX().intValue()) {
 
-                    return allItem.get(is);
+                    return onGroundItem;
                 }
             }
-
-
-
 
 
         }

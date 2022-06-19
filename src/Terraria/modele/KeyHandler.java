@@ -6,15 +6,7 @@ public class KeyHandler {
     private boolean rightPressed, leftPressed, upPressed, downPressed;
     private boolean inventoryTyped;
     private boolean interactionTyped;
-    private boolean slotTwoTyped;
-    private boolean slotThreeTyped;
-    private boolean slotFourTyped;
-    private boolean slotFiveTyped;
-    private boolean slotSixTyped;
-    private boolean slotSevenTyped;
-    private boolean slotEightTyped;
-    private boolean slotNineTyped;
-    private boolean slotTenTyped;
+
 
 
     public boolean isRightPressed() {
@@ -37,7 +29,7 @@ public class KeyHandler {
         return inventoryTyped;
     }
 
-    private Pane pane;
+    private final Pane pane;
 
 
     public KeyHandler(Pane pane) {
@@ -45,18 +37,9 @@ public class KeyHandler {
         leftPressed = false;
         upPressed = false;
         downPressed = false;
-        slotTenTyped = false;
-        slotNineTyped = false;
-        slotEightTyped = false;
-        slotSevenTyped = false;
-        slotSixTyped = false;
-        slotFiveTyped = false;
-        slotFourTyped = false;
-        slotThreeTyped = false;
-        slotTwoTyped = false;
         inventoryTyped=false;
         interactionTyped=false;
-        boolean slotOneTyped = false;
+
         this.pane = pane;
     }
 
@@ -111,9 +94,7 @@ public class KeyHandler {
         });
     }
 
-    public void setPanel(Pane pane) {
-        this.pane = pane;
-    }
+
 
     public void start() {
         this.keyPressed();

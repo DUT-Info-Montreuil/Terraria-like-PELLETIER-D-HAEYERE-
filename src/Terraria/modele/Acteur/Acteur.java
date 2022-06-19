@@ -94,9 +94,7 @@ public abstract class Acteur {
         return environnement;
     }
 
-    public boolean getisAlive() {
-        return isAlive;
-    }
+
 
     public void setPosX(int posX) {
         this.posX.set(posX);
@@ -114,17 +112,17 @@ public abstract class Acteur {
 
     }
     public void addItem(Item item){
-        for (int i = 0 ; i < inventaire.size() ; i++){
-            if (!(inventaire.get(i) instanceof ItemBlock)){
-                Class c = inventaire.get(i).getClass();
-                if(c.equals(item.getClass())){
-                    inventaire.get(i).quantiteEnPlus();
+        for (Item value : inventaire) {
+            if (!(value instanceof ItemBlock)) {
+                Class c = value.getClass();
+                if (c.equals(item.getClass())) {
+                    value.quantiteEnPlus();
                     return;
                 }
             }
 
 
-            }
+        }
         inventaire.add(item);
         }
 

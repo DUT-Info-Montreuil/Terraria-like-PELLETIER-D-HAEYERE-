@@ -17,6 +17,7 @@ import Terraria.vue.ViewObject.HudView;
 import Terraria.vue.ViewObject.ViewCoeur;
 import Terraria.vue.ViewObject.ViewFenetreCraft;
 import Terraria.vue.ViewObject.ViewFenetreInv;
+import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.collections.ObservableList;
@@ -37,11 +38,12 @@ import org.json.simple.JSONObject;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class Controleur implements Initializable {
 
-    private ArrayList<ImageView> listImageView = new ArrayList<>();
+    private final ArrayList<ImageView> listImageView = new ArrayList<>();
     @FXML
     private Pane pane;
     private Timeline timeline;
@@ -55,16 +57,15 @@ public class Controleur implements Initializable {
 
     private KeyHandler keyHandler;
 
-    private boolean affiche = false;
+
     private HashMap<Tile, Image> mapLienIdImage;
-    private HudView hudView;
     private ViewCoeur vc;
     private ViewFenetreInv imgViewInv;
     private ViewFenetreCraft imgViewCraft;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        e1 = new Environnement(InitialisationEnvironnement.loadMap("ress/terrain3.json"));
+        e1 = new Environnement(Objects.requireNonNull(InitialisationEnvironnement.loadMap("ress/terrain3.json")));
 
         mapLienIdImage = loadTile(e1.getMap());
 
@@ -169,9 +170,9 @@ public class Controleur implements Initializable {
 
 
         launchTimeLine();
-        timeline.setCycleCount(timeline.INDEFINITE);
+        timeline.setCycleCount(Animation.INDEFINITE);
         timeline.play();
-        hudView = new HudView(e1, 10, 10, pane, e1);
+        HudView hudView = new HudView(e1, 10, 10, pane, e1);
         vc = new ViewCoeur(e1.getJoueur1().getAllCoeurs(), pane);
 
 

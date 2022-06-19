@@ -57,9 +57,6 @@ public class Recipe {
                 }
             }
         }
-        if (compteItem == listItem.size()) {
-
-        }
         this.craftable = compteItem == listItem.size();
     }
 
